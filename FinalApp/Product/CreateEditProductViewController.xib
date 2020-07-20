@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateEditProductViewController" customModule="FinalApp" customModuleProvider="target">
+            <connections>
+                <outlet property="productAmountTextfield" destination="ylb-XQ-lgh" id="eRe-9S-DM5"/>
+                <outlet property="productImage" destination="j3w-5G-4p5" id="rqQ-TO-QNK"/>
+                <outlet property="productNameTextfield" destination="t5z-ig-EVA" id="twL-L0-n33"/>
+                <outlet property="productPriceTextfield" destination="SrC-IR-Hbj" id="Jil-iY-HQu"/>
+                <outlet property="titleItems" destination="ln3-EV-efw" id="YYz-RM-UT3"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jbn-Pt-gGQ">
+                    <rect key="frame" x="0.0" y="34" width="414" height="44"/>
+                    <items>
+                        <navigationItem title="Product Detail" id="ln3-EV-efw">
+                            <barButtonItem key="leftBarButtonItem" title="Back" id="6AF-1E-l9w">
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="-1" id="UJd-Xk-uFg"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product_example" translatesAutoresizingMaskIntoConstraints="NO" id="j3w-5G-4p5">
+                    <rect key="frame" x="20" y="118" width="374" height="300"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="lCj-tX-saa"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAG-3a-bI3">
+                    <rect key="frame" x="20" y="458" width="374" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="eYp-gm-J83"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t5z-ig-EVA">
+                    <rect key="frame" x="20" y="488" width="374" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="OXh-FX-4Mw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ylb-XQ-lgh">
+                    <rect key="frame" x="20" y="588" width="374" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="LFL-7V-36Y"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ea-gf-igq">
+                    <rect key="frame" x="20" y="558" width="374" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Ozv-OD-ozw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYr-ZP-fTX">
+                    <rect key="frame" x="20" y="648" width="374" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Rno-41-jkN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SrC-IR-Hbj">
+                    <rect key="frame" x="20" y="678" width="374" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="vVF-id-rRG"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JR3-qJ-SBu">
+                    <rect key="frame" x="20" y="768" width="374" height="40"/>
+                    <color key="backgroundColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="fkh-G5-xxa"/>
+                    </constraints>
+                    <state key="normal" title="Save"/>
+                    <connections>
+                        <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="hsR-bO-8X1"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fx6-k9-cLX">
+                    <rect key="frame" x="20" y="145" width="374" height="247"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="selectImageTapped:" destination="-1" eventType="touchUpInside" id="RlH-Yi-4VG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="6ea-gf-igq" firstAttribute="top" secondItem="t5z-ig-EVA" secondAttribute="bottom" constant="30" id="54u-aH-hiO"/>
+                <constraint firstItem="t5z-ig-EVA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="5UP-RT-ekN"/>
+                <constraint firstItem="hYr-ZP-fTX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="BX5-pm-53z"/>
+                <constraint firstItem="hYr-ZP-fTX" firstAttribute="top" secondItem="ylb-XQ-lgh" secondAttribute="bottom" constant="20" id="Dq1-xg-mG9"/>
+                <constraint firstItem="SrC-IR-Hbj" firstAttribute="top" secondItem="hYr-ZP-fTX" secondAttribute="bottom" id="HdB-ja-sOm"/>
+                <constraint firstItem="ylb-XQ-lgh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="JqN-MN-QgZ"/>
+                <constraint firstItem="Jbn-Pt-gGQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="34" id="KEY-Z2-V6i"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wAG-3a-bI3" secondAttribute="trailing" constant="20" id="M0G-ck-J38"/>
+                <constraint firstItem="wAG-3a-bI3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="R11-7u-Nly"/>
+                <constraint firstItem="ylb-XQ-lgh" firstAttribute="top" secondItem="6ea-gf-igq" secondAttribute="bottom" id="Xq7-Hi-2x3"/>
+                <constraint firstItem="wAG-3a-bI3" firstAttribute="top" secondItem="j3w-5G-4p5" secondAttribute="bottom" constant="40" id="Yvh-UQ-icj"/>
+                <constraint firstItem="6ea-gf-igq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ZUi-E9-HoK"/>
+                <constraint firstItem="j3w-5G-4p5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="cyb-4l-BQw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JR3-qJ-SBu" secondAttribute="trailing" constant="20" id="dKa-Iq-Jvx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hYr-ZP-fTX" secondAttribute="trailing" constant="20" id="dhj-ua-7r0"/>
+                <constraint firstItem="Jbn-Pt-gGQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="edV-6E-QkG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SrC-IR-Hbj" secondAttribute="trailing" constant="20" id="hr0-Bu-FUB"/>
+                <constraint firstItem="SrC-IR-Hbj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="i68-U1-lBF"/>
+                <constraint firstItem="JR3-qJ-SBu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ihc-Y2-Swu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6ea-gf-igq" secondAttribute="trailing" constant="20" id="lf6-QS-nfz"/>
+                <constraint firstItem="t5z-ig-EVA" firstAttribute="top" secondItem="wAG-3a-bI3" secondAttribute="bottom" id="lxp-3G-iul"/>
+                <constraint firstItem="j3w-5G-4p5" firstAttribute="top" secondItem="Jbn-Pt-gGQ" secondAttribute="bottom" constant="40" id="mEq-Kl-j00"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="t5z-ig-EVA" secondAttribute="trailing" constant="20" id="sRB-ux-YiV"/>
+                <constraint firstItem="JR3-qJ-SBu" firstAttribute="top" secondItem="SrC-IR-Hbj" secondAttribute="bottom" constant="50" id="wBx-Lb-GcG"/>
+                <constraint firstItem="Jbn-Pt-gGQ" firstAttribute="centerX" secondItem="j3w-5G-4p5" secondAttribute="centerX" id="xVr-OU-a1j"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ylb-XQ-lgh" secondAttribute="trailing" constant="20" id="zSX-Y1-yPb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="j3w-5G-4p5" secondAttribute="trailing" constant="20" id="zia-X3-1oW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="product_example" width="500" height="333"/>
+    </resources>
+</document>

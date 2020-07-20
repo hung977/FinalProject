@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ReportViewController.swift
 //  FinalApp
 //
 //  Created by TPS on 7/20/20.
@@ -8,17 +8,17 @@
 
 import UIKit
 import SideMenu
-
-class ViewController: UIViewController {
+class ReportViewController: UIViewController {
+    
     var menu: SideMenuNavigationController?
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
         menu?.menuWidth = 300
         SideMenuManager.default.leftMenuNavigationController = menu
-        
-        
+        // Do any additional setup after loading the view.
     }
     @IBAction func didTappedMenu(_ sender: UIBarButtonItem) {
         present(menu!, animated: true)
@@ -26,4 +26,3 @@ class ViewController: UIViewController {
     
 
 }
-
