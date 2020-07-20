@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmployeeManagementViewController" customModule="FinalApp" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="124" id="KGk-i7-Jjw" customClass="EmployeeTableViewCell" customModule="FinalApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="385" height="124"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="385" height="124"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xbo-sg-Shr">
+                        <rect key="frame" x="8" y="8" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="Q0X-Cz-ktk"/>
+                            <constraint firstAttribute="height" constant="100" id="d3z-XL-k2v"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Employee name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5w-82-9lL">
+                        <rect key="frame" x="116" y="10" width="249" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="HHz-Jn-K3s"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXD-Ls-jIn">
+                        <rect key="frame" x="116" y="35" width="249" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Ohm-Rq-RdK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Gc-Cx2">
+                        <rect key="frame" x="116" y="60" width="229" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="8KL-rF-twz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-RX-TL6">
+                        <rect key="frame" x="343" y="0.0" width="42" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="3Ym-Fy-Osx"/>
+                            <constraint firstAttribute="height" constant="48" id="JII-HZ-evW"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="ellipsis"/>
+                        <connections>
+                            <action selector="editButtonTapped:" destination="-1" eventType="touchUpInside" id="JP7-nD-06Y"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5On-A8-5mA">
+                        <rect key="frame" x="0.0" y="114" width="385" height="2"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="o34-5G-G6x"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="W5w-82-9lL" secondAttribute="trailing" constant="20" id="2UW-wO-svU"/>
+                    <constraint firstItem="xbo-sg-Shr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="2uV-g0-lOW"/>
+                    <constraint firstAttribute="bottom" secondItem="xbo-sg-Shr" secondAttribute="bottom" constant="8" id="4Nh-Bs-l7V"/>
+                    <constraint firstAttribute="bottom" secondItem="5On-A8-5mA" secondAttribute="bottom" id="4vU-NC-KfS"/>
+                    <constraint firstItem="5On-A8-5mA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7zW-YF-yu0"/>
+                    <constraint firstItem="xbo-sg-Shr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="8ND-Pb-BTe"/>
+                    <constraint firstItem="fXD-Ls-jIn" firstAttribute="leading" secondItem="xbo-sg-Shr" secondAttribute="trailing" constant="8" id="9uN-dZ-Dtx"/>
+                    <constraint firstAttribute="trailing" secondItem="zOG-RX-TL6" secondAttribute="trailing" id="A40-jq-0gw"/>
+                    <constraint firstAttribute="trailing" secondItem="fXD-Ls-jIn" secondAttribute="trailing" constant="20" id="EB0-eO-zqn"/>
+                    <constraint firstAttribute="trailing" secondItem="5On-A8-5mA" secondAttribute="trailing" id="GHt-jQ-mlb"/>
+                    <constraint firstItem="fXD-Ls-jIn" firstAttribute="top" secondItem="W5w-82-9lL" secondAttribute="bottom" constant="5" id="LUa-Si-cLv"/>
+                    <constraint firstItem="fPX-Gc-Cx2" firstAttribute="top" secondItem="fXD-Ls-jIn" secondAttribute="bottom" constant="5" id="RbC-8D-ztQ"/>
+                    <constraint firstItem="W5w-82-9lL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Say-Az-cwH"/>
+                    <constraint firstItem="fXD-Ls-jIn" firstAttribute="top" secondItem="W5w-82-9lL" secondAttribute="bottom" constant="5" id="VCT-dD-swK"/>
+                    <constraint firstItem="zOG-RX-TL6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="aBf-Ul-sso"/>
+                    <constraint firstItem="xbo-sg-Shr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="d1t-H6-bVK"/>
+                    <constraint firstItem="fPX-Gc-Cx2" firstAttribute="leading" secondItem="xbo-sg-Shr" secondAttribute="trailing" constant="8" id="dzI-GP-SFc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="fPX-Gc-Cx2" secondAttribute="trailing" constant="20" id="g4Y-Ka-Fs5"/>
+                    <constraint firstAttribute="bottom" secondItem="xbo-sg-Shr" secondAttribute="bottom" constant="8" id="oPR-Ex-cwi"/>
+                    <constraint firstItem="xbo-sg-Shr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="pHh-F4-Afy"/>
+                    <constraint firstItem="W5w-82-9lL" firstAttribute="leading" secondItem="xbo-sg-Shr" secondAttribute="trailing" constant="8" id="twL-gc-mct"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="employeeEmail" destination="fXD-Ls-jIn" id="Ed5-kb-ZVz"/>
+                <outlet property="employeeImage" destination="xbo-sg-Shr" id="oOq-xv-ERF"/>
+                <outlet property="employeeName" destination="W5w-82-9lL" id="kbH-E4-XFr"/>
+                <outlet property="employeePhone" destination="fPX-Gc-Cx2" id="OyC-vY-IXH"/>
+            </connections>
+            <point key="canvasLocation" x="-103.62318840579711" y="143.30357142857142"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ellipsis" width="96" height="96"/>
+    </resources>
+</document>

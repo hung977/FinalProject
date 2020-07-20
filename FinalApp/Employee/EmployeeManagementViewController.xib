@@ -9,6 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmployeeManagementViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="searchBar" destination="ahs-qG-hGy" id="ta9-oW-bif"/>
+                <outlet property="tableView" destination="5a5-nz-rAX" id="K1T-WW-8ME"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,9 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f4z-WI-eYW">
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4z-WI-eYW">
                     <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
                         <navigationItem title="Employee Management" id="gfw-Rh-Qo6">
                             <barButtonItem key="leftBarButtonItem" title="Item" image="hamburger" id="hKk-YL-GaR">
@@ -28,13 +29,40 @@
                                     <action selector="didTappedMenu:" destination="-1" id="mVz-mr-SLL"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" systemItem="add" id="W6Y-cS-goK">
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="-1" id="mct-H8-581"/>
+                                </connections>
+                            </barButtonItem>
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="ahs-qG-hGy">
+                    <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5a5-nz-rAX">
+                    <rect key="frame" x="0.0" y="144" width="414" height="718"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="ahs-qG-hGy" firstAttribute="top" secondItem="f4z-WI-eYW" secondAttribute="bottom" id="DpG-jj-Et4"/>
+                <constraint firstItem="5a5-nz-rAX" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="EVy-KL-W3p"/>
+                <constraint firstItem="f4z-WI-eYW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="JYe-ad-MXL"/>
+                <constraint firstItem="5a5-nz-rAX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="KTr-fJ-61a"/>
+                <constraint firstItem="ahs-qG-hGy" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="KWd-a4-51e"/>
+                <constraint firstItem="ahs-qG-hGy" firstAttribute="top" secondItem="f4z-WI-eYW" secondAttribute="bottom" id="VQD-0O-845"/>
+                <constraint firstItem="5a5-nz-rAX" firstAttribute="top" secondItem="ahs-qG-hGy" secondAttribute="bottom" id="dzh-xJ-Cly"/>
+                <constraint firstItem="ahs-qG-hGy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="g2G-Ff-kXs"/>
+                <constraint firstItem="5a5-nz-rAX" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="g3j-vd-pH6"/>
+                <constraint firstItem="5a5-nz-rAX" firstAttribute="top" secondItem="ahs-qG-hGy" secondAttribute="bottom" id="lQs-1H-IEm"/>
+                <constraint firstItem="f4z-WI-eYW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lgc-WV-H7B"/>
+                <constraint firstItem="f4z-WI-eYW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="vVp-PQ-jLn"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="133" y="154"/>
+            <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
         </view>
     </objects>
     <resources>

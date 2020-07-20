@@ -47,7 +47,7 @@ class ProductManagerViewController: UIViewController {
             self.alertDeleteProduct()
             
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         optionMenu.addAction(edit)
         optionMenu.addAction(delete)
         optionMenu.addAction(cancel)
@@ -71,8 +71,8 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProductTableViewCell
-        cell.productImage.image = UIImage(named: "hamburger")
-        cell.amoutLabel.text = "100"
+        cell.productImage.image = UIImage(named: "product_example")
+        cell.amoutLabel.text = "Amount: 100"
         cell.productName.text = "Product One"
         cell.productPrice.text = "Price: $99.99"
         return cell

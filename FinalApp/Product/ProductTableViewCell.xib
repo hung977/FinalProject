@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="385" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hamburger" translatesAutoresizingMaskIntoConstraints="NO" id="r7r-Go-3Ef">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hamburger" translatesAutoresizingMaskIntoConstraints="NO" id="r7r-Go-3Ef">
                         <rect key="frame" x="8" y="8" width="100" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="5oE-IP-Gzb"/>
@@ -62,17 +62,29 @@
                             <action selector="editButtonTapped:" destination="-1" eventType="touchUpInside" id="hyI-et-ths"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMe-dA-WzG">
+                        <rect key="frame" x="0.0" y="116" width="385" height="2"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="5bM-sE-WeI"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="jMe-dA-WzG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1gx-Eb-dzx"/>
                     <constraint firstItem="Abp-gL-E4W" firstAttribute="leading" secondItem="r7r-Go-3Ef" secondAttribute="trailing" constant="8" id="9lY-Sh-c1n"/>
                     <constraint firstItem="r7r-Go-3Ef" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="A1Q-Q9-VFb"/>
                     <constraint firstAttribute="trailing" secondItem="Abp-gL-E4W" secondAttribute="trailing" constant="10" id="Dro-dM-wea"/>
+                    <constraint firstAttribute="bottom" secondItem="jMe-dA-WzG" secondAttribute="bottom" id="F1c-Lv-kSu"/>
                     <constraint firstItem="nHU-oh-tQ2" firstAttribute="top" secondItem="iFg-c7-flv" secondAttribute="bottom" id="Fmc-Uo-YlW"/>
                     <constraint firstItem="nOm-0p-MbK" firstAttribute="leading" secondItem="r7r-Go-3Ef" secondAttribute="trailing" constant="8" id="Im9-Ef-C8W"/>
+                    <constraint firstItem="jMe-dA-WzG" firstAttribute="top" secondItem="r7r-Go-3Ef" secondAttribute="bottom" constant="8" id="Kbt-Gl-XQP"/>
+                    <constraint firstAttribute="bottom" secondItem="jMe-dA-WzG" secondAttribute="bottom" id="LpT-fA-G9Z"/>
                     <constraint firstItem="nHU-oh-tQ2" firstAttribute="top" secondItem="nOm-0p-MbK" secondAttribute="bottom" constant="5" id="MEU-rZ-0ih"/>
                     <constraint firstItem="nOm-0p-MbK" firstAttribute="leading" secondItem="r7r-Go-3Ef" secondAttribute="trailing" constant="8" id="T8Z-Q3-RaP"/>
                     <constraint firstItem="r7r-Go-3Ef" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="USV-Z9-cXe"/>
                     <constraint firstItem="nHU-oh-tQ2" firstAttribute="leading" secondItem="r7r-Go-3Ef" secondAttribute="trailing" constant="8" id="aHE-Cz-Twh"/>
+                    <constraint firstAttribute="trailing" secondItem="jMe-dA-WzG" secondAttribute="trailing" id="cfm-1A-zqD"/>
                     <constraint firstItem="Abp-gL-E4W" firstAttribute="top" secondItem="nHU-oh-tQ2" secondAttribute="bottom" constant="5" id="g9R-91-YRk"/>
                     <constraint firstAttribute="trailing" secondItem="iFg-c7-flv" secondAttribute="trailing" constant="10" id="iXC-u4-4vC"/>
                     <constraint firstItem="iFg-c7-flv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="mnd-QJ-3D8"/>

@@ -27,8 +27,20 @@
 		BA4EE62324C559C40014F878 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62124C559C40014F878 /* ProductTableViewCell.xib */; };
 		BA4EE62624C56A470014F878 /* CreateEditProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EE62424C56A470014F878 /* CreateEditProductViewController.swift */; };
 		BA4EE62724C56A470014F878 /* CreateEditProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62524C56A470014F878 /* CreateEditProductViewController.xib */; };
+		BA4EE62A24C57B190014F878 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EE62824C57B190014F878 /* EmployeeTableViewCell.swift */; };
+		BA4EE62B24C57B190014F878 /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */; };
 		BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */; };
 		BA6A152E24C551C500F0CF9D /* SaleManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */; };
+		BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83FB3424C5A9130054B203 /* BadgeViewController.swift */; };
+		BA83FB3724C5A9130054B203 /* BadgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA83FB3524C5A9130054B203 /* BadgeViewController.xib */; };
+		BA83FB3A24C5AA5B0054B203 /* BadgeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83FB3824C5AA5B0054B203 /* BadgeTableViewCell.swift */; };
+		BA83FB3B24C5AA5B0054B203 /* BadgeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA83FB3924C5AA5B0054B203 /* BadgeTableViewCell.xib */; };
+		BAA6B80524C5828600F2241F /* CreateEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA6B80324C5828600F2241F /* CreateEmployeeViewController.swift */; };
+		BAA6B80624C5828600F2241F /* CreateEmployeeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAA6B80424C5828600F2241F /* CreateEmployeeViewController.xib */; };
+		BAA6B80924C5892500F2241F /* EditEmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA6B80724C5892500F2241F /* EditEmployeeViewController.swift */; };
+		BAA6B80A24C5892500F2241F /* EditEmployeeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAA6B80824C5892500F2241F /* EditEmployeeViewController.xib */; };
+		BAA6B80D24C5987000F2241F /* SaleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA6B80B24C5987000F2241F /* SaleCollectionViewCell.swift */; };
+		BAA6B80E24C5987000F2241F /* SaleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAA6B80C24C5987000F2241F /* SaleCollectionViewCell.xib */; };
 		BADBD74C24C5449B00502FDC /* EmployeeManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADBD74A24C5449B00502FDC /* EmployeeManagementViewController.swift */; };
 		BADBD74D24C5449B00502FDC /* EmployeeManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BADBD74B24C5449B00502FDC /* EmployeeManagementViewController.xib */; };
 /* End PBXBuildFile section */
@@ -57,8 +69,20 @@
 		BA4EE62124C559C40014F878 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		BA4EE62424C56A470014F878 /* CreateEditProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditProductViewController.swift; sourceTree = "<group>"; };
 		BA4EE62524C56A470014F878 /* CreateEditProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateEditProductViewController.xib; sourceTree = "<group>"; };
+		BA4EE62824C57B190014F878 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
+		BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
 		BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleManagerViewController.swift; sourceTree = "<group>"; };
 		BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleManagerViewController.xib; sourceTree = "<group>"; };
+		BA83FB3424C5A9130054B203 /* BadgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewController.swift; sourceTree = "<group>"; };
+		BA83FB3524C5A9130054B203 /* BadgeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeViewController.xib; sourceTree = "<group>"; };
+		BA83FB3824C5AA5B0054B203 /* BadgeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeTableViewCell.swift; sourceTree = "<group>"; };
+		BA83FB3924C5AA5B0054B203 /* BadgeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeTableViewCell.xib; sourceTree = "<group>"; };
+		BAA6B80324C5828600F2241F /* CreateEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEmployeeViewController.swift; sourceTree = "<group>"; };
+		BAA6B80424C5828600F2241F /* CreateEmployeeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateEmployeeViewController.xib; sourceTree = "<group>"; };
+		BAA6B80724C5892500F2241F /* EditEmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEmployeeViewController.swift; sourceTree = "<group>"; };
+		BAA6B80824C5892500F2241F /* EditEmployeeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditEmployeeViewController.xib; sourceTree = "<group>"; };
+		BAA6B80B24C5987000F2241F /* SaleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleCollectionViewCell.swift; sourceTree = "<group>"; };
+		BAA6B80C24C5987000F2241F /* SaleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleCollectionViewCell.xib; sourceTree = "<group>"; };
 		BADBD74A24C5449B00502FDC /* EmployeeManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeManagementViewController.swift; sourceTree = "<group>"; };
 		BADBD74B24C5449B00502FDC /* EmployeeManagementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeManagementViewController.xib; sourceTree = "<group>"; };
 		D737BDCA116901F0D908116E /* Pods_FinalApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +193,12 @@
 			children = (
 				BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */,
 				BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */,
+				BAA6B80B24C5987000F2241F /* SaleCollectionViewCell.swift */,
+				BAA6B80C24C5987000F2241F /* SaleCollectionViewCell.xib */,
+				BA83FB3424C5A9130054B203 /* BadgeViewController.swift */,
+				BA83FB3524C5A9130054B203 /* BadgeViewController.xib */,
+				BA83FB3824C5AA5B0054B203 /* BadgeTableViewCell.swift */,
+				BA83FB3924C5AA5B0054B203 /* BadgeTableViewCell.xib */,
 			);
 			path = Sale;
 			sourceTree = "<group>";
@@ -178,6 +208,12 @@
 			children = (
 				BADBD74A24C5449B00502FDC /* EmployeeManagementViewController.swift */,
 				BADBD74B24C5449B00502FDC /* EmployeeManagementViewController.xib */,
+				BA4EE62824C57B190014F878 /* EmployeeTableViewCell.swift */,
+				BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */,
+				BAA6B80324C5828600F2241F /* CreateEmployeeViewController.swift */,
+				BAA6B80424C5828600F2241F /* CreateEmployeeViewController.xib */,
+				BAA6B80724C5892500F2241F /* EditEmployeeViewController.swift */,
+				BAA6B80824C5892500F2241F /* EditEmployeeViewController.xib */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -243,14 +279,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA2FAA1024C53FCB00BC23DF /* ProductManagerViewController.xib in Resources */,
+				BAA6B80624C5828600F2241F /* CreateEmployeeViewController.xib in Resources */,
+				BAA6B80A24C5892500F2241F /* EditEmployeeViewController.xib in Resources */,
 				BADBD74D24C5449B00502FDC /* EmployeeManagementViewController.xib in Resources */,
+				BA83FB3B24C5AA5B0054B203 /* BadgeTableViewCell.xib in Resources */,
 				BA2FAA0324C52D1000BC23DF /* MenuTableViewController.xib in Resources */,
 				BA2FA9F524C529FA00BC23DF /* LaunchScreen.storyboard in Resources */,
 				BA2FA9F224C529FA00BC23DF /* Assets.xcassets in Resources */,
 				BA6A152E24C551C500F0CF9D /* SaleManagerViewController.xib in Resources */,
 				BA2FAA0724C52E6300BC23DF /* MenuTableViewCell.xib in Resources */,
 				BA4EE62324C559C40014F878 /* ProductTableViewCell.xib in Resources */,
+				BA83FB3724C5A9130054B203 /* BadgeViewController.xib in Resources */,
 				BA2FA9F024C529F900BC23DF /* Main.storyboard in Resources */,
+				BAA6B80E24C5987000F2241F /* SaleCollectionViewCell.xib in Resources */,
+				BA4EE62B24C57B190014F878 /* EmployeeTableViewCell.xib in Resources */,
 				BA4EE62724C56A470014F878 /* CreateEditProductViewController.xib in Resources */,
 				BA3D95D724C5531A00D4BFEA /* ReportViewController.xib in Resources */,
 			);
@@ -307,15 +349,21 @@
 			files = (
 				BA2FAA0224C52D1000BC23DF /* MenuTableViewController.swift in Sources */,
 				BA2FA9ED24C529F900BC23DF /* ViewController.swift in Sources */,
+				BAA6B80524C5828600F2241F /* CreateEmployeeViewController.swift in Sources */,
+				BAA6B80D24C5987000F2241F /* SaleCollectionViewCell.swift in Sources */,
+				BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */,
 				BA2FA9E924C529F900BC23DF /* AppDelegate.swift in Sources */,
 				BA2FAA0F24C53FCB00BC23DF /* ProductManagerViewController.swift in Sources */,
 				BA2FA9EB24C529F900BC23DF /* SceneDelegate.swift in Sources */,
+				BAA6B80924C5892500F2241F /* EditEmployeeViewController.swift in Sources */,
 				BADBD74C24C5449B00502FDC /* EmployeeManagementViewController.swift in Sources */,
 				BA4EE62624C56A470014F878 /* CreateEditProductViewController.swift in Sources */,
 				BA2FAA0B24C53A8D00BC23DF /* Item.swift in Sources */,
 				BA4EE62224C559C40014F878 /* ProductTableViewCell.swift in Sources */,
+				BA83FB3A24C5AA5B0054B203 /* BadgeTableViewCell.swift in Sources */,
 				BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */,
 				BA3D95D624C5531A00D4BFEA /* ReportViewController.swift in Sources */,
+				BA4EE62A24C57B190014F878 /* EmployeeTableViewCell.swift in Sources */,
 				BA2FAA0624C52E6300BC23DF /* MenuTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

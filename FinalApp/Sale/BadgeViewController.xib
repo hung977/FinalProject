@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BadgeViewController" customModule="FinalApp" customModuleProvider="target">
+            <connections>
+                <outlet property="searchBar" destination="7Y3-cr-SAm" id="3g9-nY-aUe"/>
+                <outlet property="tableView" destination="qWV-vo-eJO" id="hxm-iW-z1Y"/>
+                <outlet property="totalPayout" destination="oV0-dy-ZY6" id="xdU-1c-XL9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xj9-XP-3qw">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <items>
+                        <navigationItem title="Product Management" id="VUb-Xr-MZR">
+                            <barButtonItem key="leftBarButtonItem" title="Item" image="hamburger" id="l74-w8-nFJ">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="didTappedMenu:" destination="-1" id="tJh-xT-flX"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" systemItem="add" id="IcT-dI-4as">
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="-1" id="DyS-rG-tQK"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="7Y3-cr-SAm">
+                    <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qWV-vo-eJO">
+                    <rect key="frame" x="0.0" y="144" width="414" height="590"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total: $398" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oV0-dy-ZY6">
+                    <rect key="frame" x="20" y="754" width="374" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="kJS-Qd-hjV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qZH-Sr-zS1">
+                    <rect key="frame" x="20" y="812" width="374" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmQ-0B-toJ">
+                            <rect key="frame" x="0.0" y="0.0" width="183" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelPaymentTapped:" destination="-1" eventType="touchUpInside" id="EYn-Vl-PRE"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HE5-BT-uhh">
+                            <rect key="frame" x="191" y="0.0" width="183" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <state key="normal" title="Pay"/>
+                            <connections>
+                                <action selector="paymentTapped:" destination="-1" eventType="touchUpInside" id="uRS-e6-nDe"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="jhm-C3-AK3"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="xj9-XP-3qw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="B0p-b6-JeP"/>
+                <constraint firstItem="7Y3-cr-SAm" firstAttribute="top" secondItem="xj9-XP-3qw" secondAttribute="bottom" id="CXh-xb-Llm"/>
+                <constraint firstItem="qZH-Sr-zS1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="E4p-Lr-Iqr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oV0-dy-ZY6" secondAttribute="trailing" constant="20" id="FHt-h7-HhB"/>
+                <constraint firstItem="oV0-dy-ZY6" firstAttribute="top" secondItem="qWV-vo-eJO" secondAttribute="bottom" constant="20" id="Ld6-IO-lL0"/>
+                <constraint firstItem="7Y3-cr-SAm" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="OSJ-RM-iQq"/>
+                <constraint firstItem="oV0-dy-ZY6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="P7t-6w-AlV"/>
+                <constraint firstItem="7Y3-cr-SAm" firstAttribute="top" secondItem="xj9-XP-3qw" secondAttribute="bottom" id="PB1-9d-kLb"/>
+                <constraint firstItem="qWV-vo-eJO" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="aLG-Ph-W8f"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qZH-Sr-zS1" secondAttribute="bottom" constant="20" id="bo4-TC-kIM"/>
+                <constraint firstItem="qZH-Sr-zS1" firstAttribute="top" secondItem="oV0-dy-ZY6" secondAttribute="bottom" constant="8" id="imM-tb-PYb"/>
+                <constraint firstItem="xj9-XP-3qw" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="jeH-KM-VlL"/>
+                <constraint firstItem="qWV-vo-eJO" firstAttribute="top" secondItem="7Y3-cr-SAm" secondAttribute="bottom" id="oj1-Tu-pEu"/>
+                <constraint firstItem="xj9-XP-3qw" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="qAj-80-0mb"/>
+                <constraint firstItem="7Y3-cr-SAm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tjt-WM-qpr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qZH-Sr-zS1" secondAttribute="trailing" constant="20" id="uab-lh-gVx"/>
+                <constraint firstItem="qWV-vo-eJO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wVG-bi-Y4D"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qWV-vo-eJO" secondAttribute="bottom" constant="128" id="wpB-Va-T9p"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="150.66964285714286"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="hamburger" width="48" height="48"/>
+    </resources>
+</document>

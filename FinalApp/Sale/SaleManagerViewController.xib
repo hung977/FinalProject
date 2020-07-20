@@ -9,6 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SaleManagerViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="diK-jf-OEw" id="tXW-dA-bLm"/>
+                <outlet property="searchBar" destination="gRR-ea-wOT" id="Dgl-VS-TtJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,9 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iAU-Ze-QmJ">
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iAU-Ze-QmJ">
                     <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
                         <navigationItem title="Sale Management" id="1j5-w7-xgZ">
                             <barButtonItem key="leftBarButtonItem" title="Item" image="hamburger" id="AsX-KL-Utf">
@@ -28,16 +29,50 @@
                                     <action selector="didTappedMenu:" destination="-1" id="7QH-Dm-OcD"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" title="Bag" image="bag_collection" id="ci2-1Q-Im5">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="bagButtonTapped:" destination="-1" id="00F-kp-zJ9"/>
+                                </connections>
+                            </barButtonItem>
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="gRR-ea-wOT">
+                    <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="diK-jf-OEw">
+                    <rect key="frame" x="20" y="144" width="374" height="752"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yUR-Yn-8dy">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="iAU-Ze-QmJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="7Ts-xo-beU"/>
+                <constraint firstItem="diK-jf-OEw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Aa0-54-3be"/>
+                <constraint firstItem="diK-jf-OEw" firstAttribute="top" secondItem="gRR-ea-wOT" secondAttribute="bottom" id="Vxf-Ml-R9c"/>
+                <constraint firstAttribute="bottom" secondItem="diK-jf-OEw" secondAttribute="bottom" id="cZs-OF-vXb"/>
+                <constraint firstItem="iAU-Ze-QmJ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="dh3-K7-6Ss"/>
+                <constraint firstItem="gRR-ea-wOT" firstAttribute="top" secondItem="iAU-Ze-QmJ" secondAttribute="bottom" id="dvY-40-cEi"/>
+                <constraint firstItem="iAU-Ze-QmJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eFX-wB-4wE"/>
+                <constraint firstItem="gRR-ea-wOT" firstAttribute="top" secondItem="iAU-Ze-QmJ" secondAttribute="bottom" id="ela-z7-Bbn"/>
+                <constraint firstAttribute="trailing" secondItem="diK-jf-OEw" secondAttribute="trailing" constant="20" id="hap-gX-rK3"/>
+                <constraint firstItem="gRR-ea-wOT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pdS-E0-tR8"/>
+                <constraint firstItem="gRR-ea-wOT" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="tTJ-a4-ODA"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="133" y="154"/>
+            <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
         </view>
     </objects>
     <resources>
+        <image name="bag_collection" width="35" height="35"/>
         <image name="hamburger" width="48" height="48"/>
     </resources>
 </document>
