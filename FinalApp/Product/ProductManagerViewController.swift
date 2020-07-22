@@ -81,7 +81,6 @@ class ProductManagerViewController: UIViewController {
             for index in self.products.enumerated() {
                 if self.products[index.offset].name == forProduct.name {
                     self.products.remove(at: index.offset)
-                    break
                 }
             }
             self.tableView.reloadData()

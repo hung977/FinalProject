@@ -30,6 +30,7 @@
 		BA4EE62A24C57B190014F878 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EE62824C57B190014F878 /* EmployeeTableViewCell.swift */; };
 		BA4EE62B24C57B190014F878 /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */; };
 		BA531C1424C815A300F80178 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA531C1324C815A300F80178 /* Product.swift */; };
+		BA531C1724C84DEC00F80178 /* TestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA531C1624C84DEC00F80178 /* TestAPI.swift */; };
 		BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */; };
 		BA6A152E24C551C500F0CF9D /* SaleManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */; };
 		BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83FB3424C5A9130054B203 /* BadgeViewController.swift */; };
@@ -74,6 +75,7 @@
 		BA4EE62824C57B190014F878 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
 		BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
 		BA531C1324C815A300F80178 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		BA531C1624C84DEC00F80178 /* TestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAPI.swift; sourceTree = "<group>"; };
 		BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleManagerViewController.swift; sourceTree = "<group>"; };
 		BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleManagerViewController.xib; sourceTree = "<group>"; };
 		BA83FB3424C5A9130054B203 /* BadgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		BA2FA9E724C529F900BC23DF /* FinalApp */ = {
 			isa = PBXGroup;
 			children = (
+				BA531C1524C84DC900F80178 /* Networking */,
 				BA2FA9E824C529F900BC23DF /* AppDelegate.swift */,
 				BA2FA9EA24C529F900BC23DF /* SceneDelegate.swift */,
 				BA2FA9EC24C529F900BC23DF /* HomeViewController.swift */,
@@ -200,6 +203,14 @@
 				BA531C1324C815A300F80178 /* Product.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		BA531C1524C84DC900F80178 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				BA531C1624C84DEC00F80178 /* TestAPI.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		BA6A152F24C551C800F0CF9D /* Sale */ = {
@@ -361,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA531C1724C84DEC00F80178 /* TestAPI.swift in Sources */,
 				BA2FAA0224C52D1000BC23DF /* MenuTableViewController.swift in Sources */,
 				BA2FA9ED24C529F900BC23DF /* HomeViewController.swift in Sources */,
 				BAA6B80524C5828600F2241F /* CreateEmployeeViewController.swift in Sources */,
@@ -526,6 +538,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XNFGCQVLAN;
 				INFOPLIST_FILE = FinalApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -544,6 +557,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XNFGCQVLAN;
 				INFOPLIST_FILE = FinalApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
