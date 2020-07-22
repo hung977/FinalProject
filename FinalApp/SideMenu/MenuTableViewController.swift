@@ -11,10 +11,11 @@ import UIKit
 class MenuTableViewController: UITableViewController {
         
     var items: [Item] = [Item(lable: "Product management", image: "product_management_icon"), Item(lable: "Employee management", image: "employee_management_icon"), Item(lable: "Sale", image: "sale_management_icon"), Item(lable: "Report", image: "report_icon")]
-    
+    var isAdmin = true
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = .darkGray
+        tableView.backgroundColor = .lightGray
+        tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
     }
@@ -31,23 +32,48 @@ class MenuTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuTableViewCell
         cell.labelViewCell?.text = items[indexPath.row].lable
         cell.imageViewCell?.image = UIImage(named: items[indexPath.row].image)
-        cell.labelViewCell?.textColor = .white
-        cell.backgroundColor = .darkGray
+        cell.labelViewCell?.textColor = .black
+        cell.backgroundColor = .lightGray
+        cell.selectionStyle = .none
+        if !isAdmin {
+            if cell.labelViewCell.text == "Product management" || cell.labelViewCell.text == "Employee management" {
+                cell.labelViewCell.textColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3)
+                cell.imageViewCell.alpha = 0.3
+                return cell
+            }
+        }
         return cell
         
+    }
+    func alertNotPermission() {
+        let alert = UIAlertController(title: nil, message: "Access denied!", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+            //do something
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch items[indexPath.row].lable {
         case "Product management":
-            let vc = ProductManagerViewController()
-            navigationController?.pushViewController(vc, animated: true)
-//            self.present(vc, animated: true, completion: nil)
+            if isAdmin {
+                let vc = ProductManagerViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            } else {
+                alertNotPermission()
+            }
             tableView.deselectRow(at: indexPath, animated: true)
+            
         case "Employee management":
-            let vc = EmployeeManagementViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            if isAdmin {
+                let vc = EmployeeManagementViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            } else {
+                alertNotPermission()
+            }
             tableView.deselectRow(at: indexPath, animated: true)
+            
         case "Sale":
             let vc = SaleManagerViewController()
             navigationController?.pushViewController(vc, animated: true)

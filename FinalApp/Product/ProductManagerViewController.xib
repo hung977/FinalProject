@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductManagerViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="menuButton" destination="vfH-AR-fz3" id="KnU-Qb-whe"/>
                 <outlet property="searchBar" destination="4V5-hy-Bjk" id="Ka0-Yo-0Gw"/>
                 <outlet property="tableView" destination="YyE-b1-YIH" id="6lS-nQ-DZk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -30,7 +31,8 @@
                                     <action selector="didTappedMenu:" destination="-1" id="6NM-Oj-zes"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" systemItem="add" id="IBk-M1-sjz">
+                            <barButtonItem key="rightBarButtonItem" image="add_icon" id="IBk-M1-sjz">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="addProductTapped:" destination="-1" id="Onp-hm-xfv"/>
                                 </connections>
@@ -74,6 +76,7 @@
         </view>
     </objects>
     <resources>
+        <image name="add_icon" width="32" height="32"/>
         <image name="hamburger" width="48" height="48"/>
     </resources>
 </document>

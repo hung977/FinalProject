@@ -13,7 +13,12 @@ class SaleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var addButton: UIButton!
+    var myColor = UIColor(red: 0, green: 0, blue: 255, alpha: 0.5)
     override func awakeFromNib() {
+        addButton.layer.cornerRadius = 10
+        addButton.backgroundColor = .darkGray
+        addButton.setTitleColor(.white, for: .normal)
         super.awakeFromNib()
         // Initialization code
     }

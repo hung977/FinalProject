@@ -11,19 +11,25 @@ import UIKit
 class CreateEditProductViewController: UIViewController {
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var productNameTextfield: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var productAmountTextfield: UITextField!
     @IBOutlet weak var titleItems: UINavigationItem!
     @IBOutlet weak var productPriceTextfield: UITextField!
     var tit = ""
-    var productName = ""
-    var productAmout = ""
-    var productPrice = ""
+    var productImageName: String?
+    var productName: String?
+    var productAmout: Int?
+    var productPrice: Double?
     override func viewDidLoad() {
+        saveButton.layer.cornerRadius = 10
+        saveButton.backgroundColor = .blue
+        saveButton.setTitleColor(.white, for: .normal)
         super.viewDidLoad()
+        productImage.image = UIImage(named: productImageName ?? "hamburger" )
         titleItems.title = tit
-        productNameTextfield.text = productName
-        productAmountTextfield.text = productAmout
-        productPriceTextfield.text = productPrice
+        productNameTextfield.text = productName ?? ""
+        productAmountTextfield.text = "\(productAmout ?? 0)"
+        productPriceTextfield.text = "\(productPrice ?? 0)"
     }
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)

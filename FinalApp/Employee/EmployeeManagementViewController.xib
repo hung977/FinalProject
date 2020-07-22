@@ -29,7 +29,8 @@
                                     <action selector="didTappedMenu:" destination="-1" id="mVz-mr-SLL"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" systemItem="add" id="W6Y-cS-goK">
+                            <barButtonItem key="rightBarButtonItem" image="add_icon" id="W6Y-cS-goK">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="addButtonTapped:" destination="-1" id="mct-H8-581"/>
                                 </connections>
@@ -66,6 +67,7 @@
         </view>
     </objects>
     <resources>
+        <image name="add_icon" width="32" height="32"/>
         <image name="hamburger" width="48" height="48"/>
     </resources>
 </document>

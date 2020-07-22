@@ -13,6 +13,7 @@
                 <outlet property="productImage" destination="j3w-5G-4p5" id="rqQ-TO-QNK"/>
                 <outlet property="productNameTextfield" destination="t5z-ig-EVA" id="twL-L0-n33"/>
                 <outlet property="productPriceTextfield" destination="SrC-IR-Hbj" id="Jil-iY-HQu"/>
+                <outlet property="saveButton" destination="JR3-qJ-SBu" id="gDH-kv-1mq"/>
                 <outlet property="titleItems" destination="ln3-EV-efw" id="YYz-RM-UT3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -97,6 +98,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="fkh-G5-xxa"/>
                     </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                     <state key="normal" title="Save"/>
                     <connections>
                         <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="hsR-bO-8X1"/>

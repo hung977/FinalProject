@@ -9,7 +9,7 @@
 import UIKit
 import SideMenu
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     var menu: SideMenuNavigationController?
     override func viewDidLoad() {
         super.viewDidLoad()

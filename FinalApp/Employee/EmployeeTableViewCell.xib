@@ -28,8 +28,8 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="HHz-Jn-K3s"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                        <color key="textColor" red="0.4559201598" green="0.45598942040000001" blue="0.45590496060000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXD-Ls-jIn">
@@ -37,7 +37,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Ohm-Rq-RdK"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -46,15 +46,15 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="8KL-rF-twz"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-RX-TL6">
-                        <rect key="frame" x="343" y="0.0" width="42" height="48"/>
+                        <rect key="frame" x="349" y="0.0" width="36" height="35"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="42" id="3Ym-Fy-Osx"/>
-                            <constraint firstAttribute="height" constant="48" id="JII-HZ-evW"/>
+                            <constraint firstAttribute="width" constant="36" id="3Ym-Fy-Osx"/>
+                            <constraint firstAttribute="height" constant="35" id="JII-HZ-evW"/>
                         </constraints>
                         <state key="normal" title="Button" image="ellipsis"/>
                         <connections>

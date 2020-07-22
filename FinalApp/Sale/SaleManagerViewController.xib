@@ -43,7 +43,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="diK-jf-OEw">
-                    <rect key="frame" x="20" y="144" width="374" height="752"/>
+                    <rect key="frame" x="20" y="144" width="374" height="718"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yUR-Yn-8dy">
                         <size key="itemSize" width="128" height="128"/>
@@ -58,13 +58,13 @@
                 <constraint firstItem="iAU-Ze-QmJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="7Ts-xo-beU"/>
                 <constraint firstItem="diK-jf-OEw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Aa0-54-3be"/>
                 <constraint firstItem="diK-jf-OEw" firstAttribute="top" secondItem="gRR-ea-wOT" secondAttribute="bottom" id="Vxf-Ml-R9c"/>
-                <constraint firstAttribute="bottom" secondItem="diK-jf-OEw" secondAttribute="bottom" id="cZs-OF-vXb"/>
                 <constraint firstItem="iAU-Ze-QmJ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="dh3-K7-6Ss"/>
                 <constraint firstItem="gRR-ea-wOT" firstAttribute="top" secondItem="iAU-Ze-QmJ" secondAttribute="bottom" id="dvY-40-cEi"/>
                 <constraint firstItem="iAU-Ze-QmJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eFX-wB-4wE"/>
                 <constraint firstItem="gRR-ea-wOT" firstAttribute="top" secondItem="iAU-Ze-QmJ" secondAttribute="bottom" id="ela-z7-Bbn"/>
                 <constraint firstAttribute="trailing" secondItem="diK-jf-OEw" secondAttribute="trailing" constant="20" id="hap-gX-rK3"/>
                 <constraint firstItem="gRR-ea-wOT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pdS-E0-tR8"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="diK-jf-OEw" secondAttribute="bottom" id="qlY-Yi-qV0"/>
                 <constraint firstItem="gRR-ea-wOT" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="tTJ-a4-ODA"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
