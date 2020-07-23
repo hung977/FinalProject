@@ -21,6 +21,10 @@
 		BA2FAA0B24C53A8D00BC23DF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2FAA0A24C53A8D00BC23DF /* Item.swift */; };
 		BA2FAA0F24C53FCB00BC23DF /* ProductManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2FAA0D24C53FCB00BC23DF /* ProductManagerViewController.swift */; };
 		BA2FAA1024C53FCB00BC23DF /* ProductManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA2FAA0E24C53FCB00BC23DF /* ProductManagerViewController.xib */; };
+		BA38ECA124C9458C00C4414F /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38ECA024C9458C00C4414F /* RequestService.swift */; };
+		BA38ECA324C94A9F00C4414F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38ECA224C94A9F00C4414F /* Router.swift */; };
+		BA38ECA724C9667E00C4414F /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38ECA624C9667E00C4414F /* LoginResponse.swift */; };
+		BA38ECA924C97C3700C4414F /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38ECA824C97C3700C4414F /* Product.swift */; };
 		BA3D95D624C5531A00D4BFEA /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3D95D424C5531A00D4BFEA /* ReportViewController.swift */; };
 		BA3D95D724C5531A00D4BFEA /* ReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA3D95D524C5531A00D4BFEA /* ReportViewController.xib */; };
 		BA4EE62224C559C40014F878 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EE62024C559C40014F878 /* ProductTableViewCell.swift */; };
@@ -29,8 +33,6 @@
 		BA4EE62724C56A470014F878 /* CreateEditProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62524C56A470014F878 /* CreateEditProductViewController.xib */; };
 		BA4EE62A24C57B190014F878 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EE62824C57B190014F878 /* EmployeeTableViewCell.swift */; };
 		BA4EE62B24C57B190014F878 /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */; };
-		BA531C1424C815A300F80178 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA531C1324C815A300F80178 /* Product.swift */; };
-		BA531C1724C84DEC00F80178 /* TestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA531C1624C84DEC00F80178 /* TestAPI.swift */; };
 		BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */; };
 		BA6A152E24C551C500F0CF9D /* SaleManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */; };
 		BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83FB3424C5A9130054B203 /* BadgeViewController.swift */; };
@@ -66,6 +68,10 @@
 		BA2FAA0A24C53A8D00BC23DF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BA2FAA0D24C53FCB00BC23DF /* ProductManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManagerViewController.swift; sourceTree = "<group>"; };
 		BA2FAA0E24C53FCB00BC23DF /* ProductManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductManagerViewController.xib; sourceTree = "<group>"; };
+		BA38ECA024C9458C00C4414F /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
+		BA38ECA224C94A9F00C4414F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		BA38ECA624C9667E00C4414F /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		BA38ECA824C97C3700C4414F /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = ../../../../.Trash/Product.swift; sourceTree = "<group>"; };
 		BA3D95D424C5531A00D4BFEA /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		BA3D95D524C5531A00D4BFEA /* ReportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportViewController.xib; sourceTree = "<group>"; };
 		BA4EE62024C559C40014F878 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
@@ -74,8 +80,6 @@
 		BA4EE62524C56A470014F878 /* CreateEditProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateEditProductViewController.xib; sourceTree = "<group>"; };
 		BA4EE62824C57B190014F878 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
 		BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
-		BA531C1324C815A300F80178 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		BA531C1624C84DEC00F80178 /* TestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAPI.swift; sourceTree = "<group>"; };
 		BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleManagerViewController.swift; sourceTree = "<group>"; };
 		BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleManagerViewController.xib; sourceTree = "<group>"; };
 		BA83FB3424C5A9130054B203 /* BadgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewController.swift; sourceTree = "<group>"; };
@@ -144,7 +148,6 @@
 		BA2FA9E724C529F900BC23DF /* FinalApp */ = {
 			isa = PBXGroup;
 			children = (
-				BA531C1524C84DC900F80178 /* Networking */,
 				BA2FA9E824C529F900BC23DF /* AppDelegate.swift */,
 				BA2FA9EA24C529F900BC23DF /* SceneDelegate.swift */,
 				BA2FA9EC24C529F900BC23DF /* HomeViewController.swift */,
@@ -153,6 +156,7 @@
 				BA2FA9F124C529FA00BC23DF /* Assets.xcassets */,
 				BA2FA9F324C529FA00BC23DF /* LaunchScreen.storyboard */,
 				BA2FA9F624C529FA00BC23DF /* Info.plist */,
+				BA531C1524C84DC900F80178 /* Networking */,
 				BA531C1224C7EFEE00F80178 /* Model */,
 				BA2FAA0C24C53F5900BC23DF /* SideMenu */,
 				BA2FAA1124C5408900BC23DF /* Product */,
@@ -200,7 +204,8 @@
 		BA531C1224C7EFEE00F80178 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BA531C1324C815A300F80178 /* Product.swift */,
+				BA38ECA824C97C3700C4414F /* Product.swift */,
+				BA38ECA624C9667E00C4414F /* LoginResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -208,7 +213,8 @@
 		BA531C1524C84DC900F80178 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				BA531C1624C84DEC00F80178 /* TestAPI.swift */,
+				BA38ECA024C9458C00C4414F /* RequestService.swift */,
+				BA38ECA224C94A9F00C4414F /* Router.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -372,7 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA531C1724C84DEC00F80178 /* TestAPI.swift in Sources */,
+				BA38ECA324C94A9F00C4414F /* Router.swift in Sources */,
 				BA2FAA0224C52D1000BC23DF /* MenuTableViewController.swift in Sources */,
 				BA2FA9ED24C529F900BC23DF /* HomeViewController.swift in Sources */,
 				BAA6B80524C5828600F2241F /* CreateEmployeeViewController.swift in Sources */,
@@ -380,17 +386,19 @@
 				BA83FB3D24C5B5370054B203 /* LoginViewController.swift in Sources */,
 				BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */,
 				BA2FA9E924C529F900BC23DF /* AppDelegate.swift in Sources */,
+				BA38ECA124C9458C00C4414F /* RequestService.swift in Sources */,
 				BA2FAA0F24C53FCB00BC23DF /* ProductManagerViewController.swift in Sources */,
 				BA2FA9EB24C529F900BC23DF /* SceneDelegate.swift in Sources */,
 				BAA6B80924C5892500F2241F /* EditEmployeeViewController.swift in Sources */,
+				BA38ECA924C97C3700C4414F /* Product.swift in Sources */,
 				BADBD74C24C5449B00502FDC /* EmployeeManagementViewController.swift in Sources */,
 				BA4EE62624C56A470014F878 /* CreateEditProductViewController.swift in Sources */,
+				BA38ECA724C9667E00C4414F /* LoginResponse.swift in Sources */,
 				BA2FAA0B24C53A8D00BC23DF /* Item.swift in Sources */,
 				BA4EE62224C559C40014F878 /* ProductTableViewCell.swift in Sources */,
 				BA83FB3A24C5AA5B0054B203 /* BadgeTableViewCell.swift in Sources */,
 				BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */,
 				BA3D95D624C5531A00D4BFEA /* ReportViewController.swift in Sources */,
-				BA531C1424C815A300F80178 /* Product.swift in Sources */,
 				BA4EE62A24C57B190014F878 /* EmployeeTableViewCell.swift in Sources */,
 				BA2FAA0624C52E6300BC23DF /* MenuTableViewCell.swift in Sources */,
 			);

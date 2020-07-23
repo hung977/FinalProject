@@ -11,9 +11,10 @@ import UIKit
 class MenuTableViewController: UITableViewController {
         
     var items: [Item] = [Item(lable: "Product management", image: "product_management_icon"), Item(lable: "Employee management", image: "employee_management_icon"), Item(lable: "Sale", image: "sale_management_icon"), Item(lable: "Report", image: "report_icon")]
-    var isAdmin = true
+    var isAdmin = LoginViewController.isAdmin
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(isAdmin)
         tableView.backgroundColor = .lightGray
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")

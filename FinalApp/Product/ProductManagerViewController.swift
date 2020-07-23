@@ -11,20 +11,7 @@ import SideMenu
 
 class ProductManagerViewController: UIViewController {
     
-    var products: [Product] = [Product(name: "iPhone XSMax", price: 999.99, amount: 12, image: "iphonexsmax"),
-                               Product(name: "iPhone XS", price: 799.99, amount: 7, image: "iphonexs"),
-                               Product(name: "iPhone 11", price: 809.99, amount: 9, image: "iphone11"),
-                               Product(name: "iPhone 11 pro", price: 999.99, amount: 21, image: "iphone11pro"),
-                               Product(name: "iPhone 11 pro max", price: 1099.99, amount: 14, image: "iphone11promax"),
-                               Product(name: "Samsung P20", price: 599.99, amount: 4, image: "samsungp20"),
-                               Product(name: "Samsung P20 pro", price: 999.99, amount: 22, image: "samsungp20pro"),
-                               Product(name: "Samsung A350", price: 399.99, amount: 9, image: "samsunga350"),
-                               Product(name: "Samsung S9 plus", price: 599.99, amount: 3, image: "samsungs9plus"),
-                               Product(name: "Xiaomi P30", price: 499.99, amount: 1, image: "xiaomip30"),
-                               Product(name: "Xiaomi P30 Pro", price: 799.99, amount: 4, image: "xiaomip30pro"),
-                               Product(name: "Huawei", price: 199.99, amount: 7, image: "huawei"),
-                               Product(name: "Huawei Pro", price: 399.99, amount: 18, image: "huaweipro"),
-                               Product(name: "OPPO S9", price: 699.99, amount: 1, image: "oppos9"), ]
+    var products: [Product] = []
     var currentProduct: Product?
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -32,6 +19,16 @@ class ProductManagerViewController: UIViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     var menu: SideMenuNavigationController?
     override func viewDidLoad() {
+        
+        let routerGetProduct = Router.getProducts
+        RequestService.shared.AFRequestWithRawData(router: routerGetProduct, parameters: nil, objectType: ProductResponse.self) { (bool, json, error) in
+            if let json = json as? ProductResponse {
+                self.products = json.items
+                self.tableView.reloadData()
+            }
+        }
+        
+        
         super.viewDidLoad()
         tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         searchBar.delegate = self
@@ -60,7 +57,8 @@ class ProductManagerViewController: UIViewController {
                 vc.productName = self.currentProduct?.name
                 vc.productAmout = self.currentProduct?.amount
                 vc.productPrice = self.currentProduct?.price
-                vc.productImageName = self.currentProduct?.image
+                let newImageURL = self.currentProduct!.image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
+                vc.productImageName = newImageURL
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -81,6 +79,7 @@ class ProductManagerViewController: UIViewController {
             for index in self.products.enumerated() {
                 if self.products[index.offset].name == forProduct.name {
                     self.products.remove(at: index.offset)
+                    break
                 }
             }
             self.tableView.reloadData()
@@ -100,10 +99,21 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProductTableViewCell
-        cell.productImage.image = UIImage(named: products[indexPath.row].image)
+        let newImageURL = products[indexPath.row].image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: URL(string: newImageURL)!) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        cell.productImage.image = image
+                        
+                    }
+                }
+            }
+        }
+        
         cell.amoutLabel.text = "Amount: \(products[indexPath.row].amount)"
         cell.productName.text = products[indexPath.row].name
-        cell.productPrice.text = "$\(products[indexPath.row].price)"
+        cell.productPrice.text = "Price: $\(products[indexPath.row].price)"
         cell.editButton.titleLabel?.text = String(indexPath.row)
         return cell
     }

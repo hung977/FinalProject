@@ -7,41 +7,50 @@
 //
 
 import UIKit
+import Alamofire
 
 class LoginViewController: UIViewController {
     
-    var isAdmin = false
-
+    static var isAdmin = false
+    
+//MARK: - IBoutlet
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+//MARK: - Life cycel
     override func viewDidLoad() {
         super.viewDidLoad()
-        //test
-        usernameTextField.text = "hungphan"
-        passwordTextField.text = "123123"
-        
-        
         passwordTextField.delegate = self
         usernameTextField.delegate = self
-        loginBtn.layer.cornerRadius = 10
-        usernameTextField.layer.cornerRadius = 15
-        passwordTextField.layer.cornerRadius = 15
-        // Do any additional setup after loading the view.
+        setUI()
     }
+//MARK: - IBAction
     
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         hideKeyboard()
         if let userTF = usernameTextField.text, let passTF = passwordTextField.text {
-            if userTF == "hungphan" && passTF == "123123" {
-                performSegue(withIdentifier: "loginToHome", sender: sender)
-            } else {
-                alertFailtureLogin(str: "username or password incorrect.")
+            let login: [String: String] = ["username":"\(userTF)", "password":"\(passTF)"]
+            let routerLogin = Router.login
+            RequestService.shared.AFRequestWithRawData(router: routerLogin, parameters: login, objectType: LoginResponse.self) { (bool, json, error) in
+                if let json = json as? LoginResponse {
+                    print(json)
+                    if json.profile.role == "admin" {
+                        LoginViewController.isAdmin = true
+                    }
+                    self.performSegue(withIdentifier: "loginToHome", sender: sender)
+                }
+                else {
+                    self.alertFailtureLogin(str: "username or password incorrect.")
+                }
             }
-        } else {
-            alertFailtureLogin(str: "username and password can't be nil")
+            
         }
-    
+    }
+    func setUI() {
+        loginBtn.layer.cornerRadius = 10
+        usernameTextField.layer.cornerRadius = 15
+        passwordTextField.layer.cornerRadius = 15
     }
     func alertFailtureLogin(str message: String) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -64,6 +73,8 @@ class LoginViewController: UIViewController {
         }
     }
 }
+// MARK: - UITextFieldDelegate
+
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         hideKeyboard()

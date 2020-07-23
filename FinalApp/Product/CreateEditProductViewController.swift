@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class CreateEditProductViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -17,11 +18,12 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
     @IBOutlet weak var productAmountTextfield: UITextField!
     @IBOutlet weak var titleItems: UINavigationItem!
     @IBOutlet weak var productPriceTextfield: UITextField!
+    var currentImage: UIImage?
     var tit = ""
     var productImageName: String?
     var productName: String?
     var productAmout: Int?
-    var productPrice: Double?
+    var productPrice: Int?
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -33,7 +35,25 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         productNameTextfield.delegate = self
         productAmountTextfield.delegate = self
         productPriceTextfield.delegate = self
-        productImage.image = UIImage(named: productImageName ?? "hamburger" )
+        if productImageName != nil {
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: URL(string: self.productImageName!)!) {
+                    if let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self.productImage.image = image
+                            self.currentImage = image
+                            
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            productImage.image = UIImage(named: "product_example")
+            currentImage = UIImage(named: "product_example")
+        }
+        
+        
         titleItems.title = tit
         productNameTextfield.text = productName ?? ""
         productAmountTextfield.text = "\(productAmout ?? 0)"
@@ -62,6 +82,12 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         navigationController?.popViewController(animated: true)
     }
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+        let routerNewProduct = Router.newProducts
+//        let currentName = productNameTextfield.text ?? "Default Name"
+//        let currentAmout = Int(productAmountTextfield.text!) ?? 0
+//        let currentPrice = Double(productPriceTextfield.text!) ?? 0.0
+        let params: [String:String] = ["Name": "DEFAULT NAME", "Price": "12", "Amount": "5"]
+        RequestService.shared.uploadProductImage(router: routerNewProduct, currentImage!, params: params)
     }
     @IBAction func selectImageTapped(_ sender: UIButton) {
         var vcCamera =  UIImagePickerController()
@@ -104,6 +130,7 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
 
         // print out the image size as a test
         productImage.image = image
+        currentImage = image
     }
 }
 extension CreateEditProductViewController: UITextFieldDelegate {
