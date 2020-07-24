@@ -1,20 +1,26 @@
 PODS:
   - Alamofire (5.2.1)
+  - Charts (3.5.0):
+    - Charts/Core (= 3.5.0)
+  - Charts/Core (3.5.0)
   - SideMenu (6.4.8)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - Charts
   - SideMenu (~> 6.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Charts
     - SideMenu
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
+  Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
   SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
 
-PODFILE CHECKSUM: 7c356b174ba0ff86cccf71c1ddbba40367bd5f0a
+PODFILE CHECKSUM: b7cb3489b991c540e6c9605d3c6a82266fbee714
 
 COCOAPODS: 1.9.3

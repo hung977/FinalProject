@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct Item {
+struct ItemMenu {
     var lable: String
     var image: String
 }

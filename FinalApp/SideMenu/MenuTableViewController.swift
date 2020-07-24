@@ -10,7 +10,7 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
         
-    var items: [Item] = [Item(lable: "Product management", image: "product_management_icon"), Item(lable: "Employee management", image: "employee_management_icon"), Item(lable: "Sale", image: "sale_management_icon"), Item(lable: "Report", image: "report_icon")]
+    var items: [ItemMenu] = [ItemMenu(lable: "Product management", image: "product_management_icon"), ItemMenu(lable: "Employee management", image: "employee_management_icon"), ItemMenu(lable: "Sale", image: "sale_management_icon"), ItemMenu(lable: "Report", image: "report_icon")]
     var isAdmin = LoginViewController.isAdmin
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,40 +11,42 @@ import Alamofire
 
 class LoginViewController: UIViewController {
     
+    static var token = ""
     static var isAdmin = false
     
-//MARK: - IBoutlet
+    //MARK: - IBoutlet
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-//MARK: - Life cycel
+    //MARK: - Life cycel
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameTextField.text = "admin"
+        passwordTextField.text = "Admin123!"
         passwordTextField.delegate = self
         usernameTextField.delegate = self
         setUI()
     }
-//MARK: - IBAction
+    //MARK: - IBAction
     
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         hideKeyboard()
         if let userTF = usernameTextField.text, let passTF = passwordTextField.text {
             let login: [String: String] = ["username":"\(userTF)", "password":"\(passTF)"]
             let routerLogin = Router.login
-            RequestService.shared.AFRequestWithRawData(router: routerLogin, parameters: login, objectType: LoginResponse.self) { (bool, json, error) in
-                if let json = json as? LoginResponse {
-                    print(json)
+            RequestService.shared.AFRequestWithRawData(router: routerLogin, parameters: login, objectType: LoginResponse.self) { (bool, data, error) in
+                do {
+                    let json = try JSONDecoder.init().decode(LoginResponse.self, from: data!)
+                    LoginViewController.token = json.accessToken
                     if json.profile.role == "admin" {
                         LoginViewController.isAdmin = true
                     }
                     self.performSegue(withIdentifier: "loginToHome", sender: sender)
-                }
-                else {
+                } catch {
                     self.alertFailtureLogin(str: "username or password incorrect.")
                 }
             }
-            
         }
     }
     func setUI() {

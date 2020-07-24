@@ -13,23 +13,17 @@ class ProductManagerViewController: UIViewController {
     
     var products: [Product] = []
     var currentProduct: Product?
+    var menu: SideMenuNavigationController?
     
+    // MARK: - Iboutlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
-    var menu: SideMenuNavigationController?
+    
+    // MARK: - Life cycle
     override func viewDidLoad() {
-        
-        let routerGetProduct = Router.getProducts
-        RequestService.shared.AFRequestWithRawData(router: routerGetProduct, parameters: nil, objectType: ProductResponse.self) { (bool, json, error) in
-            if let json = json as? ProductResponse {
-                self.products = json.items
-                self.tableView.reloadData()
-            }
-        }
-        
-        
         super.viewDidLoad()
+        loadProduct()
         tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         searchBar.delegate = self
         navigationController?.isNavigationBarHidden = true
@@ -37,6 +31,22 @@ class ProductManagerViewController: UIViewController {
         menu?.leftSide = true
         menu?.menuWidth = 300
         SideMenuManager.default.leftMenuNavigationController = menu
+    }
+    
+    // MARK: - IBAction
+    func loadProduct() {
+        let routerGetProduct = Router.getProducts
+        RequestService.shared.AFRequestWithRawData(router: routerGetProduct, parameters: nil, objectType: ProductResponse.self) { (bool, data, error) in
+            do {
+                
+                
+                let json = try JSONDecoder.init().decode(ProductResponse.self, from: data!)
+                self.products = json.items
+                self.tableView.reloadData()
+            } catch {
+                print("error to convert \(error.localizedDescription)")
+            }
+        }
     }
     
     @IBAction func addProductTapped(_ sender: UIBarButtonItem) {
@@ -76,13 +86,13 @@ class ProductManagerViewController: UIViewController {
     func alertDeleteProduct(_ forProduct: Product) {
         let alert = UIAlertController(title: "Delete \(forProduct.name)", message: "Are you sure?", preferredStyle: .alert)
         let delete = UIAlertAction(title: "Delete", style: .default) {(_) in
-            for index in self.products.enumerated() {
-                if self.products[index.offset].name == forProduct.name {
-                    self.products.remove(at: index.offset)
-                    break
+            let routerDeleteProduct = Router.deleteProducts
+            if let id = self.currentProduct?.id {
+                RequestService.shared.request(router: routerDeleteProduct, id: id) { (response) in
+                    //INNNNNNNN
                 }
+                
             }
-            self.tableView.reloadData()
         }
         let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         alert.addAction(delete)

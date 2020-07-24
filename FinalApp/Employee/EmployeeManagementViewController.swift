@@ -12,8 +12,12 @@ import SideMenu
 class EmployeeManagementViewController: UIViewController {
     
     var menu: SideMenuNavigationController?
+    
+    // MARK: - IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -25,6 +29,8 @@ class EmployeeManagementViewController: UIViewController {
         menu?.menuWidth = 300
         SideMenuManager.default.leftMenuNavigationController = menu
     }
+    
+    //MARK: - IBAction
     @IBAction func didTappedMenu(_ sender: UIBarButtonItem) {
         present(menu!, animated: true)
     }

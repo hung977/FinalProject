@@ -14,6 +14,7 @@ enum Router {
     case login
     case getProducts
     case newProducts
+    case deleteProducts
     
     var baseURL: String {
         return "http://192.168.30.101:8081"
@@ -22,7 +23,7 @@ enum Router {
         switch self {
         case .login:
             return "\(baseURL)/api/auth/login"
-        case .getProducts, .newProducts:
+        case .getProducts, .newProducts, .deleteProducts:
             return "\(baseURL)/api/products"
             
         }
@@ -34,11 +35,13 @@ enum Router {
             return .post
         case .getProducts:
             return .get
+        case .deleteProducts:
+            return .delete
         }
     }
     
     var headers: HTTPHeaders {
-        let bearerToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NGEyY2E5Ni0wZWJhLWYzNDYtMTQ5Zi0zOWY2MjY2YzdmYTMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTU5NTU3NDUyOCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzOTMiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM5MyJ9.uIgbLjOS6Uwz73AkoaDE89uvbytE25X6cadRrXrH6kE"
+        let bearerToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjE0Yjc2Ny1jYTg3LTdhOTgtMTEzYy0zOWY2MjY2YzdmY2MiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTU5NTY2OTIyNCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzOTMiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM5MyJ9.IMnZi9pcSOQvOVy7tUFzUehETMst8Jex2rII6-jZ3AA"
         
         switch self {
         case .login:
@@ -47,6 +50,8 @@ enum Router {
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "application/json; charset=utf-8"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
         case .newProducts:
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "multipart/form-data"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
+        case .deleteProducts:
+            return HTTPHeaders([HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
         }
         
     }

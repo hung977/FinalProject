@@ -6,6 +6,7 @@ target 'FinalApp' do
   use_frameworks!
   pod 'SideMenu', '~> 6.0'
   pod 'Alamofire', '~> 5.2'
+  pod 'Charts'
 
  
 
