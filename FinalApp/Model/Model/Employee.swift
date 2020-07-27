@@ -1,5 +1,5 @@
 //
-//  Employee.swift
+//  Employee1.swift
 //  FinalApp
 //
 //  Created by TPS on 7/27/20.
@@ -7,15 +7,7 @@
 //
 
 import Foundation
-public struct EmployeeResponse: Codable {
 
-        public var items : [Employee]
-        public var pageIndex : Int
-        public var pageSize : Int
-        public var totalItems : Int
-        public var totalPages : Int
-        
-}
 public struct Employee: Codable {
 
         public var name : String

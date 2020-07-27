@@ -1,20 +1,12 @@
 //
-//  Login.swift
+//  Profile.swift
 //  FinalApp
 //
-//  Created by TPS on 7/23/20.
+//  Created by TPS on 7/27/20.
 //  Copyright © 2020 TPS. All rights reserved.
 //
 
 import Foundation
-
-public struct LoginResponse: Codable {
-
-        public var accessToken : String
-        public var expiresIn : Int
-        public var profile : Profile
-        
-}
 public struct Profile: Codable {
 
         public var address : String

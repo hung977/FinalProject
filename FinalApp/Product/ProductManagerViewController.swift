@@ -15,6 +15,15 @@ class ProductManagerViewController: UIViewController {
     var currentProduct: Product?
     var menu: SideMenuNavigationController?
     
+    //MARK: - Contants
+    private var totalProducts = 0
+    private var pageIndex = 1
+    private var pageSize = 20
+    private var menuWidth: CGFloat = 300
+    private var PageIndexParams = "pageIndex"
+    private var PageSizeParams = "pageSize"
+    private var PageSearchStringParams = "searchString"
+    
     // MARK: - Iboutlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -23,27 +32,29 @@ class ProductManagerViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        loadProduct()
+        tableView.register(UINib(nibName: ProductTableViewCell.name, bundle: nil), forCellReuseIdentifier: "cell")
+        loadProduct(withPage: pageIndex, withSize: pageSize, withString: "")
         searchBar.delegate = self
         navigationController?.isNavigationBarHidden = true
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
-        menu?.menuWidth = 300
+        menu?.menuWidth = menuWidth
         SideMenuManager.default.leftMenuNavigationController = menu
     }
     
     // MARK: - IBAction
-    func loadProduct() {
+    func loadProduct(withPage: Int, withSize: Int, withString: String) {
         DispatchQueue.main.async {
+            let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
             let routerGetProduct = Router.getProducts
-            RequestService.shared.AFRequestWithRawData(router: routerGetProduct, parameters: nil, objectType: ProductResponse.self) { (bool, data, error) in
+            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: ProductResponse.self) { (bool, data, error) in
                 do {
-                    
-                    
                     let json = try JSONDecoder.init().decode(ProductResponse.self, from: data!)
-                    self.products = json.items
+                    self.products += json.items
+                    self.totalProducts = json.totalItems
                     self.tableView.reloadData()
+                    
+                    
                 } catch {
                     print("error to convert \(error.localizedDescription)")
                 }
@@ -99,7 +110,7 @@ class ProductManagerViewController: UIViewController {
             if let id = self.currentProduct?.id {
                 RequestService.shared.request(router: routerDeleteProduct, id: id) { (response) in
                 }
-                self.loadProduct()
+                self.loadProduct(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
                 self.tableView.reloadData()
                 
             }
@@ -139,36 +150,26 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         currentProduct = products[indexPath.row]
-        if currentProduct != nil {
-            let optionMenu = UIAlertController(title: nil, message: currentProduct?.name, preferredStyle: .actionSheet)
-            let edit = UIAlertAction(title: "Edit", style: .default) { (_) in
-                let vc = CreateEditProductViewController()
-                vc.tit = "Edit product"
-                vc.productName = self.currentProduct?.name
-                vc.productAmout = self.currentProduct?.amount
-                vc.productPrice = self.currentProduct?.price
-                vc.productId = self.currentProduct?.id
-                let newImageURL = self.currentProduct!.image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
-                vc.productImageName = newImageURL
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
-                self.alertDeleteProduct(self.currentProduct!)
-                
-            }
-            optionMenu.addAction(edit)
-            optionMenu.addAction(cancel)
-            optionMenu.addAction(delete)
-            present(optionMenu, animated: true)
-        }
-        else {
-            print("product is loading...")
-        }
         
+        let vc = CreateEditProductViewController()
+        vc.tit = "Edit product"
+        vc.productName = currentProduct?.name
+        vc.productAmout = currentProduct?.amount
+        vc.productPrice = currentProduct?.price
+        vc.productId = currentProduct?.id
+        let newImageURL = currentProduct!.image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
+        vc.productImageName = newImageURL
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == products.count - 1 && products.count < totalProducts {
+            loadProduct(withPage: pageIndex + 1, withSize: pageSize, withString: "")
+        }
     }
 }
 // MARK: - SearchBar Delegate
@@ -176,16 +177,19 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
 extension ProductManagerViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text {
-            products = products.filter({ $0.name.lowercased().contains(searchText.lowercased()) })
+            products = []
+            pageIndex = 1
+            loadProduct(withPage: pageIndex, withSize: pageSize, withString: searchText)
         }
         tableView.reloadData()
         searchBar.endEditing(true)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            loadProduct()
+            products = []
+            loadProduct(withPage: pageIndex, withSize: pageSize, withString: "")
             tableView.reloadData()
-
+            
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }

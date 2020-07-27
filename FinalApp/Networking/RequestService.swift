@@ -103,10 +103,27 @@ class RequestService {
         }
     }
     
-    func AFRequestWithRawData<T: Codable>(router: Router, parameters: [String:String]?, objectType: T.Type, completion: @escaping CompletionHandleJSON) {
+    func AFRequestLogin<T: Codable>(router: Router, params: [String:String]?, objectType: T.Type, completion: @escaping CompletionHandleJSON) {
         AF.request(router.URLwithPath,
-                   method: router.method, parameters: parameters, encoder: JSONParameterEncoder.default, headers: router.headers).response { (response) in
-                    // print("Body: \(parameters)")
+                   method: router.method,
+                   parameters: params,
+                   encoder: JSONParameterEncoder.default,
+                   headers: router.headers).response { (response) in
+                    switch(response.result) {
+                    case .success(let data):
+                        completion(true,data,nil)
+                        
+                    case .failure(let err):
+                        completion(false, nil, err)
+                    }
+        }
+    }
+    func AFRequestProduct<T: Codable>(router: Router, params: [String:String]?, objectType: T.Type, completion: @escaping CompletionHandleJSON) {
+        AF.request(router.URLwithPath,
+                   method: router.method,
+                   parameters: params,
+                   encoding: URLEncoding.default,
+                   headers: router.headers).response { (response) in
                     switch(response.result) {
                     case .success(let data):
                         completion(true,data,nil)

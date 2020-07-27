@@ -34,8 +34,11 @@
 		BA4EE62B24C57B190014F878 /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */; };
 		BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */; };
 		BA6A152E24C551C500F0CF9D /* SaleManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */; };
-		BA7B8FEF24CE7150005F9511 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B8FEE24CE7150005F9511 /* Employee.swift */; };
+		BA7B8FEF24CE7150005F9511 /* EmployeeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B8FEE24CE7150005F9511 /* EmployeeResponse.swift */; };
 		BA7B8FF124CEB5CF005F9511 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B8FF024CEB5CF005F9511 /* Product.swift */; };
+		BA7B8FF324CEE352005F9511 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B8FF224CEE352005F9511 /* Profile.swift */; };
+		BA7B8FF624CEE38F005F9511 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B8FF524CEE38F005F9511 /* Employee.swift */; };
+		BA7B8FF824CEE3C8005F9511 /* ProductResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B8FF724CEE3C8005F9511 /* ProductResponse.swift */; };
 		BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83FB3424C5A9130054B203 /* BadgeViewController.swift */; };
 		BA83FB3724C5A9130054B203 /* BadgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA83FB3524C5A9130054B203 /* BadgeViewController.xib */; };
 		BA83FB3A24C5AA5B0054B203 /* BadgeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83FB3824C5AA5B0054B203 /* BadgeTableViewCell.swift */; };
@@ -82,8 +85,11 @@
 		BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
 		BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleManagerViewController.swift; sourceTree = "<group>"; };
 		BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleManagerViewController.xib; sourceTree = "<group>"; };
-		BA7B8FEE24CE7150005F9511 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		BA7B8FEE24CE7150005F9511 /* EmployeeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeResponse.swift; sourceTree = "<group>"; };
 		BA7B8FF024CEB5CF005F9511 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		BA7B8FF224CEE352005F9511 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		BA7B8FF524CEE38F005F9511 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		BA7B8FF724CEE3C8005F9511 /* ProductResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductResponse.swift; sourceTree = "<group>"; };
 		BA83FB3424C5A9130054B203 /* BadgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewController.swift; sourceTree = "<group>"; };
 		BA83FB3524C5A9130054B203 /* BadgeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeViewController.xib; sourceTree = "<group>"; };
 		BA83FB3824C5AA5B0054B203 /* BadgeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeTableViewCell.swift; sourceTree = "<group>"; };
@@ -152,15 +158,14 @@
 			children = (
 				BA2FA9E824C529F900BC23DF /* AppDelegate.swift */,
 				BA2FA9EA24C529F900BC23DF /* SceneDelegate.swift */,
-				BA2FA9EC24C529F900BC23DF /* HomeViewController.swift */,
-				BA83FB3C24C5B5370054B203 /* LoginViewController.swift */,
 				BA2FA9EE24C529F900BC23DF /* Main.storyboard */,
-				BA2FA9F124C529FA00BC23DF /* Assets.xcassets */,
-				BA2FA9F324C529FA00BC23DF /* LaunchScreen.storyboard */,
 				BA2FA9F624C529FA00BC23DF /* Info.plist */,
+				BA7B8FFC24CEE503005F9511 /* Supporting File */,
 				BA531C1524C84DC900F80178 /* Networking */,
 				BA531C1224C7EFEE00F80178 /* Model */,
 				BA2FAA0C24C53F5900BC23DF /* SideMenu */,
+				BA7B8FFA24CEE4D7005F9511 /* Home */,
+				BA7B8FFB24CEE4DF005F9511 /* Login */,
 				BA2FAA1124C5408900BC23DF /* Product */,
 				BADBD74E24C544A200502FDC /* Employee */,
 				BA6A152F24C551C800F0CF9D /* Sale */,
@@ -206,9 +211,8 @@
 		BA531C1224C7EFEE00F80178 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BA38ECA624C9667E00C4414F /* LoginResponse.swift */,
-				BA7B8FEE24CE7150005F9511 /* Employee.swift */,
-				BA7B8FF024CEB5CF005F9511 /* Product.swift */,
+				BA7B8FF424CEE370005F9511 /* APIResponse */,
+				BA7B8FF924CEE3F0005F9511 /* Model */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,6 +239,51 @@
 				BA83FB3924C5AA5B0054B203 /* BadgeTableViewCell.xib */,
 			);
 			path = Sale;
+			sourceTree = "<group>";
+		};
+		BA7B8FF424CEE370005F9511 /* APIResponse */ = {
+			isa = PBXGroup;
+			children = (
+				BA38ECA624C9667E00C4414F /* LoginResponse.swift */,
+				BA7B8FEE24CE7150005F9511 /* EmployeeResponse.swift */,
+				BA7B8FF724CEE3C8005F9511 /* ProductResponse.swift */,
+			);
+			path = APIResponse;
+			sourceTree = "<group>";
+		};
+		BA7B8FF924CEE3F0005F9511 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA7B8FF224CEE352005F9511 /* Profile.swift */,
+				BA7B8FF024CEB5CF005F9511 /* Product.swift */,
+				BA7B8FF524CEE38F005F9511 /* Employee.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA7B8FFA24CEE4D7005F9511 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BA2FA9EC24C529F900BC23DF /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BA7B8FFB24CEE4DF005F9511 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BA83FB3C24C5B5370054B203 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		BA7B8FFC24CEE503005F9511 /* Supporting File */ = {
+			isa = PBXGroup;
+			children = (
+				BA2FA9F124C529FA00BC23DF /* Assets.xcassets */,
+				BA2FA9F324C529FA00BC23DF /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting File";
 			sourceTree = "<group>";
 		};
 		BADBD74E24C544A200502FDC /* Employee */ = {
@@ -382,7 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA38ECA324C94A9F00C4414F /* Router.swift in Sources */,
-				BA7B8FEF24CE7150005F9511 /* Employee.swift in Sources */,
+				BA7B8FEF24CE7150005F9511 /* EmployeeResponse.swift in Sources */,
 				BA2FAA0224C52D1000BC23DF /* MenuTableViewController.swift in Sources */,
 				BA2FA9ED24C529F900BC23DF /* HomeViewController.swift in Sources */,
 				BAA6B80524C5828600F2241F /* CreateEmployeeViewController.swift in Sources */,
@@ -390,13 +439,16 @@
 				BA83FB3D24C5B5370054B203 /* LoginViewController.swift in Sources */,
 				BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */,
 				BA2FA9E924C529F900BC23DF /* AppDelegate.swift in Sources */,
+				BA7B8FF624CEE38F005F9511 /* Employee.swift in Sources */,
 				BA38ECA124C9458C00C4414F /* RequestService.swift in Sources */,
 				BA2FAA0F24C53FCB00BC23DF /* ProductManagerViewController.swift in Sources */,
 				BA2FA9EB24C529F900BC23DF /* SceneDelegate.swift in Sources */,
 				BAA6B80924C5892500F2241F /* EditEmployeeViewController.swift in Sources */,
 				BADBD74C24C5449B00502FDC /* EmployeeManagementViewController.swift in Sources */,
+				BA7B8FF824CEE3C8005F9511 /* ProductResponse.swift in Sources */,
 				BA4EE62624C56A470014F878 /* CreateEditProductViewController.swift in Sources */,
 				BA38ECA724C9667E00C4414F /* LoginResponse.swift in Sources */,
+				BA7B8FF324CEE352005F9511 /* Profile.swift in Sources */,
 				BA2FAA0B24C53A8D00BC23DF /* Item.swift in Sources */,
 				BA7B8FF124CEB5CF005F9511 /* Product.swift in Sources */,
 				BA4EE62224C559C40014F878 /* ProductTableViewCell.swift in Sources */,

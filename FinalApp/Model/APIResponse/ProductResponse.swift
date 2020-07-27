@@ -1,0 +1,18 @@
+//
+//  ProductResponse.swift
+//  FinalApp
+//
+//  Created by TPS on 7/27/20.
+//  Copyright © 2020 TPS. All rights reserved.
+//
+
+import Foundation
+public struct ProductResponse: Codable {
+
+        public var items : [Product]
+        public var totalItems : Int
+        public var totalPages : Int
+        public var pageSize : Int
+        public var pageIndex : Int
+        
+}

@@ -15,6 +15,15 @@ class EmployeeManagementViewController: UIViewController {
     var currentEmployee: Employee?
     var menu: SideMenuNavigationController?
     
+    //MARK: - Contants
+    private var totalProducts = 0
+    private var pageIndex = 1
+    private var pageSize = 20
+    private var menuWidth: CGFloat = 300
+    private var PageIndexParams = "pageIndex"
+    private var PageSizeParams = "pageSize"
+    private var PageSearchStringParams = "searchString"
+    
     // MARK: - IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -26,23 +35,25 @@ class EmployeeManagementViewController: UIViewController {
         tableView.dataSource = self
         searchBar.delegate = self
         tableView.register(UINib(nibName: "EmployeeTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        loadEmployee()
+        loadEmployee(withPage: pageIndex, withSize: pageSize, withString: "")
         navigationController?.isNavigationBarHidden = true
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
-        menu?.menuWidth = 300
+        menu?.menuWidth = menuWidth
         SideMenuManager.default.leftMenuNavigationController = menu
     }
-    func loadEmployee() {
+    func loadEmployee(withPage: Int, withSize: Int, withString: String) {
         DispatchQueue.main.async {
+            let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
             let routerGetProduct = Router.getEmployee
-            RequestService.shared.AFRequestWithRawData(router: routerGetProduct, parameters: nil, objectType: EmployeeResponse.self) { (bool, data, error) in
+            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: EmployeeResponse.self) { (bool, data, error) in
                 do {
-                    
-                    
                     let json = try JSONDecoder.init().decode(EmployeeResponse.self, from: data!)
-                    self.employees = json.items
+                    self.employees += json.items
+                    self.totalProducts = json.totalItems
                     self.tableView.reloadData()
+                    
+                    
                 } catch {
                     print("error to convert \(error.localizedDescription)")
                 }
@@ -113,17 +124,6 @@ extension EmployeeManagementViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EmployeeTableViewCell
-        //        let newImageURL = employees[indexPath.row].image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
-        //        DispatchQueue.global().async {
-        //            if let data = try? Data(contentsOf: URL(string: newImageURL)!) {
-        //                if let image = UIImage(data: data) {
-        //                    DispatchQueue.main.async {
-        //                        cell.employeeImage.image = image
-        //
-        //                    }
-        //                }
-        //            }
-        //        }
         cell.employeeImage.image = UIImage(named: "employee_example")
         cell.employeeName.text = employees[indexPath.row].name
         cell.employeeEmail.text = employees[indexPath.row].email
@@ -138,28 +138,38 @@ extension EmployeeManagementViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == employees.count - 1 && employees.count < totalProducts {
+            loadEmployee(withPage: pageIndex + 1, withSize: pageSize, withString: "")
+        }
+    }
     
     
 }
 
-// MARK: - UISearchBarDelegate
+// MARK: - SearchBar Delegate
+//hide keyboard
 extension EmployeeManagementViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text {
-            employees = employees.filter({ $0.name.lowercased().contains(searchText.lowercased()) })
+            employees = []
+            pageIndex = 1
+            loadEmployee(withPage: pageIndex, withSize: pageSize, withString: searchText)
         }
         tableView.reloadData()
         searchBar.endEditing(true)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            loadEmployee()
+            employees = []
+            loadEmployee(withPage: pageIndex, withSize: pageSize, withString: "")
             tableView.reloadData()
-
+            
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }
         }
     }
 }
+
 

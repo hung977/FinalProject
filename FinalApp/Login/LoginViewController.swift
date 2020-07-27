@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
         if let userTF = usernameTextField.text, let passTF = passwordTextField.text {
             let login: [String: String] = ["username":"\(userTF)", "password":"\(passTF)"]
             let routerLogin = Router.login
-            RequestService.shared.AFRequestWithRawData(router: routerLogin, parameters: login, objectType: LoginResponse.self) { (bool, data, error) in
+            RequestService.shared.AFRequestLogin(router: routerLogin, params: login, objectType: LoginResponse.self) { (bool, data, error) in
                 do {
                     let json = try JSONDecoder.init().decode(LoginResponse.self, from: data!)
                     LoginViewController.token = json.accessToken

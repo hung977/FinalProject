@@ -34,7 +34,7 @@ class SaleManagerViewController: UIViewController {
     func loadProduct() {
         DispatchQueue.main.async {
             let routerGetProduct = Router.getProducts
-            RequestService.shared.AFRequestWithRawData(router: routerGetProduct, parameters: nil, objectType: ProductResponse.self) { (bool, data, error) in
+            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: nil, objectType: ProductResponse.self) { (bool, data, error) in
                 do {
                     
                     

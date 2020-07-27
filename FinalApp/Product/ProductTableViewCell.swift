@@ -15,12 +15,10 @@ class ProductTableViewCell: UITableViewCell {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var amoutLabel: UILabel!
     @IBOutlet weak var productPrice: UILabel!
+    static let name = "ProductTableViewCell"
     override func awakeFromNib() {
         super.awakeFromNib()
-        editButton.layer.cornerRadius = 5
-        editButton.backgroundColor = .darkGray
-        editButton.alpha = 0.5
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
