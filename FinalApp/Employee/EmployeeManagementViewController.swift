@@ -11,6 +11,8 @@ import SideMenu
 
 class EmployeeManagementViewController: UIViewController {
     
+    var employees: [Employee] = []
+    var currentEmployee: Employee?
     var menu: SideMenuNavigationController?
     
     // MARK: - IBOutlet
@@ -22,12 +24,30 @@ class EmployeeManagementViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
         tableView.register(UINib(nibName: "EmployeeTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        loadEmployee()
         navigationController?.isNavigationBarHidden = true
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
         menu?.menuWidth = 300
         SideMenuManager.default.leftMenuNavigationController = menu
+    }
+    func loadEmployee() {
+        DispatchQueue.main.async {
+            let routerGetProduct = Router.getEmployee
+            RequestService.shared.AFRequestWithRawData(router: routerGetProduct, parameters: nil, objectType: EmployeeResponse.self) { (bool, data, error) in
+                do {
+                    
+                    
+                    let json = try JSONDecoder.init().decode(EmployeeResponse.self, from: data!)
+                    self.employees = json.items
+                    self.tableView.reloadData()
+                } catch {
+                    print("error to convert \(error.localizedDescription)")
+                }
+            }
+        }
     }
     
     //MARK: - IBAction
@@ -35,56 +55,40 @@ class EmployeeManagementViewController: UIViewController {
         present(menu!, animated: true)
     }
     @IBAction func editButtonTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: "Edit Employee", preferredStyle: .actionSheet)
-        let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
-            self.alertDeleteProduct()
-        }
-        let edit = UIAlertAction(title: "Edit", style: .default) { (_) in
-            let vc = EditEmployeeViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        let changePasswd = UIAlertAction(title: "Change Password", style: .default) { (_) in
-            //self.changePassword()
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        alert.addAction(delete)
-        alert.addAction(edit)
-        alert.addAction(changePasswd)
-        alert.addAction(cancel)
-        present(alert, animated: true)
+        for employee in employees {
+            if employee.id == String((sender.titleLabel?.text)!) {
+                currentEmployee = employee
+            }
+        }
+        if currentEmployee != nil {
+            let alert = UIAlertController(title: nil, message: "Edit \(currentEmployee?.name ?? "Default_name")", preferredStyle: .actionSheet)
+            let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
+                self.alertDeleteProduct()
+            }
+            let edit = UIAlertAction(title: "Edit", style: .default) { (_) in
+                let vc = EditEmployeeViewController()
+                vc.name = self.currentEmployee?.name
+                vc.email = self.currentEmployee?.email
+                vc.phoneNumber = self.currentEmployee?.phoneNumber
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            let changePasswd = UIAlertAction(title: "Change Password", style: .default) { (_) in
+                //self.changePassword()
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alert.addAction(delete)
+            alert.addAction(edit)
+            alert.addAction(changePasswd)
+            alert.addAction(cancel)
+            present(alert, animated: true)
+        } else {
+            print("Employee is loading...")
+        }
+        
         
     }
-//    func changePassword() {
-//        let alert = UIAlertController(title: "Change your password", message: "", preferredStyle: .alert)
-//        let oldPasswordTextField = UITextField()
-//        oldPasswordTextField.placeholder = "Enter old password"
-//        let newPasswordTextField = UITextField()
-//        newPasswordTextField.placeholder = "New password"
-//        newPasswordTextField.isSecureTextEntry = true
-//        let comfirmPasswordTextField = UITextField()
-//        comfirmPasswordTextField.placeholder = "Confirm new password"
-//        comfirmPasswordTextField.isSecureTextEntry = true
-//
-//        let change = UIAlertAction(title: "Change", style: .default) { (_) in
-//            //do some thing
-//        }
-//        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//
-//        alert.addTextField { (olduiTextField) in
-//            olduiTextField.placeholder = "Enter old password"
-//        }
-//        alert.addTextField { (newuiTextField) in
-//            newuiTextField.placeholder = "Enter new password"
-//        }
-//        alert.addTextField { (confirmuiTextField) in
-//            confirmuiTextField.placeholder = "Confirm new password"
-//        }
-//        alert.addAction(change)
-//        alert.addAction(cancel)
-//        present(alert, animated: true)
-//
-//    }
     func alertDeleteProduct() {
         let alert = UIAlertController(title: "Delete employee", message: "Are you sure?", preferredStyle: .alert)
         let delete = UIAlertAction(title: "Delete", style: .default, handler: nil)
@@ -104,15 +108,28 @@ class EmployeeManagementViewController: UIViewController {
 // MARK: - tableView Delegate and Datasource
 extension EmployeeManagementViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return employees.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EmployeeTableViewCell
+        //        let newImageURL = employees[indexPath.row].image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
+        //        DispatchQueue.global().async {
+        //            if let data = try? Data(contentsOf: URL(string: newImageURL)!) {
+        //                if let image = UIImage(data: data) {
+        //                    DispatchQueue.main.async {
+        //                        cell.employeeImage.image = image
+        //
+        //                    }
+        //                }
+        //            }
+        //        }
         cell.employeeImage.image = UIImage(named: "employee_example")
-        cell.employeeName.text = "Phan van Hung"
-        cell.employeeEmail.text = "95dung95@gmail.com"
-        cell.employeePhone.text = "089962863739"
+        cell.employeeName.text = employees[indexPath.row].name
+        cell.employeeEmail.text = employees[indexPath.row].email
+        cell.employeePhone.text = employees[indexPath.row].phoneNumber
+        cell.editButton.titleLabel?.text = employees[indexPath.row].id
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -124,3 +141,25 @@ extension EmployeeManagementViewController: UITableViewDelegate, UITableViewData
     
     
 }
+
+// MARK: - UISearchBarDelegate
+extension EmployeeManagementViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text {
+            employees = employees.filter({ $0.name.lowercased().contains(searchText.lowercased()) })
+        }
+        tableView.reloadData()
+        searchBar.endEditing(true)
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadEmployee()
+            tableView.reloadData()
+
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+}
+

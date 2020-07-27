@@ -20,7 +20,9 @@ class SaleManagerViewController: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        searchBar.delegate = self
         collectionView.register(UINib(nibName: "SaleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+        loadProduct()
         navigationController?.isNavigationBarHidden = true
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
@@ -28,6 +30,22 @@ class SaleManagerViewController: UIViewController {
         SideMenuManager.default.leftMenuNavigationController = menu
         
         // Do any additional setup after loading the view.
+    }
+    func loadProduct() {
+        DispatchQueue.main.async {
+            let routerGetProduct = Router.getProducts
+            RequestService.shared.AFRequestWithRawData(router: routerGetProduct, parameters: nil, objectType: ProductResponse.self) { (bool, data, error) in
+                do {
+                    
+                    
+                    let json = try JSONDecoder.init().decode(ProductResponse.self, from: data!)
+                    self.products = json.items
+                    self.collectionView.reloadData()
+                } catch {
+                    print("error to convert \(error.localizedDescription)")
+                }
+            }
+        }
     }
     @IBAction func didTappedMenu(_ sender: UIBarButtonItem) {
         present(menu!, animated: true)
@@ -50,10 +68,24 @@ extension SaleManagerViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SaleCollectionViewCell
-        cell.imageView.image = UIImage(named: products[indexPath.row].image)
-        cell.nameLabel.text = products[indexPath.row].name
-        cell.priceLabel.text = "$\(products[indexPath.row].price)"
-        cell.backgroundColor = .white
+            let newImageURL = products[indexPath.row].image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: URL(string: newImageURL)!) {
+                    if let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            cell.imageView.image = image
+                            
+                        }
+                    }
+                }
+            }
+        if products[indexPath.row].amount == 0 {
+            cell.addButton.alpha = 0.3
+            cell.addButton.isEnabled = false
+        }
+            cell.nameLabel.text = products[indexPath.row].name
+            cell.priceLabel.text = "$\(products[indexPath.row].price)"
+            cell.backgroundColor = .white
         return cell
     }
     
@@ -61,5 +93,32 @@ extension SaleManagerViewController: UICollectionViewDelegate, UICollectionViewD
         return CGSize(width: 180.0, height: 250.0)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20.0
+    }
+    
     
 }
+// MARK: - SearchBar Delegate
+//hide keyboard
+extension SaleManagerViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text {
+            products = products.filter({ $0.name.lowercased().contains(searchText.lowercased()) })
+        }
+        collectionView.reloadData()
+        searchBar.endEditing(true)
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadProduct()
+            collectionView.reloadData()
+
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+}
+
+

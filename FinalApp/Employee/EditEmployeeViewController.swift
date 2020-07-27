@@ -14,10 +14,21 @@ class EditEmployeeViewController: UIViewController {
     @IBOutlet weak var fullNameTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var phoneTextfield: UITextField!
+    
+    var name: String?
+    var email: String?
+    var phoneNumber: String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateUI()
+        
 
         // Do any additional setup after loading the view.
+    }
+    func updateUI() {
+        fullNameTextfield.text = name
+        emailTextfield.text = email
+        phoneTextfield.text = phoneNumber
     }
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)

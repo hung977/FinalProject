@@ -17,6 +17,9 @@ class ProductTableViewCell: UITableViewCell {
     @IBOutlet weak var productPrice: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        editButton.layer.cornerRadius = 5
+        editButton.backgroundColor = .darkGray
+        editButton.alpha = 0.5
         // Initialization code
     }
 

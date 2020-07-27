@@ -35,7 +35,8 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         saveButton.layer.cornerRadius = 10
         saveButton.backgroundColor = .blue
-        
+        productAmountTextfield.keyboardType = UIKeyboardType.decimalPad
+        productPriceTextfield.keyboardType = UIKeyboardType.decimalPad
         saveButton.setTitleColor(.white, for: .normal)
         productNameTextfield.delegate = self
         productAmountTextfield.delegate = self
@@ -61,9 +62,9 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         
         
         titleItems.title = tit
-        productNameTextfield.text = productName ?? ""
+        productNameTextfield.text = productName
         productAmountTextfield.text = "\(productAmout ?? 0)"
-        productPriceTextfield.text = "\(productPrice ?? 0)"
+        productPriceTextfield.text = "\(productPrice ?? 0.0)"
     }
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -90,7 +91,7 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
     }
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         if tit == "Add new product" {
-            let currentName = productNameTextfield.text ?? "Default Name"
+            let currentName = productNameTextfield.text!
             let currentAmout = String(productAmountTextfield.text!)
             let currentPrice = String(productPriceTextfield.text!)
             if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
@@ -99,10 +100,22 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
                 RequestService.callsendImageAPI(param: params, arrImage: [currentImage!], imageKey: "Image") { (response) in
                 }
                 let vc = ProductManagerViewController()
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: vc.viewDidLoad)
+                navigationController?.pushViewController(viewController: vc, animated: true, completion: vc.viewDidLoad)
             } else {
-                let alert = UIAlertController(title: nil, message: "missing field !", preferredStyle: .alert)
+                var message = ""
+                if currentName == "" {
+                    message += "Product_Name "
+                }
+                if currentAmout == "" {
+                    message += "Product_Amount "
+                }
+                if currentPrice == "" {
+                    message += "Product_Price "
+                }
+                if !isSelectedImage {
+                    message += "Product_Image "
+                }
+                let alert = UIAlertController(title: "Missing field", message: "\(message) is required.", preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(action)
                 present(alert, animated:true)
@@ -116,6 +129,8 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
                 RequestService.callsendImageAPIEditProduct(for: productId!, param: params, arrImage: [currentImage!], imageKey: "Image") { (response) in
                     //code here
                 }
+                let vc = ProductManagerViewController()
+                navigationController?.pushViewController(viewController: vc, animated: true, completion: vc.viewDidLoad)
             }
         }
     }
@@ -165,6 +180,7 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         }
         productImage.image = image
         currentImage = image
+        isSelectedImage = true
     }
 }
 
@@ -175,4 +191,16 @@ extension CreateEditProductViewController: UITextFieldDelegate {
         return true
     }
     
+}
+
+// MARK: - UINavigationController
+extension UINavigationController {
+    public func pushViewController(viewController: UIViewController,
+                                   animated: Bool,
+                                   completion: (() -> Void)?) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        pushViewController(viewController, animated: animated)
+        CATransaction.commit()
+    }
 }

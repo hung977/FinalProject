@@ -175,6 +175,20 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
 //hide keyboard
 extension ProductManagerViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text {
+            products = products.filter({ $0.name.lowercased().contains(searchText.lowercased()) })
+        }
+        tableView.reloadData()
         searchBar.endEditing(true)
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadProduct()
+            tableView.reloadData()
+
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
     }
 }

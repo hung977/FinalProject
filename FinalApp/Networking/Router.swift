@@ -15,6 +15,7 @@ enum Router {
     case getProducts
     case newProducts
     case deleteProducts
+    case getEmployee
     
     var baseURL: String {
         return "http://192.168.30.101:8081"
@@ -25,6 +26,8 @@ enum Router {
             return "\(baseURL)/api/auth/login"
         case .getProducts, .newProducts, .deleteProducts:
             return "\(baseURL)/api/products"
+        case .getEmployee:
+            return "\(baseURL)/api/users"
             
         }
     }
@@ -33,7 +36,7 @@ enum Router {
         switch self {
         case .login, .newProducts:
             return .post
-        case .getProducts:
+        case .getProducts, .getEmployee:
             return .get
         case .deleteProducts:
             return .delete
@@ -46,7 +49,7 @@ enum Router {
         switch self {
         case .login:
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "application/json; charset=utf-8"), HTTPHeader(name: "Accept", value: "*/*")])
-        case .getProducts:
+        case .getProducts, .getEmployee:
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "application/json; charset=utf-8"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
         case .newProducts:
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "multipart/form-data"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])

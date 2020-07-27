@@ -56,7 +56,7 @@
                             <constraint firstAttribute="width" constant="36" id="3Ym-Fy-Osx"/>
                             <constraint firstAttribute="height" constant="35" id="JII-HZ-evW"/>
                         </constraints>
-                        <state key="normal" title="Button" image="ellipsis"/>
+                        <state key="normal" image="ellipsis"/>
                         <connections>
                             <action selector="editButtonTapped:" destination="-1" eventType="touchUpInside" id="JP7-nD-06Y"/>
                         </connections>
@@ -95,6 +95,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="editButton" destination="zOG-RX-TL6" id="BZh-QI-pfs"/>
                 <outlet property="employeeEmail" destination="fXD-Ls-jIn" id="Ed5-kb-ZVz"/>
                 <outlet property="employeeImage" destination="xbo-sg-Shr" id="oOq-xv-ERF"/>
                 <outlet property="employeeName" destination="W5w-82-9lL" id="kbH-E4-XFr"/>
