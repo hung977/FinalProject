@@ -17,6 +17,8 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
     var productName: String?
     var productAmout: Int?
     var productPrice: Double?
+    var productId: String?
+    var isSelectedImage = true
     
     // MARK: - IBOutlet
     @IBOutlet weak var productImage: UIImageView!
@@ -54,6 +56,7 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         else {
             productImage.image = UIImage(named: "product_example")
             currentImage = UIImage(named: "product_example")
+            isSelectedImage = false
         }
         
         
@@ -90,12 +93,14 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
             let currentName = productNameTextfield.text ?? "Default Name"
             let currentAmout = String(productAmountTextfield.text!)
             let currentPrice = String(productPriceTextfield.text!)
-            if (notNil(name: currentName, amount: currentAmout, price: currentPrice)) {
+            if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
                 let params: [String:Any] = ["Name": currentName, "Price": currentPrice, "Amount": currentAmout]
-                print(params)
+                //print(params)
                 RequestService.callsendImageAPI(param: params, arrImage: [currentImage!], imageKey: "Image") { (response) in
-                    //hello
                 }
+                let vc = ProductManagerViewController()
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: vc.viewDidLoad)
             } else {
                 let alert = UIAlertController(title: nil, message: "missing field !", preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -103,11 +108,19 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
                 present(alert, animated:true)
             }
         } else {
-            print("Edit product called.....")
+            let currentName = productNameTextfield.text ?? "Default Name"
+            let currentAmout = String(productAmountTextfield.text!)
+            let currentPrice = String(productPriceTextfield.text!)
+            if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
+                let params: [String:Any] = ["Name": currentName, "Price": currentPrice, "Amount": currentAmout]
+                RequestService.callsendImageAPIEditProduct(for: productId!, param: params, arrImage: [currentImage!], imageKey: "Image") { (response) in
+                    //code here
+                }
+            }
         }
     }
-    func notNil(name: String, amount: String, price: String) -> Bool {
-        if (name == "" || amount == "" || price == "") {
+    func notNil(name: String, amount: String, price: String, isImage: Bool) -> Bool {
+        if (name == "" || amount == "" || price == "" || isImage == false ) {
             return false
         } else {
             return true
