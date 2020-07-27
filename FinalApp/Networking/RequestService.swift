@@ -25,7 +25,7 @@ class RequestService {
     
     public class func callsendImageAPI(param:[String: Any],arrImage:[UIImage],imageKey:String, withblock:@escaping (_ response: AnyObject?)->Void){
         
-        let bearerToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NGEyY2E5Ni0wZWJhLWYzNDYtMTQ5Zi0zOWY2MjY2YzdmYTMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTU5NTU3NDUyOCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzOTMiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM5MyJ9.uIgbLjOS6Uwz73AkoaDE89uvbytE25X6cadRrXrH6kE"
+        let bearerToken = "Bearer \(LoginViewController.token)"
         let baseURL = "http://192.168.30.101:8081/api/products"
         let headers: HTTPHeaders
         headers = ["Content-type": "multipart/form-data",
