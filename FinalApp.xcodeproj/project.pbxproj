@@ -34,6 +34,7 @@
 		BA4EE62B24C57B190014F878 /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */; };
 		BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */; };
 		BA6A152E24C551C500F0CF9D /* SaleManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */; };
+		BA79DE2124D0189700CC5686 /* CreateEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA79DE2024D0189700CC5686 /* CreateEmployee.swift */; };
 		BA7B8FEF24CE7150005F9511 /* EmployeeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B8FEE24CE7150005F9511 /* EmployeeResponse.swift */; };
 		BA7B8FF124CEB5CF005F9511 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B8FF024CEB5CF005F9511 /* Product.swift */; };
 		BA7B8FF324CEE352005F9511 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B8FF224CEE352005F9511 /* Profile.swift */; };
@@ -85,6 +86,7 @@
 		BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
 		BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleManagerViewController.swift; sourceTree = "<group>"; };
 		BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleManagerViewController.xib; sourceTree = "<group>"; };
+		BA79DE2024D0189700CC5686 /* CreateEmployee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEmployee.swift; sourceTree = "<group>"; };
 		BA7B8FEE24CE7150005F9511 /* EmployeeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeResponse.swift; sourceTree = "<group>"; };
 		BA7B8FF024CEB5CF005F9511 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		BA7B8FF224CEE352005F9511 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				BA38ECA624C9667E00C4414F /* LoginResponse.swift */,
 				BA7B8FEE24CE7150005F9511 /* EmployeeResponse.swift */,
 				BA7B8FF724CEE3C8005F9511 /* ProductResponse.swift */,
+				BA79DE2024D0189700CC5686 /* CreateEmployee.swift */,
 			);
 			path = APIResponse;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				BAA6B80524C5828600F2241F /* CreateEmployeeViewController.swift in Sources */,
 				BAA6B80D24C5987000F2241F /* SaleCollectionViewCell.swift in Sources */,
 				BA83FB3D24C5B5370054B203 /* LoginViewController.swift in Sources */,
+				BA79DE2124D0189700CC5686 /* CreateEmployee.swift in Sources */,
 				BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */,
 				BA2FA9E924C529F900BC23DF /* AppDelegate.swift in Sources */,
 				BA7B8FF624CEE38F005F9511 /* Employee.swift in Sources */,

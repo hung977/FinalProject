@@ -82,6 +82,8 @@ class EmployeeManagementViewController: UIViewController {
                 vc.name = self.currentEmployee?.name
                 vc.email = self.currentEmployee?.email
                 vc.phoneNumber = self.currentEmployee?.phoneNumber
+                vc.isAdmin = self.currentEmployee?.role == "admin" ? true : false
+                vc.id = self.currentEmployee?.id
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             let changePasswd = UIAlertAction(title: "Change Password", style: .default) { (_) in
