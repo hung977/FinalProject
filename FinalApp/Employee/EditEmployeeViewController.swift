@@ -104,6 +104,15 @@ class EditEmployeeViewController: UIViewController {
            alert.addAction(action)
            present(alert, animated: true)
        }
+    func alertCompletion(mess: String) {
+        let alert = UIAlertController(title: "Success", message: mess, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+            let vc = EmployeeManagementViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
     
     // MARK: - IBAction
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
@@ -128,9 +137,7 @@ class EditEmployeeViewController: UIViewController {
                     if let respon = response {
                         if let statusCode = respon.response?.statusCode {
                             if statusCode == 204 || statusCode == 200 {
-                                self.alertResponse(tit: "Success", mess: "Update employee complete.")
-//                                let vc = EmployeeManagementViewController()
-//                                self.navigationController?.pushViewController(viewController: vc, animated: true, completion: vc.viewDidLoad)
+                                self.alertCompletion(mess: "Update employee success.")
                             } else if statusCode == 403 {
                                 self.alertResponse(tit: "Error", mess: "Forbidden")
                             } else {

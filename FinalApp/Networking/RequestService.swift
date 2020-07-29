@@ -11,16 +11,38 @@
     
     typealias CompletionHandleJSON = (_ result:Bool, _ data:Data?, _ error:Error?)->Void
     typealias CompletionHandleResponse = (_ response: AFDataResponse<Data?>?, _ error: Error?)-> Void
+    typealias CompletionHandleResponseAndData = (_ data: Data?, _ response: AFDataResponse<Data?>?, _ error: Error?)-> Void
     class RequestService {
         static var shared = RequestService()
-        func request(router: Router, id: String, withblock:@escaping (_ response: AnyObject?)->Void) {
+        func request(router: Router, id: String, withblock:@escaping (_ response: AFDataResponse<Data?>?, _ error: Error?)->Void) {
             let urlWithId = "\(router.URLwithPath)/\(id)"
             AF.request(urlWithId,
                        method: router.method,
                        headers: router.headers).response { (response) in
-                        debugPrint(response)
+                        switch(response.result) {
+                        case .success:
+                            withblock(response, nil)
+                        case .failure(let error):
+                            withblock(nil, error)
+                        }
             }
             
+        }
+        func AFRequestChangePassWord(router: Router, id: String, params: [String:String], completion:@escaping CompletionHandleResponseAndData) {
+            let urlWithId = "\(router.URLwithPath)/\(id)/password"
+            AF.request(urlWithId,
+                       method: router.method,
+                       parameters: params,
+                       encoder: JSONParameterEncoder.default,
+                       headers: router.headers).response { (response) in
+                        
+                        switch(response.result) {
+                        case .success(let data):
+                            completion(data,response, nil)
+                        case .failure(let error):
+                            completion(nil,response, error)
+                        }
+            }
         }
         
         public class func callsendImageAPI(param:[String: Any],arrImage:[UIImage],imageKey:String, withblock:@escaping (_ response: AnyObject?)->Void){
@@ -160,6 +182,20 @@
                             completion(response, nil)
                         case .failure(let err):
                             completion(nil, err)
+                        }
+            }
+        }
+        func AFRequestPostReceipt(router: Router, params: [String: Any], completion: @escaping CompletionHandleResponseAndData) {
+            AF.request(router.URLwithPath,
+                       method: router.method,
+                       parameters: params,
+                       encoding: JSONEncoding.default,
+                       headers: router.headers).response { (response) in
+                        switch(response.result) {
+                        case .success(let data):
+                            completion(data, response, nil)
+                        case .failure(let error):
+                            completion(nil,response, error)
                         }
             }
         }

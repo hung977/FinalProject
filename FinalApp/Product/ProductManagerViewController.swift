@@ -84,7 +84,8 @@ class ProductManagerViewController: UIViewController {
                 vc.productName = self.currentProduct?.name
                 vc.productAmout = self.currentProduct?.amount
                 vc.productPrice = self.currentProduct?.price
-                let newImageURL = self.currentProduct!.image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
+                vc.productId = self.currentProduct?.id
+                let newImageURL = self.currentProduct!.image
                 vc.productImageName = newImageURL
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -108,7 +109,7 @@ class ProductManagerViewController: UIViewController {
         let delete = UIAlertAction(title: "Delete", style: .default) {(_) in
             let routerDeleteProduct = Router.deleteProducts
             if let id = self.currentProduct?.id {
-                RequestService.shared.request(router: routerDeleteProduct, id: id) { (response) in
+                RequestService.shared.request(router: routerDeleteProduct, id: id) { (response, error) in
                 }
                 self.loadProduct(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
                 self.tableView.reloadData()
@@ -129,7 +130,7 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProductTableViewCell
-        let newImageURL = products[indexPath.row].image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
+        let newImageURL = products[indexPath.row].image
         DispatchQueue.global().async {
             if let data = try? Data(contentsOf: URL(string: newImageURL)!) {
                 if let image = UIImage(data: data) {
@@ -157,7 +158,7 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
         vc.productAmout = currentProduct?.amount
         vc.productPrice = currentProduct?.price
         vc.productId = currentProduct?.id
-        let newImageURL = currentProduct!.image.replacingOccurrences(of: "https://localhost:44393", with: "http://192.168.30.101:8081")
+        let newImageURL = currentProduct!.image
         vc.productImageName = newImageURL
         self.navigationController?.pushViewController(vc, animated: true)
     }

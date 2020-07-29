@@ -18,6 +18,9 @@ enum Router {
     case getEmployee
     case createEmployee
     case editEmployee
+    case deleteEmployee
+    case postSaleReceipt
+    case changePassword
     
     var baseURL: String {
         return "http://192.168.30.101:8081"
@@ -28,21 +31,23 @@ enum Router {
             return "\(baseURL)/api/auth/login"
         case .getProducts, .newProducts, .deleteProducts:
             return "\(baseURL)/api/products"
-        case .getEmployee, .createEmployee, .editEmployee:
+        case .getEmployee, .createEmployee, .editEmployee, .deleteEmployee, .changePassword:
             return "\(baseURL)/api/users"
+        case .postSaleReceipt:
+            return "\(baseURL)/api/SaleReceipts"
             
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .login, .newProducts, .createEmployee:
+        case .login, .newProducts, .createEmployee, .postSaleReceipt:
             return .post
         case .getProducts, .getEmployee:
             return .get
-        case .deleteProducts:
+        case .deleteProducts, .deleteEmployee:
             return .delete
-        case .editEmployee:
+        case .editEmployee, .changePassword:
             return .put
         }
     }
@@ -57,11 +62,9 @@ enum Router {
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "application/json; charset=utf-8"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
         case .newProducts:
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "multipart/form-data"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
-        case .deleteProducts:
+        case .deleteProducts, .deleteEmployee:
             return HTTPHeaders([HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
-        case .createEmployee:
-            return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "application/json-patch+json"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
-        case .editEmployee:
+        case .createEmployee, .editEmployee, .postSaleReceipt, .changePassword:
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "application/json-patch+json"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
         }
         

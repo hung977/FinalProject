@@ -53,6 +53,9 @@
 		BAA6B80E24C5987000F2241F /* SaleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAA6B80C24C5987000F2241F /* SaleCollectionViewCell.xib */; };
 		BADBD74C24C5449B00502FDC /* EmployeeManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADBD74A24C5449B00502FDC /* EmployeeManagementViewController.swift */; };
 		BADBD74D24C5449B00502FDC /* EmployeeManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BADBD74B24C5449B00502FDC /* EmployeeManagementViewController.xib */; };
+		BAEDF04D24D14A2200056669 /* ListProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEDF04C24D14A2200056669 /* ListProduct.swift */; };
+		BAEDF04F24D17F5000056669 /* PostReceiptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEDF04E24D17F5000056669 /* PostReceiptResponse.swift */; };
+		BAEDF05124D1939A00056669 /* ChangePasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEDF05024D1939A00056669 /* ChangePasswordResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +108,9 @@
 		BAA6B80C24C5987000F2241F /* SaleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleCollectionViewCell.xib; sourceTree = "<group>"; };
 		BADBD74A24C5449B00502FDC /* EmployeeManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeManagementViewController.swift; sourceTree = "<group>"; };
 		BADBD74B24C5449B00502FDC /* EmployeeManagementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeManagementViewController.xib; sourceTree = "<group>"; };
+		BAEDF04C24D14A2200056669 /* ListProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListProduct.swift; sourceTree = "<group>"; };
+		BAEDF04E24D17F5000056669 /* PostReceiptResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReceiptResponse.swift; sourceTree = "<group>"; };
+		BAEDF05024D1939A00056669 /* ChangePasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordResponse.swift; sourceTree = "<group>"; };
 		D737BDCA116901F0D908116E /* Pods_FinalApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -250,6 +256,8 @@
 				BA7B8FEE24CE7150005F9511 /* EmployeeResponse.swift */,
 				BA7B8FF724CEE3C8005F9511 /* ProductResponse.swift */,
 				BA79DE2024D0189700CC5686 /* CreateEmployee.swift */,
+				BAEDF04E24D17F5000056669 /* PostReceiptResponse.swift */,
+				BAEDF05024D1939A00056669 /* ChangePasswordResponse.swift */,
 			);
 			path = APIResponse;
 			sourceTree = "<group>";
@@ -260,6 +268,7 @@
 				BA7B8FF224CEE352005F9511 /* Profile.swift */,
 				BA7B8FF024CEB5CF005F9511 /* Product.swift */,
 				BA7B8FF524CEE38F005F9511 /* Employee.swift */,
+				BAEDF04C24D14A2200056669 /* ListProduct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -444,6 +453,7 @@
 				BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */,
 				BA2FA9E924C529F900BC23DF /* AppDelegate.swift in Sources */,
 				BA7B8FF624CEE38F005F9511 /* Employee.swift in Sources */,
+				BAEDF05124D1939A00056669 /* ChangePasswordResponse.swift in Sources */,
 				BA38ECA124C9458C00C4414F /* RequestService.swift in Sources */,
 				BA2FAA0F24C53FCB00BC23DF /* ProductManagerViewController.swift in Sources */,
 				BA2FA9EB24C529F900BC23DF /* SceneDelegate.swift in Sources */,
@@ -457,8 +467,10 @@
 				BA7B8FF124CEB5CF005F9511 /* Product.swift in Sources */,
 				BA4EE62224C559C40014F878 /* ProductTableViewCell.swift in Sources */,
 				BA83FB3A24C5AA5B0054B203 /* BadgeTableViewCell.swift in Sources */,
+				BAEDF04D24D14A2200056669 /* ListProduct.swift in Sources */,
 				BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */,
 				BA3D95D624C5531A00D4BFEA /* ReportViewController.swift in Sources */,
+				BAEDF04F24D17F5000056669 /* PostReceiptResponse.swift in Sources */,
 				BA4EE62A24C57B190014F878 /* EmployeeTableViewCell.swift in Sources */,
 				BA2FAA0624C52E6300BC23DF /* MenuTableViewCell.swift in Sources */,
 			);

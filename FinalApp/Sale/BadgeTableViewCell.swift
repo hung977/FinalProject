@@ -8,16 +8,22 @@
 
 import UIKit
 
-class BadgeTableViewCell: UITableViewCell {
-
+protocol MyBadgeCellDelegate: AnyObject {
+    func deleteButtonTapped(cell: BadgeTableViewCell)
+    func amountTextFieldDidChanged(cell: BadgeTableViewCell, textField: UITextField)
     
+}
+class BadgeTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewItem: UIImageView!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var amoutLabel: UILabel!
     @IBOutlet weak var amoutTextField: UITextField!
     @IBOutlet weak var totalLabel: UILabel!
+    weak var delegate: MyBadgeCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
+        amoutTextField.delegate = self
+        //amoutTextField.keyboardType = UIKeyboardType.decimalPad
         // Initialization code
     }
 
@@ -27,6 +33,20 @@ class BadgeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
+        delegate?.deleteButtonTapped(cell: self)
+    }
+    @IBAction func amountTextFieldDidChanged(_ sender: UITextField) {
+        delegate?.amountTextFieldDidChanged(cell: self, textField: sender)
+    }
+    
+}
+extension BadgeTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        amoutTextField.endEditing(true)
+        if amoutTextField.text?.count == 0 {
+            amoutTextField.text = "0"
+        }
+        return true
     }
     
 }

@@ -102,7 +102,7 @@ class CreateEmployeeViewController: UIViewController {
                                         }
                                     }
                                 } else {
-                                    self.alertResponse(tit: "Susscess", mess: "employee id: \(json.id!)")
+                                    self.alertCompletion(mess: "employee id: \(json.id!)")
                                 }
                                 if json.code == nil {
                                     var mess = ""
@@ -144,6 +144,15 @@ class CreateEmployeeViewController: UIViewController {
     @IBAction func addNewImageBtnTapped(_ sender: UIButton) {
     }
     // MARK: - Supporting function
+    func alertCompletion(mess: String) {
+        let alert = UIAlertController(title: "Success", message: mess, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+            let vc = EmployeeManagementViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
     func checkNumber(str: String) -> Bool {
         if str == "" {
             return true

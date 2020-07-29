@@ -31,34 +31,16 @@ class EmployeeManagementViewController: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UINib(nibName: "EmployeeTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        loadEmployee(withPage: pageIndex, withSize: pageSize, withString: "")
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
-        tableView.register(UINib(nibName: "EmployeeTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        loadEmployee(withPage: pageIndex, withSize: pageSize, withString: "")
         navigationController?.isNavigationBarHidden = true
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
         menu?.menuWidth = menuWidth
         SideMenuManager.default.leftMenuNavigationController = menu
-    }
-    func loadEmployee(withPage: Int, withSize: Int, withString: String) {
-        DispatchQueue.main.async {
-            let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
-            let routerGetProduct = Router.getEmployee
-            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: EmployeeResponse.self) { (bool, data, error) in
-                do {
-                    let json = try JSONDecoder.init().decode(EmployeeResponse.self, from: data!)
-                    self.employees += json.items
-                    self.totalProducts = json.totalItems
-                    self.tableView.reloadData()
-                    
-                    
-                } catch {
-                    print("error to convert \(error.localizedDescription)")
-                }
-            }
-        }
     }
     
     //MARK: - IBAction
@@ -87,7 +69,7 @@ class EmployeeManagementViewController: UIViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             let changePasswd = UIAlertAction(title: "Change Password", style: .default) { (_) in
-                //self.changePassword()
+                self.changePassword(name: self.currentEmployee!.name)
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
@@ -102,18 +84,112 @@ class EmployeeManagementViewController: UIViewController {
         
         
     }
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        let vc = CreateEmployeeViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    //MARK: - Supporting funciton
+    func changePassword(name: String) {
+        var password = UITextField()
+        var confirm = UITextField()
+        let alert = UIAlertController(title: "Change Password for \(name)", message: nil, preferredStyle: .alert)
+        alert.addTextField { (uiTFpassword) in
+            uiTFpassword.placeholder = "Enter password"
+            uiTFpassword.isSecureTextEntry = true
+            uiTFpassword.layer.cornerRadius = 100
+            password = uiTFpassword
+        }
+        alert.addTextField { (uiTFconfirm) in
+            uiTFconfirm.placeholder = "confirm Password"
+            uiTFconfirm.isSecureTextEntry = true
+            uiTFconfirm.layer.cornerRadius = 100
+            confirm = uiTFconfirm
+        }
+        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+            if let passwordTF = password.text, let confirmTF = confirm.text {
+                let router = Router.changePassword
+                let param = [
+                    "password": "\(passwordTF)",
+                    "confirmPassword": "\(confirmTF)"
+                ]
+                if let userId = self.currentEmployee?.id {
+                    RequestService.shared.AFRequestChangePassWord(router: router, id: userId, params: param) { (data, response, error) in
+//                        if let safeData = data {
+//                            let json = try? JSONDecoder.init().decode(ChangePasswordResponse.self, from: safeData)
+//                            print(json?.Password)
+//                        }
+                    }
+                }
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(action)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+    
+    func loadEmployee(withPage: Int, withSize: Int, withString: String) {
+        DispatchQueue.main.async {
+            let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
+            let routerGetProduct = Router.getEmployee
+            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: EmployeeResponse.self) { (bool, data, error) in
+                do {
+                    let json = try JSONDecoder.init().decode(EmployeeResponse.self, from: data!)
+                    self.employees += json.items
+                    self.totalProducts = json.totalItems
+                    self.tableView.reloadData()
+                    
+                    
+                } catch {
+                    print("error to convert \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    func alertResponseAPIError(tit: String, mess: String) {
+        let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+    func alertResponseAPISuccess(tit: String, mess: String) {
+        let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+            self.loadEmployee(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
+            self.tableView.reloadData()
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
     func alertDeleteProduct() {
         let alert = UIAlertController(title: "Delete employee", message: "Are you sure?", preferredStyle: .alert)
-        let delete = UIAlertAction(title: "Delete", style: .default, handler: nil)
+        let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
+            let router = Router.deleteEmployee
+            RequestService.shared.request(router: router, id: (self.currentEmployee?.id)!) { (response, error) in
+                if let respon = response {
+                    if respon.response?.statusCode == 204 || respon.response?.statusCode == 200 {
+                        self.alertResponseAPISuccess(tit: "Success", mess: "Removed \(self.currentEmployee?.name ?? "")")
+                    } else if respon.response?.statusCode == 401 {
+                        self.alertResponseAPIError(tit: "Error", mess: "Error: Unauthorized")
+                    } else if respon.response?.statusCode == 403 {
+                        self.alertResponseAPIError(tit: "Error", mess: "Error: Forbidden")
+                    } else {
+                        self.alertResponseAPIError(tit: "Error", mess: "_SERVER_ERROR_")
+                    }
+                } else {
+                    if let error = error {
+                        self.alertResponseAPIError(tit: "Error", mess: "_SERVER_ERROR_\(error)")
+                    }
+                }
+            }
+        }
         let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         alert.addAction(delete)
         alert.addAction(cancel)
         
         present(alert, animated: true)
-    }
-    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
-        let vc = CreateEmployeeViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
