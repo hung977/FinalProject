@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1115E7ED9C5C72CB01E156FB /* Pods_FinalApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D737BDCA116901F0D908116E /* Pods_FinalApp.framework */; };
+		BA2899F324D3C968008EC394 /* ReportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2899F224D3C968008EC394 /* ReportResponse.swift */; };
+		BA2899F524D3EB91008EC394 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2899F424D3EB91008EC394 /* NetworkManager.swift */; };
 		BA2FA9E924C529F900BC23DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2FA9E824C529F900BC23DF /* AppDelegate.swift */; };
 		BA2FA9EB24C529F900BC23DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2FA9EA24C529F900BC23DF /* SceneDelegate.swift */; };
 		BA2FA9ED24C529F900BC23DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2FA9EC24C529F900BC23DF /* HomeViewController.swift */; };
@@ -61,6 +63,8 @@
 /* Begin PBXFileReference section */
 		465C4B0636E99EB50A7D1817 /* Pods-FinalApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalApp.debug.xcconfig"; path = "Target Support Files/Pods-FinalApp/Pods-FinalApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4B08CEF8FEE18722D9A20930 /* Pods-FinalApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalApp.release.xcconfig"; path = "Target Support Files/Pods-FinalApp/Pods-FinalApp.release.xcconfig"; sourceTree = "<group>"; };
+		BA2899F224D3C968008EC394 /* ReportResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportResponse.swift; sourceTree = "<group>"; };
+		BA2899F424D3EB91008EC394 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BA2FA9E524C529F900BC23DF /* FinalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA2FA9E824C529F900BC23DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA2FA9EA24C529F900BC23DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 			children = (
 				BA38ECA024C9458C00C4414F /* RequestService.swift */,
 				BA38ECA224C94A9F00C4414F /* Router.swift */,
+				BA2899F424D3EB91008EC394 /* NetworkManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				BA79DE2024D0189700CC5686 /* CreateEmployee.swift */,
 				BAEDF04E24D17F5000056669 /* PostReceiptResponse.swift */,
 				BAEDF05024D1939A00056669 /* ChangePasswordResponse.swift */,
+				BA2899F224D3C968008EC394 /* ReportResponse.swift */,
 			);
 			path = APIResponse;
 			sourceTree = "<group>";
@@ -457,6 +463,7 @@
 				BA38ECA124C9458C00C4414F /* RequestService.swift in Sources */,
 				BA2FAA0F24C53FCB00BC23DF /* ProductManagerViewController.swift in Sources */,
 				BA2FA9EB24C529F900BC23DF /* SceneDelegate.swift in Sources */,
+				BA2899F524D3EB91008EC394 /* NetworkManager.swift in Sources */,
 				BAA6B80924C5892500F2241F /* EditEmployeeViewController.swift in Sources */,
 				BADBD74C24C5449B00502FDC /* EmployeeManagementViewController.swift in Sources */,
 				BA7B8FF824CEE3C8005F9511 /* ProductResponse.swift in Sources */,
@@ -468,6 +475,7 @@
 				BA4EE62224C559C40014F878 /* ProductTableViewCell.swift in Sources */,
 				BA83FB3A24C5AA5B0054B203 /* BadgeTableViewCell.swift in Sources */,
 				BAEDF04D24D14A2200056669 /* ListProduct.swift in Sources */,
+				BA2899F324D3C968008EC394 /* ReportResponse.swift in Sources */,
 				BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */,
 				BA3D95D624C5531A00D4BFEA /* ReportViewController.swift in Sources */,
 				BAEDF04F24D17F5000056669 /* PostReceiptResponse.swift in Sources */,

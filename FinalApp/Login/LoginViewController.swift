@@ -25,6 +25,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwdLeading: NSLayoutConstraint!
     @IBOutlet weak var passTFLeading: NSLayoutConstraint!
     @IBOutlet weak var loginLeading: NSLayoutConstraint!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     
     //MARK: - Life cycel
     override func viewDidLoad() {
@@ -56,11 +57,11 @@ class LoginViewController: UIViewController {
                         self?.loginLeading.constant = 20
                         self?.view.layoutIfNeeded()
           }, completion: nil)
-        UIView.animate(withDuration: 1.0, delay: 1.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.5, delay: 1.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.imageview.transform = CGAffineTransform.identity.scaledBy(x: 1.5, y: 1.5)
             self.loginBtn.transform = CGAffineTransform.identity.scaledBy(x: 0.9, y: 0.9)
          }) { (finished) in
-            UIView.animate(withDuration: 1.0, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
               self.imageview.transform = CGAffineTransform.identity
               self.loginBtn.transform = CGAffineTransform.identity
            })
@@ -70,17 +71,24 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         hideKeyboard()
+        activityLoad(state: true)
         if let userTF = usernameTextField.text, let passTF = passwordTextField.text {
             let login: [String: String] = ["username":"\(userTF)", "password":"\(passTF)"]
             let routerLogin = Router.login
             RequestService.shared.AFRequestLogin(router: routerLogin, params: login, objectType: LoginResponse.self) { (bool, data, error) in
+                self.activityLoad(state: false)
+                
                 do {
-                    let json = try JSONDecoder.init().decode(LoginResponse.self, from: data!)
-                    LoginViewController.token = json.accessToken
-                    if json.profile.role == "admin" {
-                        LoginViewController.isAdmin = true
+                    if error != nil {
+                        self.alertFailtureLogin(str: "Request time out.")
+                    } else {
+                        let json = try JSONDecoder.init().decode(LoginResponse.self, from: data!)
+                        LoginViewController.token = json.accessToken
+                        if json.profile.role == "admin" {
+                            LoginViewController.isAdmin = true
+                        }
+                        self.performSegue(withIdentifier: "loginToHome", sender: sender)
                     }
-                    self.performSegue(withIdentifier: "loginToHome", sender: sender)
                 } catch {
                     self.alertFailtureLogin(str: "username or password incorrect.")
                 }
@@ -88,9 +96,28 @@ class LoginViewController: UIViewController {
         }
     }
     func setUI() {
+        activity.style = .large
+        activity.isHidden = true
         loginBtn.layer.cornerRadius = 10
         usernameTextField.layer.cornerRadius = 15
         passwordTextField.layer.cornerRadius = 15
+    }
+    func activityLoad(state: Bool) {
+        if state {
+            activity.isHidden = false
+            activity.startAnimating()
+            loginBtn.alpha = 0.5
+            loginBtn.isEnabled = false
+            usernameTextField.isEnabled = false
+            passwordTextField.isEnabled = false
+        } else {
+            activity.isHidden = true
+            activity.stopAnimating()
+            loginBtn.alpha = 1
+            loginBtn.isEnabled = true
+            usernameTextField.isEnabled = true
+            passwordTextField.isEnabled = true
+        }
     }
     func alertFailtureLogin(str message: String) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)

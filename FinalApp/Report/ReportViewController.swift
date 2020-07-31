@@ -12,41 +12,83 @@ import Charts
 class ReportViewController: UIViewController {
     
     var menu: SideMenuNavigationController?
-    var months = [String]()
-    var unitsSold = [Double]()
-    @IBOutlet weak var barChartView: BarChartView!
+    var productsReport: [ReportResponse] = []
     weak var axisFormatDelegate: IAxisValueFormatter?
+    var productName: [String] = []
+    var productAmount: [Double] = []
+    
+    //MARK: - IBOutlet
+    @IBOutlet weak var fromDatePicker: UIDatePicker!
+    @IBOutlet weak var toDatePicker: UIDatePicker!
+    @IBOutlet weak var drawButton: UIButton!
+    @IBOutlet weak var barChartView: BarChartView!
+    
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
         navigationController?.isNavigationBarHidden = true
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
         menu?.menuWidth = 300
         SideMenuManager.default.leftMenuNavigationController = menu
         axisFormatDelegate = self
-        
-        months = ["Jan",
-                  "Feb",
-                  "Mar",
-                  "Apr",
-                  "May",
-                  "Jun",
-                  "Jul",
-                  "Aug",
-                  "Sep",
-                  "Oct",
-                  "Nov",
-                  "Dec"
-        ]
-        
-        unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0, 4.0, 38.0, 2.0, 4.0, 5.0, 4.0]
-        
-        setChart(dataPoints: months, values: unitsSold)
     }
-    
+    //MARK: - IBAction
     @IBAction func didTappedMenu(_ sender: UIBarButtonItem) {
         present(menu!, animated: true)
     }
+    @IBAction func drawBtnTapped(_ sender: UIButton) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let from = dateFormatter.string(from: fromDatePicker.date)
+        let to = dateFormatter.string(from: toDatePicker.date)
+        let router = Router.getReport
+        RequestService.shared.AFRequestReport(router: router, from: "\(from)", to: "\(to)") { (data, response, error) in
+            do {
+                if let err = error {
+                    self.alert(tit: "Error", mess: "\(err)")
+                } else {
+                    if let safeData = data {
+                        let json = try JSONDecoder.init().decode([ReportResponse].self, from: safeData)
+                        self.productsReport = json
+                        self.setData()
+                        self.setChart(dataPoints: self.productName, values: self.productAmount)
+                    }
+                }
+            } catch {
+                self.alert(tit: "Error", mess: "\(error)")
+            }
+        }
+        
+    }
+    
+    //MARK: - Supporting function
+    func alert(tit: String, mess: String) {
+        let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+    func setUI() {
+        fromDatePicker.layer.cornerRadius = 10
+        fromDatePicker.maximumDate = Date()
+        fromDatePicker.minimumDate = Date(timeIntervalSinceNow: -31556926)
+        toDatePicker.maximumDate = Date()
+        toDatePicker.layer.cornerRadius = 10
+        drawButton.layer.cornerRadius = 10
+        drawButton.alpha = 0.7
+        drawButton.backgroundColor = .systemBlue
+        drawButton.setTitleColor(.white, for: .normal)
+    }
+    
+    func setData() {
+        for item in productsReport {
+            productName.append(item.product.name)
+            productAmount.append(Double(item.product.amount))
+        }
+    }
+    
     func setChart(dataPoints: [String], values: [Double]) {
         barChartView.noDataText = "NO DATA"
         
@@ -58,26 +100,30 @@ class ReportViewController: UIViewController {
             dataEntries.append(dataEntry)
         }
         
-        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Units Sold")
+        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Amount")
         chartDataSet.colors = [UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)]
         let chartData = BarChartData(dataSet: chartDataSet)
-        barChartView.xAxis.labelCount = 12
+        barChartView.xAxis.labelCount = productName.count
         barChartView.xAxis.labelPosition = .bottom
+        barChartView.xAxis.labelRotationAngle = 90.0
         barChartView.data = chartData
         barChartView.drawGridBackgroundEnabled = false
         barChartView.rightAxis.drawAxisLineEnabled = false
         barChartView.rightAxis.drawLabelsEnabled = false
         barChartView.backgroundColor = UIColor(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
-
+        
         barChartView.xAxis.valueFormatter = axisFormatDelegate
         barChartView.animate(xAxisDuration: 0.3, yAxisDuration: 2.0)
     }
     
     
 }
+
+//MARK: - IAxisValueFormatter
 extension ReportViewController: IAxisValueFormatter {
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return months[Int(value)]
+        return productName[Int(value)]
     }
 }
+

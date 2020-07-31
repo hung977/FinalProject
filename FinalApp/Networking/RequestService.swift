@@ -126,7 +126,9 @@
         }
         
         func AFRequestLogin<T: Codable>(router: Router, params: [String:String]?, objectType: T.Type, completion: @escaping CompletionHandleJSON) {
+            
             AF.request(router.URLwithPath,
+                       
                        method: router.method,
                        parameters: params,
                        encoder: JSONParameterEncoder.default,
@@ -189,6 +191,21 @@
             AF.request(router.URLwithPath,
                        method: router.method,
                        parameters: params,
+                       encoding: JSONEncoding.default,
+                       headers: router.headers).response { (response) in
+                        switch(response.result) {
+                        case .success(let data):
+                            completion(data, response, nil)
+                        case .failure(let error):
+                            completion(nil,response, error)
+                        }
+            }
+        }
+        
+        func AFRequestReport(router: Router, from: String, to: String, completion: @escaping CompletionHandleResponseAndData) {
+            let urlWithId = "\(router.URLwithPath)?from=\(from)&to=\(to)"
+            AF.request(urlWithId,
+                       method: router.method,
                        encoding: JSONEncoding.default,
                        headers: router.headers).response { (response) in
                         switch(response.result) {

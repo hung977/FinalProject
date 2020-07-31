@@ -9,11 +9,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateEmployeeViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="confirmPassHideorShowBtn" destination="hmB-r6-d49" id="IG1-8x-HTC"/>
                 <outlet property="confirmTextfield" destination="uNf-lG-oQb" id="xoK-WN-zdJ"/>
                 <outlet property="emailTextfield" destination="I2l-SI-giq" id="RYa-1T-ABm"/>
                 <outlet property="employeeImage" destination="arG-nS-Uyy" id="1Qf-2c-9gJ"/>
                 <outlet property="fullNameTextfield" destination="HUH-A9-uIR" id="s8R-nh-Xd7"/>
                 <outlet property="isAdminSwitch" destination="o4M-zq-PZ8" id="MSR-Rv-hUQ"/>
+                <outlet property="passwordHideorShowBtn" destination="tCh-27-ORL" id="SF0-td-QgA"/>
                 <outlet property="passwordTextfield" destination="DKt-Ws-Kgx" id="gAJ-l1-dEh"/>
                 <outlet property="phoneTextfield" destination="ByO-2b-ylR" id="TdU-ms-NFr"/>
                 <outlet property="saveBtn" destination="xFh-aT-XMH" id="Keb-gY-nwT"/>
@@ -123,6 +125,24 @@
                                     <rect key="frame" x="76" y="445" width="51" height="31"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </switch>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCh-27-ORL">
+                                    <rect key="frame" x="368" y="328" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="Sjk-Ng-Bp3"/>
+                                        <constraint firstAttribute="width" constant="20" id="i5Q-Qh-Foh"/>
+                                    </constraints>
+                                    <state key="normal" image="hidepass"/>
+                                    <connections>
+                                        <action selector="passwordHideorShow:" destination="-1" eventType="touchUpInside" id="RMq-Ra-HPB"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmB-r6-d49">
+                                    <rect key="frame" x="368" y="403" width="20" height="20"/>
+                                    <state key="normal" image="hidepass"/>
+                                    <connections>
+                                        <action selector="confirmPassHideorShow:" destination="-1" eventType="touchUpInside" id="fS5-Um-qNT"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -134,7 +154,9 @@
                                 <constraint firstItem="DXh-XJ-b9M" firstAttribute="top" secondItem="lpP-0U-Wt8" secondAttribute="top" id="8n0-lA-Lbs"/>
                                 <constraint firstItem="o4M-zq-PZ8" firstAttribute="centerY" secondItem="B3H-5p-cfX" secondAttribute="centerY" id="AAO-S6-CDc"/>
                                 <constraint firstAttribute="trailing" secondItem="KkM-fG-u3p" secondAttribute="trailing" constant="20" id="ACP-HZ-hsU"/>
+                                <constraint firstItem="hmB-r6-d49" firstAttribute="top" secondItem="KkM-fG-u3p" secondAttribute="bottom" constant="7" id="Eb1-ux-phl"/>
                                 <constraint firstItem="xFh-aT-XMH" firstAttribute="top" secondItem="uNf-lG-oQb" secondAttribute="bottom" constant="61" id="Gid-Hr-dl7"/>
+                                <constraint firstItem="tCh-27-ORL" firstAttribute="centerY" secondItem="DKt-Ws-Kgx" secondAttribute="centerY" id="HUZ-bx-VV9"/>
                                 <constraint firstItem="xFh-aT-XMH" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="8" id="JMh-0M-i1c"/>
                                 <constraint firstAttribute="trailing" secondItem="o94-ge-3QY" secondAttribute="trailing" constant="20" id="LYI-59-Fps"/>
                                 <constraint firstItem="DKt-Ws-Kgx" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="10" id="MPn-yV-5yN"/>
@@ -145,13 +167,17 @@
                                 <constraint firstAttribute="trailing" secondItem="DKt-Ws-Kgx" secondAttribute="trailing" constant="20" id="Otp-ju-akQ"/>
                                 <constraint firstItem="ByO-2b-ylR" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="10" id="Oul-tW-Zdz"/>
                                 <constraint firstItem="ip9-bH-nCl" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="10" id="QHO-j1-vhx"/>
+                                <constraint firstItem="hmB-r6-d49" firstAttribute="leading" secondItem="tCh-27-ORL" secondAttribute="leading" id="SIb-LZ-9d3"/>
                                 <constraint firstItem="DKt-Ws-Kgx" firstAttribute="top" secondItem="etl-Cg-0At" secondAttribute="bottom" id="Sbe-EP-ACi"/>
                                 <constraint firstItem="B3H-5p-cfX" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="10" id="Sng-G7-8CN"/>
                                 <constraint firstItem="KkM-fG-u3p" firstAttribute="top" secondItem="DKt-Ws-Kgx" secondAttribute="bottom" constant="20" id="WFk-8c-Sph"/>
                                 <constraint firstAttribute="trailing" secondItem="q5R-Kb-ZrL" secondAttribute="trailing" constant="20" id="YM7-Lb-fzn"/>
+                                <constraint firstItem="hmB-r6-d49" firstAttribute="centerY" secondItem="uNf-lG-oQb" secondAttribute="centerY" id="ZLt-2g-sI6"/>
                                 <constraint firstItem="ip9-bH-nCl" firstAttribute="top" secondItem="I2l-SI-giq" secondAttribute="bottom" constant="20" id="ZOk-A8-qzp"/>
                                 <constraint firstItem="I2l-SI-giq" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="10" id="ZZH-vV-36U"/>
                                 <constraint firstItem="q5R-Kb-ZrL" firstAttribute="top" secondItem="HUH-A9-uIR" secondAttribute="bottom" constant="20" id="a43-U9-y62"/>
+                                <constraint firstItem="hmB-r6-d49" firstAttribute="trailing" secondItem="tCh-27-ORL" secondAttribute="trailing" id="dqc-2n-beA"/>
+                                <constraint firstAttribute="trailing" secondItem="tCh-27-ORL" secondAttribute="trailing" constant="26" id="ec6-cZ-1kp"/>
                                 <constraint firstAttribute="trailing" secondItem="OFs-16-8YH" secondAttribute="trailing" constant="20" id="fM9-lM-RVh"/>
                                 <constraint firstItem="uNf-lG-oQb" firstAttribute="top" secondItem="KkM-fG-u3p" secondAttribute="bottom" id="fac-rF-ueF"/>
                                 <constraint firstItem="q5R-Kb-ZrL" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="10" id="iIn-Q0-q12"/>
@@ -213,5 +239,6 @@
     </objects>
     <resources>
         <image name="employee_example" width="201" height="201"/>
+        <image name="hidepass" width="48" height="48"/>
     </resources>
 </document>

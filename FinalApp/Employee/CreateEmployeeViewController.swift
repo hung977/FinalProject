@@ -10,6 +10,9 @@ import UIKit
 
 class CreateEmployeeViewController: UIViewController {
     
+    var isPasswordHide = true
+    var isConfirmPassHide = true
+    
     //MARK: - IbOutlet
     
     @IBOutlet weak var titleItems: UINavigationItem!
@@ -22,6 +25,8 @@ class CreateEmployeeViewController: UIViewController {
     @IBOutlet weak var confirmTextfield: UITextField!
     @IBOutlet weak var isAdminSwitch: UISwitch!
     @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var passwordHideorShowBtn: UIButton!
+    @IBOutlet weak var confirmPassHideorShowBtn: UIButton!
     
     // MARK: - Dictinary Response Error API
     var dirError: [Int:String] = [
@@ -66,6 +71,17 @@ class CreateEmployeeViewController: UIViewController {
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
+    @IBAction func passwordHideorShow(_ sender: UIButton) {
+        isPasswordHide = !isPasswordHide
+        passwordHideorShowBtn.setImage(isPasswordHide ? UIImage(named: "hidepass") : UIImage(named: "showpass"), for: .normal)
+        passwordTextfield.isSecureTextEntry = isPasswordHide ? true : false
+    }
+    @IBAction func confirmPassHideorShow(_ sender: UIButton) {
+        isConfirmPassHide = !isConfirmPassHide
+        confirmPassHideorShowBtn.setImage(isConfirmPassHide ? UIImage(named: "hidepass") : UIImage(named: "showpass"), for: .normal)
+        confirmTextfield.isSecureTextEntry = isConfirmPassHide ? true : false
+    }
+    
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         let name = fullNameTextfield.text!
         let email = emailTextfield.text!
@@ -140,8 +156,6 @@ class CreateEmployeeViewController: UIViewController {
             alertResponse(tit: "Error", mess: "invalid Email Address")
         }
         
-    }
-    @IBAction func addNewImageBtnTapped(_ sender: UIButton) {
     }
     // MARK: - Supporting function
     func alertCompletion(mess: String) {
