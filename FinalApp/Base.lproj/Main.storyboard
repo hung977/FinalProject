@@ -7,28 +7,43 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--Welcome-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="FinalApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Success" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QdR-Uc-Xv0">
+                                <rect key="frame" x="20" y="403.5" width="374" height="35"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
+                                <color key="textColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wait a second..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXh-ft-18C">
+                                <rect key="frame" x="20" y="438.5" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="QdR-Uc-Xv0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3xd-l6-uCk"/>
+                            <constraint firstItem="kXh-ft-18C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="D2n-GM-5Ov"/>
+                            <constraint firstItem="kXh-ft-18C" firstAttribute="top" secondItem="QdR-Uc-Xv0" secondAttribute="bottom" id="LLF-HJ-IZB"/>
+                            <constraint firstItem="QdR-Uc-Xv0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SrB-Yb-23E"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kXh-ft-18C" secondAttribute="trailing" constant="20" id="eqp-QC-SnP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QdR-Uc-Xv0" secondAttribute="trailing" constant="20" id="vgR-bE-lDL"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="anI-yr-Hxh">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" image="hamburger" id="sbD-I6-Bk8">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="didTappedMenu:" destination="BYZ-38-t0r" id="0b5-U7-4dr"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Welcome" id="anI-yr-Hxh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2101" y="-78"/>
+            <point key="canvasLocation" x="2100" y="-78.348214285714278"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="5fE-C6-zek">
@@ -170,6 +185,5 @@
     </scenes>
     <resources>
         <image name="final1" width="1000" height="1000"/>
-        <image name="hamburger" width="48" height="48"/>
     </resources>
 </document>

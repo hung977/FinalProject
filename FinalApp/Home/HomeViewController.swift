@@ -7,23 +7,15 @@
 //
 
 import UIKit
-import SideMenu
 
 class HomeViewController: UIViewController {
-    var menu: SideMenuNavigationController?
     override func viewDidLoad() {
         super.viewDidLoad()
-        menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
-        menu?.leftSide = true
-        menu?.menuWidth = 300
-        SideMenuManager.default.leftMenuNavigationController = menu
+        let vc = ProductManagerViewController()
+        navigationController?.pushViewController(vc, animated: true)
         
         
     }
-    @IBAction func didTappedMenu(_ sender: UIBarButtonItem) {
-        present(menu!, animated: true)
-    }
-    
 
 }
 
