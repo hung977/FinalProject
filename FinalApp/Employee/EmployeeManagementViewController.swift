@@ -56,10 +56,12 @@ class EmployeeManagementViewController: UIViewController {
         }
         if currentEmployee != nil {
             let alert = UIAlertController(title: nil, message: "Edit \(currentEmployee?.name ?? "Default_name")", preferredStyle: .actionSheet)
-            let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
+            let delete = UIAlertAction(title: "Delete", style: .default) { [weak self] (_) in
+                guard let self = self else {return}
                 self.alertDeleteProduct()
             }
-            let edit = UIAlertAction(title: "Edit", style: .default) { (_) in
+            let edit = UIAlertAction(title: "Edit", style: .default) { [weak self] (_) in
+                guard let self = self else {return}
                 let vc = EditEmployeeViewController()
                 vc.name = self.currentEmployee?.name
                 vc.email = self.currentEmployee?.email
@@ -68,7 +70,8 @@ class EmployeeManagementViewController: UIViewController {
                 vc.id = self.currentEmployee?.id
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            let changePasswd = UIAlertAction(title: "Change Password", style: .default) { (_) in
+            let changePasswd = UIAlertAction(title: "Change Password", style: .default) { [weak self] (_) in
+                guard let self = self else {return}
                 self.changePassword(name: self.currentEmployee!.name)
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -115,11 +118,31 @@ class EmployeeManagementViewController: UIViewController {
                     "confirmPassword": "\(confirmTF)"
                 ]
                 if let userId = self.currentEmployee?.id {
-                    RequestService.shared.AFRequestChangePassWord(router: router, id: userId, params: param) { (data, response, error) in
-//                        if let safeData = data {
-//                            let json = try? JSONDecoder.init().decode(ChangePasswordResponse.self, from: safeData)
-//                            print(json?.Password)
-//                        }
+                    RequestService.shared.AFRequestChangePassWord(router: router, id: userId, params: param) { [weak self] (data, response, error) in
+                        guard let self = self else {return}
+                        do {
+                            let statusCode = response?.response?.statusCode
+                            if statusCode == 200 || statusCode == 204 {
+                                self.alertResponseAPISuccess(tit: "Success", mess: "Changed password for \(userId).")
+                            } else if statusCode == 401 {
+                                self.alertResponseAPIError(tit: "ERROR", mess: "Unauthorized")
+                            } else if statusCode == 403 {
+                                self.alertResponseAPIError(tit: "ERROR", mess: "Forbidden")
+                            } else {
+                                if let safeData = data {
+                                    let json = try JSONDecoder.init().decode(ChangePasswordResponse.self, from: safeData)
+                                    if let pass = json.Password, let confirm = json.ConfirmPassword {
+                                        self.alertResponseAPIError(tit: "ERROR", mess: "\(pass), \(confirm)")
+                                    } else {
+                                        self.alertResponseAPIError(tit: "ERROR", mess: "Some thing went wrong!")
+                                    }
+                                    
+                                }
+                            }
+
+                        } catch {
+                            self.alertResponseAPIError(tit: "ERROR", mess: "Can't parse JSON")
+                        }
                     }
                 }
             }
@@ -134,7 +157,9 @@ class EmployeeManagementViewController: UIViewController {
         DispatchQueue.main.async {
             let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
             let routerGetProduct = Router.getEmployee
-            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: EmployeeResponse.self) { (bool, data, error) in
+            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: EmployeeResponse.self) {
+                [weak self] (bool, data, error) in
+                guard let self = self else {return}
                 do {
                     let json = try JSONDecoder.init().decode(EmployeeResponse.self, from: data!)
                     self.employees += json.items
@@ -156,7 +181,8 @@ class EmployeeManagementViewController: UIViewController {
     }
     func alertResponseAPISuccess(tit: String, mess: String) {
         let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+        let action = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
+            guard let self = self else {return}
             self.loadEmployee(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
             self.tableView.reloadData()
         }
@@ -165,9 +191,11 @@ class EmployeeManagementViewController: UIViewController {
     }
     func alertDeleteProduct() {
         let alert = UIAlertController(title: "Delete employee", message: "Are you sure?", preferredStyle: .alert)
-        let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
+        let delete = UIAlertAction(title: "Delete", style: .default) { [weak self] (_) in
+            guard let self = self else {return}
             let router = Router.deleteEmployee
-            RequestService.shared.request(router: router, id: (self.currentEmployee?.id)!) { (response, error) in
+            RequestService.shared.request(router: router, id: (self.currentEmployee?.id)!) { [weak self] (response, error) in
+                guard let self = self else {return}
                 if let respon = response {
                     if respon.response?.statusCode == 204 || respon.response?.statusCode == 200 {
                         self.alertResponseAPISuccess(tit: "Success", mess: "Removed \(self.currentEmployee?.name ?? "")")

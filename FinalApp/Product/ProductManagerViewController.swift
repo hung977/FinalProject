@@ -23,6 +23,15 @@ class ProductManagerViewController: UIViewController {
     private var PageIndexParams = "pageIndex"
     private var PageSizeParams = "pageSize"
     private var PageSearchStringParams = "searchString"
+    private let titleAdd = "Add new product"
+    private let titleEdit = "Edit product"
+    private let heightForRow: CGFloat = 120
+    private let messageConfirmDelete = "Are you sure?"
+    private enum Title: String {
+        case delete = "Delete"
+        case cancel = "Cancel"
+        case edit = "Edit"
+    }
     
     // MARK: - Iboutlet
     @IBOutlet weak var searchBar: UISearchBar!
@@ -36,18 +45,22 @@ class ProductManagerViewController: UIViewController {
         loadProduct(withPage: pageIndex, withSize: pageSize, withString: "")
         searchBar.delegate = self
         navigationController?.isNavigationBarHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateProduct), name: .didUpdateProduct, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateProduct), name: .didCreateProduct, object: nil)
+        
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
         menu?.menuWidth = menuWidth
         SideMenuManager.default.leftMenuNavigationController = menu
+        
     }
     
-    // MARK: - IBAction
     func loadProduct(withPage: Int, withSize: Int, withString: String) {
         DispatchQueue.main.async {
             let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
             let routerGetProduct = Router.getProducts
-            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: ProductResponse.self) { (bool, data, error) in
+            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: ProductResponse.self) { [weak self] (bool, data, error) in
+                guard let self = self else {return}
                 do {
                     let json = try JSONDecoder.init().decode(ProductResponse.self, from: data!)
                     self.products += json.items
@@ -61,11 +74,33 @@ class ProductManagerViewController: UIViewController {
             }
         }
     }
-    
+    // MARK: - IBAction
+    @objc func didUpdateProduct() {
+        loadProduct(withPage: pageIndex, withSize: pageSize, withString: "")
+    }
     @IBAction func addProductTapped(_ sender: UIBarButtonItem) {
         let vc = CreateEditProductViewController()
-        vc.tit = "Add new product"
+        vc.tit = titleAdd
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func alertDeleteProduct(_ forProduct: Product) {
+        let alert = UIAlertController(title: "\(Title.delete.rawValue) \(forProduct.name)", message: messageConfirmDelete, preferredStyle: .alert)
+        let delete = UIAlertAction(title: Title.delete.rawValue, style: .default) { [weak self] (_) in
+            guard let self = self else {return}
+            let routerDeleteProduct = Router.deleteProducts
+            if let id = self.currentProduct?.id {
+                RequestService.shared.request(router: routerDeleteProduct, id: id) { [weak self] (response, error) in
+                    guard let self = self else {return}
+                    self.loadProduct(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
+                }
+                
+            }
+        }
+        let cancel = UIAlertAction(title: Title.cancel.rawValue, style: .default, handler: nil)
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        present(alert, animated: true)
     }
     @IBAction func didTappedMenu(_ sender: UIBarButtonItem) {
         present(menu!, animated: true)
@@ -78,9 +113,10 @@ class ProductManagerViewController: UIViewController {
         }
         if currentProduct != nil {
             let optionMenu = UIAlertController(title: nil, message: currentProduct?.name, preferredStyle: .actionSheet)
-            let edit = UIAlertAction(title: "Edit", style: .default) { (_) in
+            let edit = UIAlertAction(title: Title.edit.rawValue, style: .default) { [weak self] (_) in
+                guard let self = self else {return}
                 let vc = CreateEditProductViewController()
-                vc.tit = "Edit product"
+                vc.tit = self.titleEdit
                 vc.productName = self.currentProduct?.name
                 vc.productAmout = self.currentProduct?.amount
                 vc.productPrice = self.currentProduct?.price
@@ -89,8 +125,9 @@ class ProductManagerViewController: UIViewController {
                 vc.productImageName = newImageURL
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
+            let cancel = UIAlertAction(title: Title.cancel.rawValue, style: .cancel, handler: nil)
+            let delete = UIAlertAction(title: Title.delete.rawValue, style: .default) { [weak self] (_) in
+                guard let self = self else {return}
                 self.alertDeleteProduct(self.currentProduct!)
                 
             }
@@ -102,24 +139,6 @@ class ProductManagerViewController: UIViewController {
         else {
             print("product is loading...")
         }
-    }
-    
-    func alertDeleteProduct(_ forProduct: Product) {
-        let alert = UIAlertController(title: "Delete \(forProduct.name)", message: "Are you sure?", preferredStyle: .alert)
-        let delete = UIAlertAction(title: "Delete", style: .default) {(_) in
-            let routerDeleteProduct = Router.deleteProducts
-            if let id = self.currentProduct?.id {
-                RequestService.shared.request(router: routerDeleteProduct, id: id) { (response, error) in
-                }
-                self.loadProduct(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
-                self.tableView.reloadData()
-                
-            }
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        alert.addAction(delete)
-        alert.addAction(cancel)
-        present(alert, animated: true)
     }
 }
 // MARK: - TableViewDelegate and Datasource
@@ -153,7 +172,7 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
         currentProduct = products[indexPath.row]
         
         let vc = CreateEditProductViewController()
-        vc.tit = "Edit product"
+        vc.tit = titleEdit
         vc.productName = currentProduct?.name
         vc.productAmout = currentProduct?.amount
         vc.productPrice = currentProduct?.price
@@ -165,7 +184,7 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return heightForRow
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == products.count - 1 && products.count < totalProducts {
@@ -196,4 +215,10 @@ extension ProductManagerViewController: UISearchBarDelegate {
             }
         }
     }
+}
+//MARK: - Extension Notification
+extension Notification.Name {
+    static let didCreateProduct = Notification.Name("didCreateProduct")
+    static let didUpdateProduct = Notification.Name("didUpdateProduct")
+    static let didDeleteProduct = Notification.Name("didDeleteProduct")
 }

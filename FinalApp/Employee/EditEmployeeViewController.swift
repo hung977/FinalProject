@@ -106,7 +106,8 @@ class EditEmployeeViewController: UIViewController {
        }
     func alertCompletion(mess: String) {
         let alert = UIAlertController(title: "Success", message: mess, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+        let action = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
+            guard let self = self else {return}
             let vc = EmployeeManagementViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -133,7 +134,8 @@ class EditEmployeeViewController: UIViewController {
         if isValidEmailAddress(emailAddressString: email) {
             if checkNumber(str: phone) {
                 let router = Router.editEmployee
-                RequestService.shared.AFRequestEditEmployee(router: router, id: id!, params: param) { (response, error) in
+                RequestService.shared.AFRequestEditEmployee(router: router, id: id!, params: param) { [weak self] (response, error) in
+                    guard let self = self else {return}
                     if let respon = response {
                         if let statusCode = respon.response?.statusCode {
                             if statusCode == 204 || statusCode == 200 {

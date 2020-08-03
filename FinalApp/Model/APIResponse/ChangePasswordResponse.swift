@@ -9,6 +9,8 @@
 import Foundation
 
 public struct ChangePasswordResponse: Codable {
-    public var Password: [String] = ["PASSWORD_ERROR"]
-    public var ConfirmPassword: [String] = ["COFIRM_PASSWORD_ERROR"]
+
+        public var ConfirmPassword : [String]?
+        public var Password : [String]?
+        
 }

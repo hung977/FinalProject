@@ -44,7 +44,8 @@ class ReportViewController: UIViewController {
         let from = dateFormatter.string(from: fromDatePicker.date)
         let to = dateFormatter.string(from: toDatePicker.date)
         let router = Router.getReport
-        RequestService.shared.AFRequestReport(router: router, from: "\(from)", to: "\(to)") { (data, response, error) in
+        RequestService.shared.AFRequestReport(router: router, from: "\(from)", to: "\(to)") { [weak self] (data, response, error) in
+            guard let self = self else {return}
             do {
                 if let err = error {
                     self.alert(tit: "Error", mess: "\(err)")
@@ -85,7 +86,7 @@ class ReportViewController: UIViewController {
     func setData() {
         for item in productsReport {
             productName.append(item.product.name)
-            productAmount.append(Double(item.product.amount))
+            productAmount.append(Double(item.revenue))
         }
     }
     
@@ -100,7 +101,7 @@ class ReportViewController: UIViewController {
             dataEntries.append(dataEntry)
         }
         
-        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Amount")
+        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Revenue")
         chartDataSet.colors = [UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)]
         let chartData = BarChartData(dataSet: chartDataSet)
         barChartView.xAxis.labelCount = productName.count

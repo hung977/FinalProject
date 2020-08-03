@@ -101,7 +101,8 @@ class BadgeViewController: UIViewController, MyBadgeCellDelegate {
     }
     func alertResponse(tit: String, mess: String) {
         let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
-        let actio = UIAlertAction(title: "OK", style: .default) { (_) in
+        let actio = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
+            guard let self = self else {return}
             do {
                 try FileManager.default.removeItem(at: self.dataFile!)
                 self.products = []
@@ -129,7 +130,8 @@ class BadgeViewController: UIViewController, MyBadgeCellDelegate {
     }
     func alertCancel() {
         let alert = UIAlertController(title: nil, message: "Are you sure?", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+        let action = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
+            guard let self = self else {return}
             do {
                 try FileManager.default.removeItem(at: self.dataFile!)
                 self.products = []
@@ -156,13 +158,18 @@ class BadgeViewController: UIViewController, MyBadgeCellDelegate {
             array.append(dirc)
             
         }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = Date()
+        let currentDate = dateFormatter.string(from: date)
         let param: [String:Any] = [
-            "dateTime": "2020-07-29T08:23:52.819Z",
+            "dateTime": "\(currentDate)",
             "totalPrice": totalPrice,
             "saleReceiptDetails": array
         ]
         let router = Router.postSaleReceipt
-        RequestService.shared.AFRequestPostReceipt(router: router, params: param) { (data, response, error) in
+        RequestService.shared.AFRequestPostReceipt(router: router, params: param) { [weak self] (data, response, error) in
+            guard let self = self else {return}
             if let respon = response {
                 if respon.response?.statusCode == 200 {
                     self.alertResponse(tit: "Success", mess: "Payment complete: ($\(self.totalPrice)")

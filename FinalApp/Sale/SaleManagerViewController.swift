@@ -68,7 +68,8 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
         DispatchQueue.main.async {
             let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
             let routerGetProduct = Router.getProducts
-            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: ProductResponse.self) { (bool, data, error) in
+            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: ProductResponse.self) { [weak self] (bool, data, error) in
+                guard let self = self else {return}
                 do {
                     let json = try JSONDecoder.init().decode(ProductResponse.self, from: data!)
                     self.products += json.items

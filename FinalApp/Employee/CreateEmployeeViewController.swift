@@ -106,7 +106,8 @@ class CreateEmployeeViewController: UIViewController {
         if isValidEmailAddress(emailAddressString: email) {
             if checkNumber(str: phone) {
                 if checkPassMatch(pass, confirmPass) {
-                    RequestService.shared.AFRequestCreateEmployee(router: router, params: param) { (bool, data, error) in
+                    RequestService.shared.AFRequestCreateEmployee(router: router, params: param) { [weak self] (bool, data, error) in
+                        guard let self = self else {return}
                         if let safeData = data {
                             do {
                                 let json = try JSONDecoder.init().decode(CreateEmployee.self, from: safeData)
@@ -160,7 +161,8 @@ class CreateEmployeeViewController: UIViewController {
     // MARK: - Supporting function
     func alertCompletion(mess: String) {
         let alert = UIAlertController(title: "Success", message: mess, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+        let action = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
+            guard let self = self else {return}
             let vc = EmployeeManagementViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }

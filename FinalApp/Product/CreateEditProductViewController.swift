@@ -20,6 +20,35 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
     var productId: String?
     var isSelectedImage = true
     
+    //MARK: - Contants
+    private let saveButtonRadiusValue: CGFloat = 10
+    private let imageNameDefault = "product_example"
+    private let titleAdd = "Add new product"
+    private let nameParam = "Name"
+    private let priceParam = "Price"
+    private let amountParam = "Amount"
+    private let imageParam = "Image"
+    private let missName = "Product_Name "
+    private let missAmount = "Product_Amount "
+    private let missPrice = "Product_Price "
+    private let missImage = "Product_Image "
+    private let amountDefault = 0
+    private let priceDefault = 0.0
+    private let nameDefault = "Default Name"
+    private enum Title: String {
+        case missingField = "Missing Field!"
+        case ok = "OK"
+        case camera = "Camera"
+        case alright = "Alright"
+        case photoLibrary = "Photos Library"
+        case cancel = "Cancel"
+    }
+    private enum MessageAlert: String {
+        case selectOptions = "Select options"
+        case deviceNoCamera = "Device has no camera"
+    }
+    
+    
     // MARK: - IBOutlet
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var productNameTextfield: UITextField!
@@ -33,7 +62,7 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        saveButton.layer.cornerRadius = 10
+        saveButton.layer.cornerRadius = saveButtonRadiusValue
         saveButton.backgroundColor = .blue
         productAmountTextfield.keyboardType = UIKeyboardType.decimalPad
         productPriceTextfield.keyboardType = UIKeyboardType.decimalPad
@@ -55,16 +84,16 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
             }
         }
         else {
-            productImage.image = UIImage(named: "product_example")
-            currentImage = UIImage(named: "product_example")
+            productImage.image = UIImage(named: imageNameDefault)
+            currentImage = UIImage(named: imageNameDefault)
             isSelectedImage = false
         }
         
         
         titleItems.title = tit
-        productNameTextfield.text = productName
-        productAmountTextfield.text = "\(productAmout ?? 0)"
-        productPriceTextfield.text = "\(productPrice ?? 0.0)"
+        productNameTextfield.text = productName ?? nameDefault
+        productAmountTextfield.text = "\(productAmout ?? amountDefault)"
+        productPriceTextfield.text = "\(productPrice ?? priceDefault)"
     }
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -90,47 +119,48 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         navigationController?.popViewController(animated: true)
     }
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        if tit == "Add new product" {
+        if tit == titleAdd {
             let currentName = productNameTextfield.text!
             let currentAmout = String(productAmountTextfield.text!)
             let currentPrice = String(productPriceTextfield.text!)
             if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
-                let params: [String:Any] = ["Name": currentName, "Price": currentPrice, "Amount": currentAmout]
+                let params: [String:Any] = [nameParam: currentName, priceParam: currentPrice, amountParam: currentAmout]
                 //print(params)
-                RequestService.callsendImageAPI(param: params, arrImage: [currentImage!], imageKey: "Image") { (response) in
+                RequestService.callsendImageAPI(param: params, arrImage: [currentImage!], imageKey: imageParam) { (response) in
                 }
+                NotificationCenter.default.post(name: .didCreateProduct, object: nil)
                 let vc = ProductManagerViewController()
-                navigationController?.pushViewController(viewController: vc, animated: true, completion: vc.viewDidLoad)
+                navigationController?.pushViewController(vc, animated: true)
             } else {
                 var message = ""
                 if currentName == "" {
-                    message += "Product_Name "
+                    message += missName
                 }
                 if currentAmout == "" {
-                    message += "Product_Amount "
+                    message += missAmount
                 }
                 if currentPrice == "" {
-                    message += "Product_Price "
+                    message += missPrice
                 }
                 if !isSelectedImage {
-                    message += "Product_Image "
+                    message += missImage
                 }
-                let alert = UIAlertController(title: "Missing field", message: "\(message) is required.", preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                let alert = UIAlertController(title: Title.missingField.rawValue, message: "\(message) is required.", preferredStyle: .alert)
+                let action = UIAlertAction(title: Title.ok.rawValue, style: .default, handler: nil)
                 alert.addAction(action)
                 present(alert, animated:true)
             }
         } else {
-            let currentName = productNameTextfield.text ?? "Default Name"
+            let currentName = productNameTextfield.text ?? nameDefault
             let currentAmout = String(productAmountTextfield.text!)
             let currentPrice = String(productPriceTextfield.text!)
             if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
-                let params: [String:Any] = ["Name": currentName, "Price": currentPrice, "Amount": currentAmout]
-                RequestService.callsendImageAPIEditProduct(for: productId!, param: params, arrImage: [currentImage!], imageKey: "Image") { (response) in
-                    //code here
+                let params: [String:Any] = [nameParam: currentName, priceParam: currentPrice, amountParam: currentAmout]
+                RequestService.callsendImageAPIEditProduct(for: productId!, param: params, arrImage: [currentImage!], imageKey: imageParam) { (response) in
                 }
+                NotificationCenter.default.post(name: .didUpdateProduct, object: nil)
                 let vc = ProductManagerViewController()
-                navigationController?.pushViewController(viewController: vc, animated: true, completion: vc.viewDidLoad)
+                navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
@@ -144,11 +174,12 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
     @IBAction func selectImageTapped(_ sender: UIButton) {
         var vcCamera =  UIImagePickerController()
         vcCamera = UIImagePickerController()
-        let options = UIAlertController(title: nil, message: "Select options", preferredStyle: .actionSheet)
-        let camera = UIAlertAction(title: "Camera", style: .default) { (_) in
+        let options = UIAlertController(title: nil, message: MessageAlert.selectOptions.rawValue, preferredStyle: .actionSheet)
+        let camera = UIAlertAction(title: Title.camera.rawValue, style: .default) { [weak self] (_) in
+            guard let self = self else {return}
             if !UIImagePickerController.isSourceTypeAvailable(.camera) {
-                let alert = UIAlertController(title: nil, message: "Device has no camera", preferredStyle: .alert)
-                let action = UIAlertAction(title: "Alright", style: .default, handler: nil)
+                let alert = UIAlertController(title: nil, message: MessageAlert.deviceNoCamera.rawValue, preferredStyle: .alert)
+                let action = UIAlertAction(title: Title.alright.rawValue, style: .default, handler: nil)
                 alert.addAction(action)
                 self.present(alert, animated: true)
             } else {
@@ -157,12 +188,13 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
                 self.present(vcCamera, animated: true, completion: nil)
             }
         }
-        let photoLibrary = UIAlertAction(title: "Photos Library", style: .default) { (_) in
+        let photoLibrary = UIAlertAction(title: Title.photoLibrary.rawValue, style: .default) { [weak self] (_) in
+            guard let self = self else {return}
             vcCamera.sourceType = .photoLibrary
             vcCamera.delegate = self
             self.present(vcCamera, animated: true, completion: nil)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: Title.cancel.rawValue, style: .cancel, handler: nil)
         options.addAction(camera)
         options.addAction(photoLibrary)
         options.addAction(cancel)
@@ -204,3 +236,4 @@ extension UINavigationController {
         CATransaction.commit()
     }
 }
+
