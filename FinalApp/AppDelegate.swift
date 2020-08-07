@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-tclass AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
