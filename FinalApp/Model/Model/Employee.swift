@@ -9,15 +9,16 @@
 import Foundation
 
 public struct Employee: Codable {
-
-        public var name : String
-        public var username : String
-        public var email : String
-        public var phoneNumber : String
-        public var dateOfBirth : String?
-        public var address : String?
-        public var locked : Bool
-        public var role : String
-        public var id : String
-        
+    
+    public var name : String?
+    public var username : String
+    public var email : String
+    public var phoneNumber : String?
+    public var dateOfBirth : String?
+    public var address : String?
+    public var locked : Bool
+    public var role : String
+    public var image: String?
+    public var id : String
+    
 }

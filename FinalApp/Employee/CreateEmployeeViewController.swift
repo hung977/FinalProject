@@ -8,8 +8,20 @@
 
 import UIKit
 
-class CreateEmployeeViewController: UIViewController {
+class CreateEmployeeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    private enum Title: String {
+        case missingField = "Missing Field!"
+        case ok = "OK"
+        case camera = "Camera"
+        case alright = "Alright"
+        case photoLibrary = "Photos Library"
+        case cancel = "Cancel"
+    }
+    private enum MessageAlert: String {
+        case selectOptions = "Select options"
+        case deviceNoCamera = "Device has no camera"
+    }
     var isPasswordHide = true
     var isConfirmPassHide = true
     
@@ -53,6 +65,8 @@ class CreateEmployeeViewController: UIViewController {
         // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        employeeImage.layer.cornerRadius = employeeImage.frame.size.height / 2
+        
         saveBtn.layer.cornerRadius = 10
         saveBtn.backgroundColor = .systemBlue
         saveBtn.setTitleColor(.white, for: .normal)
@@ -81,6 +95,37 @@ class CreateEmployeeViewController: UIViewController {
         confirmPassHideorShowBtn.setImage(isConfirmPassHide ? UIImage(named: "hidepass") : UIImage(named: "showpass"), for: .normal)
         confirmTextfield.isSecureTextEntry = isConfirmPassHide ? true : false
     }
+    @IBAction func selectImage(_ sender: UIButton) {
+        var vcCamera =  UIImagePickerController()
+        vcCamera = UIImagePickerController()
+        let options = UIAlertController(title: nil, message: MessageAlert.selectOptions.rawValue, preferredStyle: .actionSheet)
+        let camera = UIAlertAction(title: Title.camera.rawValue, style: .default) { [weak self] (_) in
+            guard let self = self else {return}
+            if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+                let alert = UIAlertController(title: nil, message: MessageAlert.deviceNoCamera.rawValue, preferredStyle: .alert)
+                let action = UIAlertAction(title: Title.alright.rawValue, style: .default, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true)
+            } else {
+                vcCamera.sourceType = .camera
+                vcCamera.delegate = self
+                self.present(vcCamera, animated: true, completion: nil)
+            }
+        }
+        let photoLibrary = UIAlertAction(title: Title.photoLibrary.rawValue, style: .default) { [weak self] (_) in
+            guard let self = self else {return}
+            vcCamera.sourceType = .photoLibrary
+            vcCamera.delegate = self
+            self.present(vcCamera, animated: true, completion: nil)
+        }
+        let cancel = UIAlertAction(title: Title.cancel.rawValue, style: .cancel, handler: nil)
+        options.addAction(camera)
+        options.addAction(photoLibrary)
+        options.addAction(cancel)
+        present(options, animated: true)
+        
+    }
+    
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         let name = fullNameTextfield.text!
@@ -93,8 +138,8 @@ class CreateEmployeeViewController: UIViewController {
         if isAdminSwitch.isOn {
             isAdmin = "admin"
         }
+        let currentImage = employeeImage.image
         
-        let router = Router.createEmployee
         let param = [
             "name":"\(name)",
             "email":"\(email)",
@@ -106,7 +151,7 @@ class CreateEmployeeViewController: UIViewController {
         if isValidEmailAddress(emailAddressString: email) {
             if checkNumber(str: phone) {
                 if checkPassMatch(pass, confirmPass) {
-                    RequestService.shared.AFRequestCreateEmployee(router: router, params: param) { [weak self] (bool, data, error) in
+                    RequestService.callsendImageAPICreateEmployee(param: param, arrImage: [currentImage!], imageKey: "Image") { [weak self] (bool, data, error) in
                         guard let self = self else {return}
                         if let safeData = data {
                             do {
@@ -235,6 +280,17 @@ class CreateEmployeeViewController: UIViewController {
         passwordTextfield.endEditing(true)
         confirmTextfield.endEditing(true)
         userNameTextField.endEditing(true)
+    }
+    // MARK: - UIImagePickerController
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        guard let image = info[.originalImage] as? UIImage else {
+            print("No image found")
+            return
+        }
+        employeeImage.image = image
+        
     }
     
 }

@@ -8,12 +8,12 @@
 
 import Foundation
 public struct EmployeeResponse: Codable {
-
-        public var items : [Employee]
-        public var pageIndex : Int
-        public var pageSize : Int
-        public var totalItems : Int
-        public var totalPages : Int
-        
+    
+    public var items : [Employee]
+    public var totalItems : Int
+    public var totalPages : Int
+    public var pageSize : Int
+    public var pageIndex : Int
+    
 }
 

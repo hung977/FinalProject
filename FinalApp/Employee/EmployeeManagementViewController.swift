@@ -23,6 +23,30 @@ class EmployeeManagementViewController: UIViewController {
     private var PageIndexParams = "pageIndex"
     private var PageSizeParams = "pageSize"
     private var PageSearchStringParams = "searchString"
+    private var default_name = "Default_name"
+    private var roleAdmin = "admin"
+    private var passwordPlacehold = "Enter password"
+    private var cofirmPasswordPlacehold = "confirm Password"
+    private var passwordLayerValue: CGFloat = 100
+    private var passworParam = "password"
+    private var confirmParam = "confirmPassword"
+    private enum Title: String {
+        case delete = "Delete"
+        case edit = "Edit"
+        case changePassword = "Change Password"
+        case cancel = "Cancel"
+        case ok = "OK"
+        case success = "Success"
+        case error = "ERROR"
+    }
+    private enum Message: String {
+        case edit = "Edit"
+        case changePassword = "Change Password"
+        case unauthorized = "Unauthorized"
+        case forbidden = "Forbidden"
+        case oops = "Some thing went wrong!"
+        case errorParseJSON = "Can't parse JSON"
+    }
     
     // MARK: - IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
@@ -31,7 +55,7 @@ class EmployeeManagementViewController: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "EmployeeTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: EmployeeTableViewCell.name, bundle: nil), forCellReuseIdentifier: "cell")
         loadEmployee(withPage: pageIndex, withSize: pageSize, withString: "")
         tableView.delegate = self
         tableView.dataSource = self
@@ -55,26 +79,38 @@ class EmployeeManagementViewController: UIViewController {
             }
         }
         if currentEmployee != nil {
-            let alert = UIAlertController(title: nil, message: "Edit \(currentEmployee?.name ?? "Default_name")", preferredStyle: .actionSheet)
-            let delete = UIAlertAction(title: "Delete", style: .default) { [weak self] (_) in
+            let alert = UIAlertController(title: nil, message: "\(Message.edit.rawValue) \(currentEmployee?.name ?? default_name)", preferredStyle: .actionSheet)
+            let delete = UIAlertAction(title: Title.delete.rawValue, style: .default) { [weak self] (_) in
                 guard let self = self else {return}
                 self.alertDeleteProduct()
             }
-            let edit = UIAlertAction(title: "Edit", style: .default) { [weak self] (_) in
+            let edit = UIAlertAction(title: Title.edit.rawValue, style: .default) { [weak self] (_) in
                 guard let self = self else {return}
                 let vc = EditEmployeeViewController()
+                if let newImageURL = self.currentEmployee?.image {
+                    DispatchQueue.global().async {
+                        if let data = try? Data(contentsOf: URL(string: newImageURL)!) {
+                            if let image = UIImage(data: data) {
+                                DispatchQueue.main.async {
+                                    vc.employeeImg.image = image
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
                 vc.name = self.currentEmployee?.name
                 vc.email = self.currentEmployee?.email
                 vc.phoneNumber = self.currentEmployee?.phoneNumber
-                vc.isAdmin = self.currentEmployee?.role == "admin" ? true : false
+                vc.isAdmin = self.currentEmployee?.role == self.roleAdmin ? true : false
                 vc.id = self.currentEmployee?.id
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            let changePasswd = UIAlertAction(title: "Change Password", style: .default) { [weak self] (_) in
+            let changePasswd = UIAlertAction(title: Title.changePassword.rawValue, style: .default) { [weak self] (_) in
                 guard let self = self else {return}
-                self.changePassword(name: self.currentEmployee!.name)
+                self.changePassword(name: self.currentEmployee!.name ?? self.default_name)
             }
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let cancel = UIAlertAction(title: Title.cancel.rawValue, style: .cancel, handler: nil)
             
             alert.addAction(delete)
             alert.addAction(edit)
@@ -97,25 +133,25 @@ class EmployeeManagementViewController: UIViewController {
     func changePassword(name: String) {
         var password = UITextField()
         var confirm = UITextField()
-        let alert = UIAlertController(title: "Change Password for \(name)", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "\(Title.changePassword.rawValue) for \(name)", message: nil, preferredStyle: .alert)
         alert.addTextField { (uiTFpassword) in
-            uiTFpassword.placeholder = "Enter password"
+            uiTFpassword.placeholder = self.passwordPlacehold
             uiTFpassword.isSecureTextEntry = true
-            uiTFpassword.layer.cornerRadius = 100
+            uiTFpassword.layer.cornerRadius = self.passwordLayerValue
             password = uiTFpassword
         }
         alert.addTextField { (uiTFconfirm) in
-            uiTFconfirm.placeholder = "confirm Password"
+            uiTFconfirm.placeholder = self.cofirmPasswordPlacehold
             uiTFconfirm.isSecureTextEntry = true
-            uiTFconfirm.layer.cornerRadius = 100
+            uiTFconfirm.layer.cornerRadius = self.passwordLayerValue
             confirm = uiTFconfirm
         }
-        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+        let action = UIAlertAction(title: Title.ok.rawValue, style: .default) { (_) in
             if let passwordTF = password.text, let confirmTF = confirm.text {
                 let router = Router.changePassword
                 let param = [
-                    "password": "\(passwordTF)",
-                    "confirmPassword": "\(confirmTF)"
+                    self.passworParam: "\(passwordTF)",
+                    self.confirmParam: "\(confirmTF)"
                 ]
                 if let userId = self.currentEmployee?.id {
                     RequestService.shared.AFRequestChangePassWord(router: router, id: userId, params: param) { [weak self] (data, response, error) in
@@ -123,31 +159,31 @@ class EmployeeManagementViewController: UIViewController {
                         do {
                             let statusCode = response?.response?.statusCode
                             if statusCode == 200 || statusCode == 204 {
-                                self.alertResponseAPISuccess(tit: "Success", mess: "Changed password for \(userId).")
+                                self.alertResponseAPISuccess(tit: Title.success.rawValue, mess: "\(Message.changePassword.rawValue) for \(userId).")
                             } else if statusCode == 401 {
-                                self.alertResponseAPIError(tit: "ERROR", mess: "Unauthorized")
+                                self.alertResponseAPIError(tit: Title.error.rawValue, mess: Message.unauthorized.rawValue)
                             } else if statusCode == 403 {
-                                self.alertResponseAPIError(tit: "ERROR", mess: "Forbidden")
+                                self.alertResponseAPIError(tit: Title.error.rawValue, mess: Message.forbidden.rawValue)
                             } else {
                                 if let safeData = data {
                                     let json = try JSONDecoder.init().decode(ChangePasswordResponse.self, from: safeData)
                                     if let pass = json.Password, let confirm = json.ConfirmPassword {
-                                        self.alertResponseAPIError(tit: "ERROR", mess: "\(pass), \(confirm)")
+                                        self.alertResponseAPIError(tit: Title.error.rawValue, mess: "\(pass), \(confirm)")
                                     } else {
-                                        self.alertResponseAPIError(tit: "ERROR", mess: "Some thing went wrong!")
+                                        self.alertResponseAPIError(tit: Title.error.rawValue, mess: Message.oops.rawValue)
                                     }
                                     
                                 }
                             }
 
                         } catch {
-                            self.alertResponseAPIError(tit: "ERROR", mess: "Can't parse JSON")
+                            self.alertResponseAPIError(tit: Title.error.rawValue, mess: Message.errorParseJSON.rawValue)
                         }
                     }
                 }
             }
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: Title.cancel.rawValue, style: .cancel, handler: nil)
         alert.addAction(action)
         alert.addAction(cancel)
         present(alert, animated: true)
@@ -175,13 +211,13 @@ class EmployeeManagementViewController: UIViewController {
     }
     func alertResponseAPIError(tit: String, mess: String) {
         let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let action = UIAlertAction(title: Title.ok.rawValue, style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true)
     }
     func alertResponseAPISuccess(tit: String, mess: String) {
         let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
+        let action = UIAlertAction(title: Title.ok.rawValue, style: .default) { [weak self] (_) in
             guard let self = self else {return}
             self.loadEmployee(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
             self.tableView.reloadData()
@@ -230,12 +266,28 @@ extension EmployeeManagementViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EmployeeTableViewCell
-        cell.employeeImage.image = UIImage(named: "employee_example")
-        cell.employeeName.text = employees[indexPath.row].name
-        cell.employeeEmail.text = employees[indexPath.row].email
-        cell.employeePhone.text = employees[indexPath.row].phoneNumber
+        if let newImageURL = employees[indexPath.row].image {
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: URL(string: newImageURL)!) {
+                    if let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            cell.employeeImage.image = image
+                            cell.employeeImage.layer.cornerRadius = cell.employeeImage.frame.size.height / 2
+                            cell.clipsToBounds = true
+                            
+                        }
+                    }
+                }
+            }
+        } else {
+            cell.employeeImage.image = UIImage(named: "employee_example")
+            cell.employeeImage.layer.cornerRadius = cell.employeeImage.frame.size.height / 2
+            cell.clipsToBounds = true
+        }
+        cell.employeeName.text = employees[indexPath.row].name ?? "NO_NAME"
+        cell.employeePhone.text = employees[indexPath.row].phoneNumber ?? "NO_PHONE_NUMBER"
         cell.editButton.titleLabel?.text = employees[indexPath.row].id
-        
+        cell.employeeEmail.text = employees[indexPath.row].email
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

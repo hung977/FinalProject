@@ -25,12 +25,14 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
     
     //MARK: - IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var barItem: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         loadListProduct()
+        createBarItem(withNumber: "80")
         collectionView.delegate = self
         collectionView.dataSource = self
         searchBar.delegate = self
@@ -45,6 +47,32 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
         // Do any additional setup after loading the view.
     }
     // MARK: - Supporting function
+    @objc func rightButtonTouched() {
+        let vc = BadgeViewController()
+        //vc.products = listproduct
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    func createBarItem(withNumber: String) {
+        let label = UILabel(frame: CGRect(x: 23, y: -5, width: 25, height: 25))
+        label.layer.borderColor = UIColor.clear.cgColor
+        label.layer.borderWidth = 2
+        label.layer.cornerRadius = label.bounds.size.height / 2
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.font = UIFont(name: "SanFranciscoText-Light", size: 5)
+        label.textColor = .white
+        label.backgroundColor = .systemBlue
+        label.text = withNumber
+        // button
+        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
+        rightButton.setBackgroundImage(UIImage(named: "Webp.net-resizeimage-6"), for: .normal)
+        rightButton.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
+        rightButton.addSubview(label)
+        // Bar button item
+        let rightBarButtomItem = UIBarButtonItem(customView: rightButton)
+        
+        barItem.rightBarButtonItem = rightBarButtomItem
+    }
     func loadListProduct() {
         if let data = try? Data(contentsOf: dataFile!) {
             let decoder = PropertyListDecoder()
@@ -90,8 +118,19 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
     }
     func addButtonTapped(cell: SaleCollectionViewCell) {
         let indexPath = self.collectionView.indexPath(for: cell)
+        let cell = collectionView.cellForItem(at: indexPath!) as? SaleCollectionViewCell
         let product = products[indexPath!.row]
         if product.amount != 0 {
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: .transitionFlipFromLeft, animations: {
+                cell?.imageView.transform = CGAffineTransform.identity.scaledBy(x: 0.5, y: 0.5)
+            }) { (_) in
+                UIView.animate(withDuration: 0.1, delay: 0.0, options: .transitionFlipFromLeft, animations: {
+                    cell?.imageView.transform = CGAffineTransform.identity
+                }) { (_) in
+                    self.saveListProduct()
+                    self.alertAppendProduct(message: "Success")
+                }
+            }
             let item = ListProduct(name: product.name, price: product.price, amount: 1, image: product.image, id: product.id)
             if listproduct.count == 0 {
                 listproduct.append(item)
@@ -108,8 +147,6 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
                     }
                 }
             }
-            saveListProduct()
-            alertAppendProduct(message: "Success")
         } else {
             alertAppendProduct(message: "Error: Out of Stock")
         }

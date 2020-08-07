@@ -44,6 +44,71 @@
                         }
             }
         }
+        public class func callsendImageAPIEditEmployee(for id: String, param:[String: Any],arrImage:[UIImage],imageKey:String, withblock:@escaping (_ response: AFDataResponse<Data?>?, _ error:Error?)->Void){
+            
+            let bearerToken = "Bearer \(LoginViewController.token)"
+            let baseURL = "http://192.168.30.101:8081/api/users/\(id)"
+            let headers: HTTPHeaders
+            headers = ["Content-type": "multipart/form-data",
+                       "Content-Disposition" : "form-data",
+                       "Authorization" : bearerToken]
+            
+            AF.upload(multipartFormData: { (multipartFormData) in
+                
+                for (key, value) in param {
+                    multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
+                }
+                
+                for img in arrImage {
+                    guard let imgData = img.jpegData(compressionQuality: 1) else { return }
+                    multipartFormData.append(imgData, withName: imageKey, fileName: String(NSDate().timeIntervalSince1970) + ".jpeg", mimeType: "image/jpeg")
+                }
+                
+                
+            },to: baseURL, usingThreshold: UInt64.init(),
+              method: .put,
+              headers: headers).response{ response in
+                switch (response.result) {
+                case .success:
+                    withblock(response, nil)
+                case .failure(let error):
+                    withblock(nil, error)
+                }
+            }
+        }
+        public class func callsendImageAPICreateEmployee(param:[String: Any],arrImage:[UIImage],imageKey:String, completion: @escaping CompletionHandleJSON){
+            
+            let bearerToken = "Bearer \(LoginViewController.token)"
+            let baseURL = "http://192.168.30.101:8081/api/users"
+            let headers: HTTPHeaders
+            headers = ["Content-type": "multipart/form-data",
+                       "Content-Disposition" : "form-data",
+                       "Authorization" : bearerToken]
+            
+            AF.upload(multipartFormData: { (multipartFormData) in
+                
+                for (key, value) in param {
+                    multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
+                }
+                
+                for img in arrImage {
+                    guard let imgData = img.jpegData(compressionQuality: 1) else { return }
+                    multipartFormData.append(imgData, withName: imageKey, fileName: String(NSDate().timeIntervalSince1970) + ".jpeg", mimeType: "image/jpeg")
+                }
+                
+                
+            },to: baseURL, usingThreshold: UInt64.init(),
+              method: .post,
+              headers: headers).response{ response in
+                switch (response.result) {
+                case .success(let data):
+                    completion(true, data, nil)
+                case .failure(let err):
+                    completion(false, nil, err)
+                }
+            }
+        }
+        
         
         public class func callsendImageAPI(param:[String: Any],arrImage:[UIImage],imageKey:String, withblock:@escaping (_ response: AnyObject?)->Void){
             

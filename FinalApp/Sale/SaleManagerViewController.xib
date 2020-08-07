@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SaleManagerViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="barItem" destination="1j5-w7-xgZ" id="iUp-Fb-Xee"/>
                 <outlet property="collectionView" destination="diK-jf-OEw" id="tXW-dA-bLm"/>
                 <outlet property="searchBar" destination="gRR-ea-wOT" id="Dgl-VS-TtJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -27,12 +28,6 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="didTappedMenu:" destination="-1" id="7QH-Dm-OcD"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" title="Bag" image="bag_collection" id="ci2-1Q-Im5">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="bagButtonTapped:" destination="-1" id="00F-kp-zJ9"/>
                                 </connections>
                             </barButtonItem>
                         </navigationItem>
@@ -72,7 +67,6 @@
         </view>
     </objects>
     <resources>
-        <image name="bag_collection" width="35" height="35"/>
         <image name="hamburger" width="48" height="48"/>
     </resources>
 </document>

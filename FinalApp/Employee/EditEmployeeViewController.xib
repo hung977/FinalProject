@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditEmployeeViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
                 <outlet property="emailTextfield" destination="0Vq-On-bD5" id="Zzr-vA-xgD"/>
+                <outlet property="employeeImg" destination="QSL-gK-vfi" id="1yc-qq-rNM"/>
                 <outlet property="fullNameTextfield" destination="5Ob-OW-mMJ" id="LBx-dd-OoJ"/>
                 <outlet property="isAdminSwitch" destination="gO4-xH-SeH" id="Pe3-ye-hc8"/>
                 <outlet property="phoneTextfield" destination="kfd-CR-1Zh" id="mad-e4-f0h"/>
@@ -36,6 +37,11 @@
                 </navigationBar>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="employee_example" translatesAutoresizingMaskIntoConstraints="NO" id="QSL-gK-vfi">
                     <rect key="frame" x="106.5" y="108" width="201" height="201"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="201" id="hja-tp-MfU"/>
+                        <constraint firstAttribute="width" constant="201" id="j9Y-yO-AcK"/>
+                    </constraints>
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oxo-JY-Qn8">
                     <rect key="frame" x="0.0" y="389" width="414" height="507"/>
@@ -136,6 +142,16 @@
                         <constraint firstAttribute="trailing" secondItem="5VK-4h-opT" secondAttribute="trailing" id="j6S-po-FlJ"/>
                     </constraints>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dF-Vn-sEM">
+                    <rect key="frame" x="106.5" y="108" width="201" height="201"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="201" id="Udq-7b-3BM"/>
+                        <constraint firstAttribute="width" constant="201" id="gks-Ah-5l1"/>
+                    </constraints>
+                    <connections>
+                        <action selector="selectImage:" destination="-1" eventType="touchUpInside" id="6dX-zf-54W"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
@@ -146,9 +162,12 @@
                 <constraint firstAttribute="bottom" secondItem="Oxo-JY-Qn8" secondAttribute="bottom" id="RMG-z1-azE"/>
                 <constraint firstItem="zmy-PH-Bof" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="W0d-uj-dwd"/>
                 <constraint firstItem="zmy-PH-Bof" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="X4o-iC-uxz"/>
+                <constraint firstItem="Oxo-JY-Qn8" firstAttribute="top" secondItem="4dF-Vn-sEM" secondAttribute="bottom" constant="80" id="af3-ZV-Ye3"/>
                 <constraint firstItem="Oxo-JY-Qn8" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="b4H-ep-FUU"/>
                 <constraint firstItem="QSL-gK-vfi" firstAttribute="top" secondItem="zmy-PH-Bof" secondAttribute="bottom" constant="20" id="oy6-SE-Fst"/>
                 <constraint firstItem="Oxo-JY-Qn8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pkQ-1Y-ELW"/>
+                <constraint firstItem="4dF-Vn-sEM" firstAttribute="top" secondItem="zmy-PH-Bof" secondAttribute="bottom" constant="20" id="uIu-kZ-ykj"/>
+                <constraint firstItem="4dF-Vn-sEM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="v2g-hI-8Zc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>

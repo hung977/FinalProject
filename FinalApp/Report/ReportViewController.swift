@@ -101,7 +101,7 @@ class ReportViewController: UIViewController {
             dataEntries.append(dataEntry)
         }
         
-        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Revenue")
+        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Revenue ($)")
         chartDataSet.colors = [UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)]
         let chartData = BarChartData(dataSet: chartDataSet)
         barChartView.xAxis.labelCount = productName.count
@@ -111,7 +111,8 @@ class ReportViewController: UIViewController {
         barChartView.drawGridBackgroundEnabled = false
         barChartView.rightAxis.drawAxisLineEnabled = false
         barChartView.rightAxis.drawLabelsEnabled = false
-        barChartView.backgroundColor = UIColor(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
+        //barChartView.backgroundColor = UIColor(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
+        barChartView.backgroundColor = .white
         
         barChartView.xAxis.valueFormatter = axisFormatDelegate
         barChartView.animate(xAxisDuration: 0.3, yAxisDuration: 2.0)

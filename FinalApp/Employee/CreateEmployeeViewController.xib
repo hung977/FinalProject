@@ -29,8 +29,12 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="employee_example" translatesAutoresizingMaskIntoConstraints="NO" id="arG-nS-Uyy">
-                    <rect key="frame" x="106.5" y="89" width="201" height="201"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="employee_example" translatesAutoresizingMaskIntoConstraints="NO" id="arG-nS-Uyy">
+                    <rect key="frame" x="106.5" y="93" width="201" height="201"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="201" id="LdK-KN-nR7"/>
+                        <constraint firstAttribute="width" constant="201" id="buQ-cq-BuM"/>
+                    </constraints>
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tia-ft-7ef">
                     <rect key="frame" x="0.0" y="410" width="414" height="486"/>
@@ -219,18 +223,31 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsB-6v-N0J">
+                    <rect key="frame" x="106.5" y="89" width="201" height="201"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="201" id="KVe-6k-yag"/>
+                        <constraint firstAttribute="width" constant="201" id="mFG-SF-SLY"/>
+                    </constraints>
+                    <connections>
+                        <action selector="selectImage:" destination="-1" eventType="touchUpInside" id="MlT-Ro-Wo9"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Tia-ft-7ef" secondAttribute="bottom" id="9nQ-l7-hI3"/>
-                <constraint firstItem="Tia-ft-7ef" firstAttribute="top" secondItem="arG-nS-Uyy" secondAttribute="bottom" constant="120" id="AJ1-xY-RJo"/>
+                <constraint firstItem="Tia-ft-7ef" firstAttribute="top" secondItem="arG-nS-Uyy" secondAttribute="bottom" constant="116" id="AJ1-xY-RJo"/>
                 <constraint firstItem="lpP-0U-Wt8" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="RuC-Bw-2ah"/>
                 <constraint firstItem="9k4-zV-BLB" firstAttribute="top" secondItem="kYH-ja-uvU" secondAttribute="top" id="jaE-fh-k05"/>
                 <constraint firstItem="9k4-zV-BLB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="m9w-B0-k6q"/>
                 <constraint firstItem="Tia-ft-7ef" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="mGe-sd-AzX"/>
-                <constraint firstItem="arG-nS-Uyy" firstAttribute="top" secondItem="9k4-zV-BLB" secondAttribute="bottom" constant="1" id="msQ-3b-98S"/>
+                <constraint firstItem="arG-nS-Uyy" firstAttribute="top" secondItem="9k4-zV-BLB" secondAttribute="bottom" constant="5" id="msQ-3b-98S"/>
                 <constraint firstItem="9k4-zV-BLB" firstAttribute="centerX" secondItem="arG-nS-Uyy" secondAttribute="centerX" id="o7Q-D4-PdJ"/>
+                <constraint firstItem="Tia-ft-7ef" firstAttribute="top" secondItem="tsB-6v-N0J" secondAttribute="bottom" constant="120" id="oFc-Mo-zsQ"/>
                 <constraint firstItem="arG-nS-Uyy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pvV-Nv-FW6"/>
+                <constraint firstItem="tsB-6v-N0J" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="r9b-oN-axU"/>
+                <constraint firstItem="tsB-6v-N0J" firstAttribute="top" secondItem="9k4-zV-BLB" secondAttribute="bottom" constant="1" id="tgR-eI-e55"/>
                 <constraint firstItem="Tia-ft-7ef" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xsf-yf-KS6"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="kYH-ja-uvU"/>

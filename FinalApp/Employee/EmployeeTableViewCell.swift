@@ -15,6 +15,7 @@ class EmployeeTableViewCell: UITableViewCell {
     @IBOutlet weak var employeeEmail: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var employeePhone: UILabel!
+    static let name = "EmployeeTableViewCell"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
