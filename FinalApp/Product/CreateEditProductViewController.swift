@@ -125,7 +125,6 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
             let currentPrice = String(productPriceTextfield.text!)
             if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
                 let params: [String:Any] = [nameParam: currentName, priceParam: currentPrice, amountParam: currentAmout]
-                //print(params)
                 RequestService.callsendImageAPI(param: params, arrImage: [currentImage!], imageKey: imageParam) { (response) in
                 }
                 NotificationCenter.default.post(name: .didCreateProduct, object: nil)
@@ -175,6 +174,10 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         var vcCamera =  UIImagePickerController()
         vcCamera = UIImagePickerController()
         let options = UIAlertController(title: nil, message: MessageAlert.selectOptions.rawValue, preferredStyle: .actionSheet)
+        if let popoverController = options.popoverPresentationController {
+            popoverController.sourceView = sender
+            popoverController.sourceRect = sender.bounds
+        }
         let camera = UIAlertAction(title: Title.camera.rawValue, style: .default) { [weak self] (_) in
             guard let self = self else {return}
             if !UIImagePickerController.isSourceTypeAvailable(.camera) {

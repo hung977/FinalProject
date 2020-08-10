@@ -30,6 +30,10 @@ class EmployeeManagementViewController: UIViewController {
     private var passwordLayerValue: CGFloat = 100
     private var passworParam = "password"
     private var confirmParam = "confirmPassword"
+    private var defaultNameImage = "employee_example"
+    private var noName = "NO_NAME"
+    private var noPhoneNumber = "NO_PHONE_NUMBER"
+    private var heightForRow: CGFloat = 120
     private enum Title: String {
         case delete = "Delete"
         case edit = "Edit"
@@ -41,6 +45,7 @@ class EmployeeManagementViewController: UIViewController {
     }
     private enum Message: String {
         case edit = "Edit"
+        case areYouSure = "Are you sure?"
         case changePassword = "Change Password"
         case unauthorized = "Unauthorized"
         case forbidden = "Forbidden"
@@ -80,6 +85,10 @@ class EmployeeManagementViewController: UIViewController {
         }
         if currentEmployee != nil {
             let alert = UIAlertController(title: nil, message: "\(Message.edit.rawValue) \(currentEmployee?.name ?? default_name)", preferredStyle: .actionSheet)
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = sender
+                popoverController.sourceRect = sender.bounds
+            }
             let delete = UIAlertAction(title: Title.delete.rawValue, style: .default) { [weak self] (_) in
                 guard let self = self else {return}
                 self.alertDeleteProduct()
@@ -226,30 +235,30 @@ class EmployeeManagementViewController: UIViewController {
         present(alert, animated: true)
     }
     func alertDeleteProduct() {
-        let alert = UIAlertController(title: "Delete employee", message: "Are you sure?", preferredStyle: .alert)
-        let delete = UIAlertAction(title: "Delete", style: .default) { [weak self] (_) in
+        let alert = UIAlertController(title: Title.delete.rawValue, message: Message.areYouSure.rawValue, preferredStyle: .alert)
+        let delete = UIAlertAction(title: Title.delete.rawValue, style: .default) { [weak self] (_) in
             guard let self = self else {return}
             let router = Router.deleteEmployee
             RequestService.shared.request(router: router, id: (self.currentEmployee?.id)!) { [weak self] (response, error) in
                 guard let self = self else {return}
                 if let respon = response {
                     if respon.response?.statusCode == 204 || respon.response?.statusCode == 200 {
-                        self.alertResponseAPISuccess(tit: "Success", mess: "Removed \(self.currentEmployee?.name ?? "")")
+                        self.alertResponseAPISuccess(tit: Title.success.rawValue, mess: "Removed \(self.currentEmployee?.name ?? "")")
                     } else if respon.response?.statusCode == 401 {
-                        self.alertResponseAPIError(tit: "Error", mess: "Error: Unauthorized")
+                        self.alertResponseAPIError(tit: Title.error.rawValue, mess: Message.unauthorized.rawValue)
                     } else if respon.response?.statusCode == 403 {
-                        self.alertResponseAPIError(tit: "Error", mess: "Error: Forbidden")
+                        self.alertResponseAPIError(tit: Title.error.rawValue, mess: Message.forbidden.rawValue)
                     } else {
-                        self.alertResponseAPIError(tit: "Error", mess: "_SERVER_ERROR_")
+                        self.alertResponseAPIError(tit: Title.error.rawValue, mess: Message.oops.rawValue)
                     }
                 } else {
                     if let error = error {
-                        self.alertResponseAPIError(tit: "Error", mess: "_SERVER_ERROR_\(error)")
+                        self.alertResponseAPIError(tit: Title.error.rawValue, mess: "\(Message.oops.rawValue)\(error)")
                     }
                 }
             }
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let cancel = UIAlertAction(title: Title.cancel.rawValue, style: .default, handler: nil)
         alert.addAction(delete)
         alert.addAction(cancel)
         
@@ -280,12 +289,12 @@ extension EmployeeManagementViewController: UITableViewDelegate, UITableViewData
                 }
             }
         } else {
-            cell.employeeImage.image = UIImage(named: "employee_example")
+            cell.employeeImage.image = UIImage(named: defaultNameImage)
             cell.employeeImage.layer.cornerRadius = cell.employeeImage.frame.size.height / 2
             cell.clipsToBounds = true
         }
-        cell.employeeName.text = employees[indexPath.row].name ?? "NO_NAME"
-        cell.employeePhone.text = employees[indexPath.row].phoneNumber ?? "NO_PHONE_NUMBER"
+        cell.employeeName.text = employees[indexPath.row].name ?? noName
+        cell.employeePhone.text = employees[indexPath.row].phoneNumber ?? noPhoneNumber
         cell.editButton.titleLabel?.text = employees[indexPath.row].id
         cell.employeeEmail.text = employees[indexPath.row].email
         return cell
@@ -294,7 +303,7 @@ extension EmployeeManagementViewController: UITableViewDelegate, UITableViewData
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return heightForRow
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == employees.count - 1 && employees.count < totalProducts {

@@ -32,7 +32,7 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadListProduct()
-        createBarItem(withNumber: "80")
+        createBarItem(withNumber: calculateNumberProduct())
         collectionView.delegate = self
         collectionView.dataSource = self
         searchBar.delegate = self
@@ -49,10 +49,16 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
     // MARK: - Supporting function
     @objc func rightButtonTouched() {
         let vc = BadgeViewController()
-        //vc.products = listproduct
         navigationController?.pushViewController(vc, animated: true)
     }
-    func createBarItem(withNumber: String) {
+    func calculateNumberProduct() -> Int {
+        var totalItem = 0
+        for item in listproduct {
+            totalItem += item.amount
+        }
+        return totalItem
+    }
+    func createBarItem(withNumber: Int) {
         let label = UILabel(frame: CGRect(x: 23, y: -5, width: 25, height: 25))
         label.layer.borderColor = UIColor.clear.cgColor
         label.layer.borderWidth = 2
@@ -62,7 +68,7 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
         label.font = UIFont(name: "SanFranciscoText-Light", size: 5)
         label.textColor = .white
         label.backgroundColor = .systemBlue
-        label.text = withNumber
+        label.text = String(withNumber)
         // button
         let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
         rightButton.setBackgroundImage(UIImage(named: "Webp.net-resizeimage-6"), for: .normal)
@@ -118,19 +124,8 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
     }
     func addButtonTapped(cell: SaleCollectionViewCell) {
         let indexPath = self.collectionView.indexPath(for: cell)
-        let cell = collectionView.cellForItem(at: indexPath!) as? SaleCollectionViewCell
         let product = products[indexPath!.row]
         if product.amount != 0 {
-            UIView.animate(withDuration: 0.1, delay: 0.0, options: .transitionFlipFromLeft, animations: {
-                cell?.imageView.transform = CGAffineTransform.identity.scaledBy(x: 0.5, y: 0.5)
-            }) { (_) in
-                UIView.animate(withDuration: 0.1, delay: 0.0, options: .transitionFlipFromLeft, animations: {
-                    cell?.imageView.transform = CGAffineTransform.identity
-                }) { (_) in
-                    self.saveListProduct()
-                    self.alertAppendProduct(message: "Success")
-                }
-            }
             let item = ListProduct(name: product.name, price: product.price, amount: 1, image: product.image, id: product.id)
             if listproduct.count == 0 {
                 listproduct.append(item)
@@ -147,6 +142,9 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
                     }
                 }
             }
+            saveListProduct()
+            createBarItem(withNumber: calculateNumberProduct())
+            alertAppendProduct(message: "Success")
         } else {
             alertAppendProduct(message: "Error: Out of Stock")
         }

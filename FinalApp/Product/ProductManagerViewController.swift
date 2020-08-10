@@ -55,35 +55,23 @@ class ProductManagerViewController: UIViewController {
         
     }
     
-    func loadProduct(withPage: Int, withSize: Int, withString: String) {
-        DispatchQueue.main.async {
-            let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
-            let routerGetProduct = Router.getProducts
-            RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: ProductResponse.self) { [weak self] (bool, data, error) in
-                guard let self = self else {return}
-                do {
-                    let json = try JSONDecoder.init().decode(ProductResponse.self, from: data!)
-                    self.products += json.items
-                    self.totalProducts = json.totalItems
-                    self.tableView.reloadData()
-                    
-                    
-                } catch {
-                    print("error to convert \(error.localizedDescription)")
-                }
+    @objc func loadProduct(withPage: Int, withSize: Int, withString: String) {
+        
+        let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
+        let routerGetProduct = Router.getProducts
+        RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: ProductResponse.self) { [weak self] (bool, data, error) in
+            guard let self = self else {return}
+            do {
+                let json = try JSONDecoder.init().decode(ProductResponse.self, from: data!)
+                self.products += json.items
+                self.totalProducts = json.totalItems
+                self.tableView.reloadData()
+            } catch {
+                print("error to convert \(error.localizedDescription)")
             }
         }
+        
     }
-    // MARK: - IBAction
-    @objc func didUpdateProduct() {
-        loadProduct(withPage: pageIndex, withSize: pageSize, withString: "")
-    }
-    @IBAction func addProductTapped(_ sender: UIBarButtonItem) {
-        let vc = CreateEditProductViewController()
-        vc.tit = titleAdd
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
     func alertDeleteProduct(_ forProduct: Product) {
         let alert = UIAlertController(title: "\(Title.delete.rawValue) \(forProduct.name)", message: messageConfirmDelete, preferredStyle: .alert)
         let delete = UIAlertAction(title: Title.delete.rawValue, style: .default) { [weak self] (_) in
@@ -93,6 +81,13 @@ class ProductManagerViewController: UIViewController {
                 RequestService.shared.request(router: routerDeleteProduct, id: id) { [weak self] (response, error) in
                     guard let self = self else {return}
                     self.loadProduct(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
+                    for (index, _) in self.products.enumerated() {
+                        if self.products[index].id == forProduct.id {
+                            self.products.remove(at: index)
+                            self.tableView.reloadData()
+                            break
+                        }
+                    }
                 }
                 
             }
@@ -101,6 +96,15 @@ class ProductManagerViewController: UIViewController {
         alert.addAction(delete)
         alert.addAction(cancel)
         present(alert, animated: true)
+    }
+    // MARK: - IBAction
+    @objc func didUpdateProduct() {
+        loadProduct(withPage: pageIndex, withSize: pageSize, withString: "")
+    }
+    @IBAction func addProductTapped(_ sender: UIBarButtonItem) {
+        let vc = CreateEditProductViewController()
+        vc.tit = titleAdd
+        navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func didTappedMenu(_ sender: UIBarButtonItem) {
         present(menu!, animated: true)
@@ -113,6 +117,10 @@ class ProductManagerViewController: UIViewController {
         }
         if currentProduct != nil {
             let optionMenu = UIAlertController(title: nil, message: currentProduct?.name, preferredStyle: .actionSheet)
+            if let popoverController = optionMenu.popoverPresentationController {
+                popoverController.sourceView = sender
+                popoverController.sourceRect = sender.bounds
+            }
             let edit = UIAlertAction(title: Title.edit.rawValue, style: .default) { [weak self] (_) in
                 guard let self = self else {return}
                 let vc = CreateEditProductViewController()

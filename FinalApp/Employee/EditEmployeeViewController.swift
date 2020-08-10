@@ -10,6 +10,28 @@ import UIKit
 
 class EditEmployeeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var currentImage: UIImage?
+    var name: String?
+    var isSelectedImage = true
+    var email: String?
+    var phoneNumber: String?
+    var isAdmin: Bool?
+    var id: String?
+    
+    //MARK: - Contants
+    private var defaultStr = ""
+    private var layercornerRadiusVL: CGFloat = 10
+    private var employeeRole = "employee"
+     private var adminRole = "admin"
+    private var nameParam = "name"
+    private var emailParam = "email"
+    private var phoneParam = "phoneNumber"
+    private var usernameParam = "userName"
+    private var passwordParam = "password"
+    private var roleParam = "Role"
+    private var imageKey = "Image"
+    private var enterStr = "\n"
+    private var emailFormart = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
     private enum Title: String {
         case missingField = "Missing Field!"
         case ok = "OK"
@@ -17,10 +39,17 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
         case alright = "Alright"
         case photoLibrary = "Photos Library"
         case cancel = "Cancel"
+        case success = "Success"
+        case error = "Error"
     }
     private enum MessageAlert: String {
         case selectOptions = "Select options"
         case deviceNoCamera = "Device has no camera"
+        case updateEmployee = "Update employee success."
+        case forbidden = "Forbidden"
+        case serverError = "ERROR REQUEST TO SERVER"
+        case invaldPhone = "invalid Phone Number"
+        case invaldEmail = "invalid Email"
     }
     
     // MARK: -IBOutlet
@@ -30,14 +59,6 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var isAdminSwitch: UISwitch!
     @IBOutlet weak var phoneTextfield: UITextField!
-    
-    var currentImage: UIImage?
-    var name: String?
-    var isSelectedImage = true
-    var email: String?
-    var phoneNumber: String?
-    var isAdmin: Bool?
-    var id: String?
     
     //MARK: - Life cycle
     override func viewDidLoad() {
@@ -65,10 +86,10 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
         }
     }
     func isValidEmailAddress(emailAddressString: String) -> Bool {
-        if emailAddressString == "" { return true }
+        if emailAddressString == defaultStr { return true }
         
         var returnValue = true
-        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
+        let emailRegEx = emailFormart
         
         do {
             let regex = try NSRegularExpression(pattern: emailRegEx)
@@ -88,7 +109,7 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
         return  returnValue
     }
     func checkNumber(str: String) -> Bool {
-        if str == "" {
+        if str == defaultStr {
             return true
         }
         let num = Int(str)
@@ -97,7 +118,7 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
     func updateUI() {
         employeeImg.layer.cornerRadius = employeeImg.frame.size.height / 2
         employeeImg.layer.masksToBounds = true
-        saveBtn.layer.cornerRadius = 10
+        saveBtn.layer.cornerRadius = layercornerRadiusVL
         saveBtn.backgroundColor = .systemBlue
         saveBtn.setTitleColor(.white, for: .normal)
         fullNameTextfield.text = name
@@ -116,13 +137,13 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
     }
     func alertResponse(tit: String, mess: String) {
         let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let action = UIAlertAction(title: Title.ok.rawValue, style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true)
     }
     func alertCompletion(mess: String) {
-        let alert = UIAlertController(title: "Success", message: mess, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
+        let alert = UIAlertController(title: Title.success.rawValue, message: mess, preferredStyle: .alert)
+        let action = UIAlertAction(title: Title.ok.rawValue, style: .default) { [weak self] (_) in
             guard let self = self else {return}
             let vc = EmployeeManagementViewController()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -140,6 +161,10 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
         var vcCamera =  UIImagePickerController()
         vcCamera = UIImagePickerController()
         let options = UIAlertController(title: nil, message: MessageAlert.selectOptions.rawValue, preferredStyle: .actionSheet)
+        if let popoverController = options.popoverPresentationController {
+                   popoverController.sourceView = sender
+                   popoverController.sourceRect = sender.bounds
+               }
         let camera = UIAlertAction(title: Title.camera.rawValue, style: .default) { [weak self] (_) in
             guard let self = self else {return}
             if !UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -170,42 +195,42 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
         let name = fullNameTextfield.text!
         let email = emailTextfield.text!
         let phone = phoneTextfield.text!
-        var isAd = "employee"
+        var isAd = employeeRole
         currentImage = employeeImg.image
-        if isAdmin! {isAd = "admin"}
+        if isAdmin! {isAd = adminRole}
         let param = [
-            "name":"\(name)",
-            "email":"\(email)",
-            "phoneNumber":"\(phone)",
-            "Role":"\(isAd)"
+            nameParam : name,
+            emailParam : email,
+            phoneParam : phone,
+            roleParam : isAd
         ]
         if isValidEmailAddress(emailAddressString: email) {
             if checkNumber(str: phone) {
-                RequestService.callsendImageAPIEditEmployee(for: id!, param: param, arrImage: [currentImage!], imageKey: "Image") { [weak self] (response , error) in
+                RequestService.callsendImageAPIEditEmployee(for: id!, param: param, arrImage: [currentImage!], imageKey: imageKey) { [weak self] (response , error) in
                     guard let self = self else {return}
                     if let respon = response {
                         if let statusCode = respon.response?.statusCode {
                             if statusCode == 204 || statusCode == 200 {
-                                self.alertCompletion(mess: "Update employee success.")
+                                self.alertCompletion(mess: MessageAlert.updateEmployee.rawValue)
                             } else if statusCode == 403 {
-                                self.alertResponse(tit: "Error", mess: "Forbidden")
+                                self.alertResponse(tit: Title.error.rawValue, mess: MessageAlert.forbidden.rawValue)
                             } else {
-                                self.alertResponse(tit: "Error", mess: "ERROR REQUEST TO SERVER")
+                                self.alertResponse(tit: Title.error.rawValue, mess: MessageAlert.serverError.rawValue)
                             }
                         }
                     } else {
                         if let err = error {
-                            self.alertResponse(tit: "Error", mess: "\(err.localizedDescription)")
+                            self.alertResponse(tit: Title.error.rawValue, mess: "\(err.localizedDescription)")
                         }
                     }
                 }
                 
             } else {
-                alertResponse(tit: "Error", mess: "invalid Phone Number")
+                alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldPhone.rawValue)
             }
             
         } else {
-            alertResponse(tit: "Error", mess: "invalid Email")
+            alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldEmail.rawValue)
         }
     }
     @IBAction func isAdminSwitchChanged(_ sender: UISwitch) {

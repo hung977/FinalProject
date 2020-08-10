@@ -13,8 +13,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         let vc = ProductManagerViewController()
         navigationController?.pushViewController(vc, animated: true)
-        
-        
     }
 
 }
