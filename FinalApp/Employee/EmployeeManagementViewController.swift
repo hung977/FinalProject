@@ -240,6 +240,8 @@ class EmployeeManagementViewController: UIViewController {
             guard let self = self else {return}
             let router = Router.deleteEmployee
             RequestService.shared.request(router: router, id: (self.currentEmployee?.id)!) { [weak self] (response, error) in
+                self!.employees = []
+                self!.loadEmployee(withPage: 1, withSize: 20, withString: "")
                 guard let self = self else {return}
                 if let respon = response {
                     if respon.response?.statusCode == 204 || respon.response?.statusCode == 200 {
@@ -257,6 +259,7 @@ class EmployeeManagementViewController: UIViewController {
                     }
                 }
             }
+            
         }
         let cancel = UIAlertAction(title: Title.cancel.rawValue, style: .default, handler: nil)
         alert.addAction(delete)

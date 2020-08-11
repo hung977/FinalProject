@@ -42,6 +42,8 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         case alright = "Alright"
         case photoLibrary = "Photos Library"
         case cancel = "Cancel"
+        case error = "Error"
+        case success = "Success"
     }
     private enum MessageAlert: String {
         case selectOptions = "Select options"
@@ -125,11 +127,24 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
             let currentPrice = String(productPriceTextfield.text!)
             if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
                 let params: [String:Any] = [nameParam: currentName, priceParam: currentPrice, amountParam: currentAmout]
-                RequestService.callsendImageAPI(param: params, arrImage: [currentImage!], imageKey: imageParam) { (response) in
+                RequestService.callsendImageAPI(param: params, arrImage: [currentImage!], imageKey: imageParam) { (response, data, error) in
+                    if let err = error {
+                        self.alertAPI(tit: Title.error.rawValue, mess: "\(err.localizedDescription)")
+                    } else {
+                        if let status = response?.response?.statusCode {
+                            if status == 200 {
+                                self.alertAPISuccess(tit: Title.success.rawValue, mess: "")
+                                
+                            }
+                            else {
+                                if let safeData = data {
+                                    self.alertAPI(tit: Title.error.rawValue, mess: "\(status): \(String(data: safeData, encoding: .utf8) ?? "Something went wrong.")")
+                                }
+                            }
+                        }
+                    }
+                    
                 }
-                NotificationCenter.default.post(name: .didCreateProduct, object: nil)
-                let vc = ProductManagerViewController()
-                navigationController?.pushViewController(vc, animated: true)
             } else {
                 var message = ""
                 if currentName == "" {
@@ -155,13 +170,43 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
             let currentPrice = String(productPriceTextfield.text!)
             if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
                 let params: [String:Any] = [nameParam: currentName, priceParam: currentPrice, amountParam: currentAmout]
-                RequestService.callsendImageAPIEditProduct(for: productId!, param: params, arrImage: [currentImage!], imageKey: imageParam) { (response) in
+                RequestService.callsendImageAPIEditProduct(for: productId!, param: params, arrImage: [currentImage!], imageKey: imageParam) { (response, data, error) in
+                    if let err = error {
+                        self.alertAPI(tit: Title.error.rawValue, mess: "\(err.localizedDescription)")
+                    } else {
+                        if let status = response?.response?.statusCode {
+                            if status == 200 {
+                                self.alertAPISuccess(tit: Title.success.rawValue, mess: "")
+                            }
+                            else {
+                                if let safeData = data {
+                                    self.alertAPI(tit: Title.error.rawValue, mess: "\(status): \(String(data: safeData, encoding: .utf8) ?? "Something went wrong.")")
+                                }
+                            }
+                        }
+                    }
                 }
-                NotificationCenter.default.post(name: .didUpdateProduct, object: nil)
-                let vc = ProductManagerViewController()
-                navigationController?.pushViewController(vc, animated: true)
+                
             }
         }
+    }
+    func alertAPI(tit: String, mess: String) {
+        let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
+        let action = UIAlertAction(title: Title.ok.rawValue, style: .cancel) { (_) in
+            //self.hideKeyboard()
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+    func alertAPISuccess(tit: String, mess: String) {
+        let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
+        let action = UIAlertAction(title: Title.ok.rawValue, style: .cancel) { (_) in
+            NotificationCenter.default.post(name: .didUpdateProduct, object: nil)
+            let vc = ProductManagerViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
     }
     func notNil(name: String, amount: String, price: String, isImage: Bool) -> Bool {
         if (name == "" || amount == "" || price == "" || isImage == false ) {

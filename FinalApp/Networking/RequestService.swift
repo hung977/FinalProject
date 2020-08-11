@@ -110,7 +110,7 @@
         }
         
         
-        public class func callsendImageAPI(param:[String: Any],arrImage:[UIImage],imageKey:String, withblock:@escaping (_ response: AnyObject?)->Void){
+        public class func callsendImageAPI(param:[String: Any],arrImage:[UIImage],imageKey:String, withblock:@escaping (_ response: AFDataResponse<Data?>?, _ data:Data?, _ error: Error?)->Void){
             
             let bearerToken = "Bearer \(LoginViewController.token)"
             let baseURL = "http://192.168.30.101:8081/api/products"
@@ -134,23 +134,16 @@
             },to: baseURL, usingThreshold: UInt64.init(),
               method: .post,
               headers: headers).response{ response in
-                
-                if(response.error == nil){
-                    do{
-                        if let jsonData = response.data{
-                            let parsedData = try JSONSerialization.jsonObject(with: jsonData) as! Dictionary<String, AnyObject>
-                            print(parsedData)
-                        }
-                    }catch{
-                        print("error message")
-                    }
-                }else{
-                    print(response.error?.localizedDescription ?? "___error___")
+                switch (response.result) {
+                case .success(let data):
+                    withblock(response, data, nil)
+                case .failure(let error):
+                    withblock(response, nil, error)
                 }
             }
         }
         
-        public class func callsendImageAPIEditProduct(for id: String, param:[String: Any],arrImage:[UIImage],imageKey:String, withblock:@escaping (_ response: AnyObject?)->Void){
+        public class func callsendImageAPIEditProduct(for id: String, param:[String: Any],arrImage:[UIImage],imageKey:String, withblock:@escaping (_ response: AFDataResponse<Data?>?, _ data:Data?, _ error: Error?)->Void){
             
             let bearerToken = "Bearer \(LoginViewController.token)"
             let baseURL = "http://192.168.30.101:8081/api/products/\(id)"
@@ -174,18 +167,11 @@
             },to: baseURL, usingThreshold: UInt64.init(),
               method: .put,
               headers: headers).response{ response in
-                
-                if(response.error == nil){
-                    do{
-                        if let jsonData = response.data{
-                            let parsedData = try JSONSerialization.jsonObject(with: jsonData) as! Dictionary<String, AnyObject>
-                            print(parsedData)
-                        }
-                    }catch{
-                        print("error message")
-                    }
-                }else{
-                    print(response.error?.localizedDescription ?? "___error___")
+                switch (response.result) {
+                case .success(let data):
+                    withblock(response, data, nil)
+                case .failure(let error):
+                    withblock(response, nil, error)
                 }
             }
         }

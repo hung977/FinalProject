@@ -95,9 +95,18 @@ class BadgeViewController: UIViewController, MyBadgeCellDelegate {
             }
             saveListProduct()
             loadListProduct()
+            NotificationCenter.default.post(name: Notification.Name("didUpdateNumberCart"), object: totalItem())
             updateUI()
             tableView.reloadData()
         }
+    }
+    func totalItem() -> Int {
+        var total = 0
+        loadListProduct()
+        for item in products {
+            total += item.amount
+        }
+        return total
     }
     func alertResponse(tit: String, mess: String) {
         let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
@@ -115,6 +124,13 @@ class BadgeViewController: UIViewController, MyBadgeCellDelegate {
         alert.addAction(actio)
         present(alert, animated: true)
     }
+    func alertResponseErr(tit: String, mess: String) {
+        let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
+        let actio = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(actio)
+        present(alert, animated: true)
+    }
+    
     
     
     //MARK: - IBAction
@@ -172,25 +188,25 @@ class BadgeViewController: UIViewController, MyBadgeCellDelegate {
             guard let self = self else {return}
             if let respon = response {
                 if respon.response?.statusCode == 200 {
-                    self.alertResponse(tit: "Success", mess: "Payment complete: ($\(self.totalPrice)")
+                    self.alertResponse(tit: "Payment complete", mess: "You payed: ($\(self.totalPrice))")
                 } else if respon.response?.statusCode == 400 {
                     if let data = data {
                         do {
                             let json = try JSONDecoder.init().decode(PostReceiptResponse.self, from: data)
                             for (key, value) in self.dirError {
                                 if key == json.code {
-                                    self.alertResponse(tit: "Error", mess: value)
+                                    self.alertResponseErr(tit: "Error", mess: value)
                                 }
                             }
                             
                         } catch {
-                            self.alertResponse(tit: "Oops!", mess: "Something went wrong :<")
+                            self.alertResponseErr(tit: "Oops!", mess: "Something went wrong :<")
                         }
                     } else {
-                        self.alertResponse(tit: "Oops!", mess: "Something went wrong :<")
+                        self.alertResponseErr(tit: "Oops!", mess: "Something went wrong :<")
                     }
                 } else {
-                    self.alertResponse(tit: "Oops!", mess: "Something went wrong :<")
+                    self.alertResponseErr(tit: "Oops!", mess: "Something went wrong :<")
                 }
             }
         }

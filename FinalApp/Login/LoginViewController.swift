@@ -91,17 +91,23 @@ class LoginViewController: UIViewController {
           }, completion: nil)
         UIView.animate(withDuration: timeWithDurationForLogo, delay: timeDelayForLogo, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.imageview.transform = CGAffineTransform.identity.scaledBy(x: self.logoScaleValue, y: self.logoScaleValue)
-            self.loginBtn.transform = CGAffineTransform.identity.scaledBy(x: self.buttonScaleValue, y: self.buttonScaleValue)
          }) { [weak self] (finished) in
             guard let self = self else {return}
             UIView.animate(withDuration: self.timeWithDurationForLogo, animations: {
               self.imageview.transform = CGAffineTransform.identity
-              self.loginBtn.transform = CGAffineTransform.identity
            })
         }
     }
     //MARK: - IBAction
     @IBAction func loginButtonTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.loginBtn.transform = CGAffineTransform.identity.scaledBy(x: self.buttonScaleValue, y: self.buttonScaleValue)
+         }) { [weak self] (finished) in
+            guard let self = self else {return}
+            UIView.animate(withDuration: 0.2, animations: {
+              self.loginBtn.transform = CGAffineTransform.identity
+           })
+        }
         hideKeyboard()
         activityLoad(state: true)
         if let userTF = usernameTextField.text, let passTF = passwordTextField.text {

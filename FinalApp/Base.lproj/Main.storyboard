@@ -60,7 +60,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ehb-Hj-Bbu">
-                                <rect key="frame" x="20" y="278" width="374" height="564"/>
+                                <rect key="frame" x="20" y="278" width="374" height="248"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfo-oa-Dkm">
                                         <rect key="frame" x="20" y="8" width="334" height="30"/>
@@ -128,7 +128,6 @@
                                     <constraint firstItem="FPY-ar-MzD" firstAttribute="centerY" secondItem="llT-ma-n8h" secondAttribute="centerY" id="Kwd-q5-lYO"/>
                                     <constraint firstAttribute="trailing" secondItem="mjQ-MC-Zol" secondAttribute="trailing" constant="20" id="L9T-LD-xNl"/>
                                     <constraint firstItem="Hfo-oa-Dkm" firstAttribute="top" secondItem="Ehb-Hj-Bbu" secondAttribute="top" constant="8" id="OEt-fh-MoF"/>
-                                    <constraint firstAttribute="height" constant="564" id="QBs-bX-WNo"/>
                                     <constraint firstItem="llT-ma-n8h" firstAttribute="leading" secondItem="Ehb-Hj-Bbu" secondAttribute="leading" constant="20" id="QYe-09-mcH"/>
                                     <constraint firstItem="2Rb-up-mly" firstAttribute="top" secondItem="Hfo-oa-Dkm" secondAttribute="bottom" id="R6u-h5-zUk"/>
                                     <constraint firstAttribute="trailing" secondItem="Uyv-EX-HwQ" secondAttribute="trailing" constant="20" id="RDI-RW-uMP"/>
@@ -138,6 +137,7 @@
                                     <constraint firstItem="Uyv-EX-HwQ" firstAttribute="leading" secondItem="Ehb-Hj-Bbu" secondAttribute="leading" constant="20" id="ZdR-8y-x2u"/>
                                     <constraint firstItem="Uyv-EX-HwQ" firstAttribute="top" secondItem="2Rb-up-mly" secondAttribute="bottom" constant="20" id="cYe-vr-wbH"/>
                                     <constraint firstItem="mjQ-MC-Zol" firstAttribute="top" secondItem="Uyv-EX-HwQ" secondAttribute="bottom" id="kPX-OC-sFc"/>
+                                    <constraint firstAttribute="height" constant="248" id="p3I-iz-EwK"/>
                                     <constraint firstItem="mjQ-MC-Zol" firstAttribute="leading" secondItem="Ehb-Hj-Bbu" secondAttribute="leading" constant="20" id="xJG-iV-Ca7"/>
                                     <constraint firstItem="FPY-ar-MzD" firstAttribute="centerX" secondItem="Ehb-Hj-Bbu" secondAttribute="centerX" id="zsc-LK-ZhT"/>
                                 </constraints>
@@ -146,11 +146,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="wAP-hi-B7Y" firstAttribute="leading" secondItem="mL1-u8-Lvd" secondAttribute="leading" constant="20" id="0bH-Ar-J9x"/>
-                            <constraint firstItem="mL1-u8-Lvd" firstAttribute="bottom" secondItem="Ehb-Hj-Bbu" secondAttribute="bottom" constant="20" id="KSo-eK-h4a"/>
                             <constraint firstItem="Ehb-Hj-Bbu" firstAttribute="leading" secondItem="mL1-u8-Lvd" secondAttribute="leading" constant="20" id="VQw-ty-2fV"/>
                             <constraint firstItem="mL1-u8-Lvd" firstAttribute="trailing" secondItem="Ehb-Hj-Bbu" secondAttribute="trailing" constant="20" id="ZiA-wf-0LH"/>
                             <constraint firstItem="mL1-u8-Lvd" firstAttribute="trailing" secondItem="wAP-hi-B7Y" secondAttribute="trailing" constant="20" id="ezz-rh-DPw"/>
                             <constraint firstItem="wAP-hi-B7Y" firstAttribute="top" secondItem="mL1-u8-Lvd" secondAttribute="top" constant="34" id="sEY-5A-qBp"/>
+                            <constraint firstItem="Ehb-Hj-Bbu" firstAttribute="top" secondItem="wAP-hi-B7Y" secondAttribute="bottom" id="zWi-8O-wRd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mL1-u8-Lvd"/>
                     </view>
@@ -171,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ceh-zH-YCO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="242" y="-78"/>
+            <point key="canvasLocation" x="240.57971014492756" y="-78.348214285714278"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ahi-77-uSU">

@@ -46,7 +46,6 @@ class ProductManagerViewController: UIViewController {
         searchBar.delegate = self
         navigationController?.isNavigationBarHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(didUpdateProduct), name: .didUpdateProduct, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateProduct), name: .didCreateProduct, object: nil)
         
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
@@ -79,15 +78,8 @@ class ProductManagerViewController: UIViewController {
             let routerDeleteProduct = Router.deleteProducts
             if let id = self.currentProduct?.id {
                 RequestService.shared.request(router: routerDeleteProduct, id: id) { [weak self] (response, error) in
-                    guard let self = self else {return}
-                    self.loadProduct(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
-                    for (index, _) in self.products.enumerated() {
-                        if self.products[index].id == forProduct.id {
-                            self.products.remove(at: index)
-                            self.tableView.reloadData()
-                            break
-                        }
-                    }
+                    self!.products = []
+                    self?.loadProduct(withPage: 1, withSize: 20, withString: "")
                 }
                 
             }

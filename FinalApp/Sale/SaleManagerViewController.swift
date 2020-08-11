@@ -43,16 +43,24 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
         menu?.leftSide = true
         menu?.menuWidth = 300
         SideMenuManager.default.leftMenuNavigationController = menu
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateNumberCart(notification:)), name: Notification.Name("didUpdateNumberCart"), object: nil)
         
         // Do any additional setup after loading the view.
     }
     // MARK: - Supporting function
+    @objc func didUpdateNumberCart(notification: Notification) {
+        if let number = notification.object as? Int {
+            createBarItem(withNumber: number)
+        }
+    }
+    
     @objc func rightButtonTouched() {
         let vc = BadgeViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     func calculateNumberProduct() -> Int {
         var totalItem = 0
+        loadListProduct()
         for item in listproduct {
             totalItem += item.amount
         }
