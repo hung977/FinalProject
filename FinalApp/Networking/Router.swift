@@ -22,6 +22,8 @@ enum Router {
     case postSaleReceipt
     case changePassword
     case getReport
+    case getDistributor
+    case editDistributor
     
     var baseURL: String {
         return "http://192.168.30.101:8081"
@@ -38,6 +40,8 @@ enum Router {
             return "\(baseURL)/api/SaleReceipts"
         case .getReport:
             return "\(baseURL)/api/Reports"
+        case .getDistributor, .editDistributor:
+            return "\(baseURL)/api/distributors"
         }
     }
     
@@ -45,11 +49,11 @@ enum Router {
         switch self {
         case .login, .newProducts, .createEmployee, .postSaleReceipt:
             return .post
-        case .getProducts, .getEmployee, .getReport:
+        case .getProducts, .getEmployee, .getReport, .getDistributor:
             return .get
         case .deleteProducts, .deleteEmployee:
             return .delete
-        case .editEmployee, .changePassword:
+        case .editEmployee, .changePassword, .editDistributor:
             return .put
         }
     }
@@ -60,9 +64,9 @@ enum Router {
         switch self {
         case .login:
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "application/json; charset=utf-8"), HTTPHeader(name: "Accept", value: "*/*")])
-        case .getProducts, .getEmployee:
+        case .getProducts, .getEmployee, .getDistributor:
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "application/json; charset=utf-8"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
-        case .newProducts:
+        case .newProducts, .editDistributor:
             return HTTPHeaders([HTTPHeader(name: "Content-Type", value: "multipart/form-data"), HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])
         case .deleteProducts, .deleteEmployee, .getReport:
             return HTTPHeaders([HTTPHeader(name: "Accept", value: "*/*"), HTTPHeader(name: "Authorization", value: bearerToken)])

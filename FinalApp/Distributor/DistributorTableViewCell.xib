@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="73" id="KGk-i7-Jjw" customClass="DistributorTableViewCell" customModule="FinalApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61C-Tt-0rI">
+                        <rect key="frame" x="10" y="10" width="290" height="16"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                        <color key="textColor" red="0.4992517829" green="0.49932694439999997" blue="0.49923533199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3We-nS-2MC">
+                        <rect key="frame" x="10" y="36" width="290" height="17"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHC-iT-0vt">
+                        <rect key="frame" x="280" y="3" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="Cub-77-sqL"/>
+                            <constraint firstAttribute="height" constant="30" id="xxH-05-RlF"/>
+                        </constraints>
+                        <state key="normal" image="ellipsis">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="editBtnTapped:" destination="-1" eventType="touchUpInside" id="54N-uh-FQ0"/>
+                            <action selector="editBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Sfl-97-tQv"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="qHC-iT-0vt" firstAttribute="centerY" secondItem="61C-Tt-0rI" secondAttribute="centerY" id="B78-Zu-Xkf"/>
+                    <constraint firstAttribute="trailing" secondItem="61C-Tt-0rI" secondAttribute="trailing" constant="20" id="PL7-D3-YPf"/>
+                    <constraint firstAttribute="bottom" secondItem="3We-nS-2MC" secondAttribute="bottom" constant="20" id="XwN-Ei-EGD"/>
+                    <constraint firstAttribute="trailing" secondItem="qHC-iT-0vt" secondAttribute="trailing" constant="10" id="d2N-bF-NKo"/>
+                    <constraint firstItem="61C-Tt-0rI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="g3b-tg-KbU"/>
+                    <constraint firstAttribute="trailing" secondItem="3We-nS-2MC" secondAttribute="trailing" constant="20" id="mCg-zR-nj2"/>
+                    <constraint firstItem="3We-nS-2MC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="sXt-9z-gan"/>
+                    <constraint firstItem="3We-nS-2MC" firstAttribute="top" secondItem="61C-Tt-0rI" secondAttribute="bottom" constant="10" id="xbJ-09-nya"/>
+                    <constraint firstItem="61C-Tt-0rI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="y3V-TI-asu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="addressLabel" destination="3We-nS-2MC" id="Ecr-at-Xqr"/>
+                <outlet property="nameLabel" destination="61C-Tt-0rI" id="3Gi-kC-qgZ"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="153.68303571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ellipsis" width="96" height="96"/>
+    </resources>
+</document>

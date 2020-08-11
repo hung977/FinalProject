@@ -34,6 +34,14 @@
 		BA4EE62724C56A470014F878 /* CreateEditProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62524C56A470014F878 /* CreateEditProductViewController.xib */; };
 		BA4EE62A24C57B190014F878 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EE62824C57B190014F878 /* EmployeeTableViewCell.swift */; };
 		BA4EE62B24C57B190014F878 /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */; };
+		BA64495724E2A6B1001EC8F5 /* DistributorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA64495524E2A6B1001EC8F5 /* DistributorViewController.swift */; };
+		BA64495824E2A6B1001EC8F5 /* DistributorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA64495624E2A6B1001EC8F5 /* DistributorViewController.xib */; };
+		BA64495B24E2A894001EC8F5 /* DistributorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA64495924E2A894001EC8F5 /* DistributorTableViewCell.swift */; };
+		BA64495C24E2A894001EC8F5 /* DistributorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA64495A24E2A894001EC8F5 /* DistributorTableViewCell.xib */; };
+		BA64495E24E2ABBC001EC8F5 /* DistributorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA64495D24E2ABBC001EC8F5 /* DistributorResponse.swift */; };
+		BA64496024E2ABE1001EC8F5 /* Distributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA64495F24E2ABE1001EC8F5 /* Distributor.swift */; };
+		BA64496324E2B483001EC8F5 /* EditDistributorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA64496124E2B483001EC8F5 /* EditDistributorViewController.swift */; };
+		BA64496424E2B483001EC8F5 /* EditDistributorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA64496224E2B483001EC8F5 /* EditDistributorViewController.xib */; };
 		BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */; };
 		BA6A152E24C551C500F0CF9D /* SaleManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */; };
 		BA79DE2124D0189700CC5686 /* CreateEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA79DE2024D0189700CC5686 /* CreateEmployee.swift */; };
@@ -91,6 +99,14 @@
 		BA4EE62524C56A470014F878 /* CreateEditProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateEditProductViewController.xib; sourceTree = "<group>"; };
 		BA4EE62824C57B190014F878 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
 		BA4EE62924C57B190014F878 /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
+		BA64495524E2A6B1001EC8F5 /* DistributorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributorViewController.swift; sourceTree = "<group>"; };
+		BA64495624E2A6B1001EC8F5 /* DistributorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistributorViewController.xib; sourceTree = "<group>"; };
+		BA64495924E2A894001EC8F5 /* DistributorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributorTableViewCell.swift; sourceTree = "<group>"; };
+		BA64495A24E2A894001EC8F5 /* DistributorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistributorTableViewCell.xib; sourceTree = "<group>"; };
+		BA64495D24E2ABBC001EC8F5 /* DistributorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributorResponse.swift; sourceTree = "<group>"; };
+		BA64495F24E2ABE1001EC8F5 /* Distributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Distributor.swift; sourceTree = "<group>"; };
+		BA64496124E2B483001EC8F5 /* EditDistributorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDistributorViewController.swift; sourceTree = "<group>"; };
+		BA64496224E2B483001EC8F5 /* EditDistributorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditDistributorViewController.xib; sourceTree = "<group>"; };
 		BA6A152B24C551C500F0CF9D /* SaleManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleManagerViewController.swift; sourceTree = "<group>"; };
 		BA6A152C24C551C500F0CF9D /* SaleManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleManagerViewController.xib; sourceTree = "<group>"; };
 		BA79DE2024D0189700CC5686 /* CreateEmployee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEmployee.swift; sourceTree = "<group>"; };
@@ -180,6 +196,7 @@
 				BA7B8FFB24CEE4DF005F9511 /* Login */,
 				BA2FAA1124C5408900BC23DF /* Product */,
 				BADBD74E24C544A200502FDC /* Employee */,
+				BA64495424E2A642001EC8F5 /* Distributor */,
 				BA6A152F24C551C800F0CF9D /* Sale */,
 				BA3D95D824C5531E00D4BFEA /* Report */,
 			);
@@ -239,6 +256,19 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		BA64495424E2A642001EC8F5 /* Distributor */ = {
+			isa = PBXGroup;
+			children = (
+				BA64495524E2A6B1001EC8F5 /* DistributorViewController.swift */,
+				BA64495624E2A6B1001EC8F5 /* DistributorViewController.xib */,
+				BA64495924E2A894001EC8F5 /* DistributorTableViewCell.swift */,
+				BA64495A24E2A894001EC8F5 /* DistributorTableViewCell.xib */,
+				BA64496124E2B483001EC8F5 /* EditDistributorViewController.swift */,
+				BA64496224E2B483001EC8F5 /* EditDistributorViewController.xib */,
+			);
+			path = Distributor;
+			sourceTree = "<group>";
+		};
 		BA6A152F24C551C800F0CF9D /* Sale */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +294,7 @@
 				BAEDF04E24D17F5000056669 /* PostReceiptResponse.swift */,
 				BAEDF05024D1939A00056669 /* ChangePasswordResponse.swift */,
 				BA2899F224D3C968008EC394 /* ReportResponse.swift */,
+				BA64495D24E2ABBC001EC8F5 /* DistributorResponse.swift */,
 			);
 			path = APIResponse;
 			sourceTree = "<group>";
@@ -275,6 +306,7 @@
 				BA7B8FF024CEB5CF005F9511 /* Product.swift */,
 				BA7B8FF524CEE38F005F9511 /* Employee.swift */,
 				BAEDF04C24D14A2200056669 /* ListProduct.swift */,
+				BA64495F24E2ABE1001EC8F5 /* Distributor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -381,9 +413,12 @@
 			files = (
 				BA2FAA1024C53FCB00BC23DF /* ProductManagerViewController.xib in Resources */,
 				BAA6B80624C5828600F2241F /* CreateEmployeeViewController.xib in Resources */,
+				BA64496424E2B483001EC8F5 /* EditDistributorViewController.xib in Resources */,
 				BAA6B80A24C5892500F2241F /* EditEmployeeViewController.xib in Resources */,
 				BADBD74D24C5449B00502FDC /* EmployeeManagementViewController.xib in Resources */,
+				BA64495824E2A6B1001EC8F5 /* DistributorViewController.xib in Resources */,
 				BA83FB3B24C5AA5B0054B203 /* BadgeTableViewCell.xib in Resources */,
+				BA64495C24E2A894001EC8F5 /* DistributorTableViewCell.xib in Resources */,
 				BA2FAA0324C52D1000BC23DF /* MenuTableViewController.xib in Resources */,
 				BA2FA9F524C529FA00BC23DF /* LaunchScreen.storyboard in Resources */,
 				BA2FA9F224C529FA00BC23DF /* Assets.xcassets in Resources */,
@@ -450,12 +485,15 @@
 			files = (
 				BA38ECA324C94A9F00C4414F /* Router.swift in Sources */,
 				BA7B8FEF24CE7150005F9511 /* EmployeeResponse.swift in Sources */,
+				BA64496324E2B483001EC8F5 /* EditDistributorViewController.swift in Sources */,
 				BA2FAA0224C52D1000BC23DF /* MenuTableViewController.swift in Sources */,
 				BA2FA9ED24C529F900BC23DF /* HomeViewController.swift in Sources */,
 				BAA6B80524C5828600F2241F /* CreateEmployeeViewController.swift in Sources */,
 				BAA6B80D24C5987000F2241F /* SaleCollectionViewCell.swift in Sources */,
+				BA64495E24E2ABBC001EC8F5 /* DistributorResponse.swift in Sources */,
 				BA83FB3D24C5B5370054B203 /* LoginViewController.swift in Sources */,
 				BA79DE2124D0189700CC5686 /* CreateEmployee.swift in Sources */,
+				BA64495724E2A6B1001EC8F5 /* DistributorViewController.swift in Sources */,
 				BA83FB3624C5A9130054B203 /* BadgeViewController.swift in Sources */,
 				BA2FA9E924C529F900BC23DF /* AppDelegate.swift in Sources */,
 				BA7B8FF624CEE38F005F9511 /* Employee.swift in Sources */,
@@ -463,8 +501,10 @@
 				BA38ECA124C9458C00C4414F /* RequestService.swift in Sources */,
 				BA2FAA0F24C53FCB00BC23DF /* ProductManagerViewController.swift in Sources */,
 				BA2FA9EB24C529F900BC23DF /* SceneDelegate.swift in Sources */,
+				BA64496024E2ABE1001EC8F5 /* Distributor.swift in Sources */,
 				BA2899F524D3EB91008EC394 /* NetworkManager.swift in Sources */,
 				BAA6B80924C5892500F2241F /* EditEmployeeViewController.swift in Sources */,
+				BA64495B24E2A894001EC8F5 /* DistributorTableViewCell.swift in Sources */,
 				BADBD74C24C5449B00502FDC /* EmployeeManagementViewController.swift in Sources */,
 				BA7B8FF824CEE3C8005F9511 /* ProductResponse.swift in Sources */,
 				BA4EE62624C56A470014F878 /* CreateEditProductViewController.swift in Sources */,

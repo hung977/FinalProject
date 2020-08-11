@@ -13,6 +13,8 @@ class MenuTableViewController: UITableViewController {
     var items: [ItemMenu] = [
         ItemMenu(lable: MenuName.product.rawValue, image: MenuImage.product.rawValue),
         ItemMenu(lable: MenuName.employee.rawValue, image: MenuImage.employee.rawValue),
+        ItemMenu(lable: MenuName.distributor.rawValue, image: MenuImage.distributor.rawValue),
+        ItemMenu(lable: MenuName.importReceipt.rawValue, image: MenuImage.importReceipt.rawValue),
         ItemMenu(lable: MenuName.sale.rawValue, image: MenuImage.sale.rawValue),
         ItemMenu(lable: MenuName.report.rawValue, image: MenuImage.report.rawValue)
     ]
@@ -23,12 +25,16 @@ class MenuTableViewController: UITableViewController {
         case product = "Product management"
         case employee = "Employee management"
         case sale = "Sale"
+        case distributor = "Distributor"
+        case importReceipt = "Import Receipt"
         case report = "Report"
     }
     private enum MenuImage: String {
         case product = "product_management_icon"
         case employee = "employee_management_icon"
         case sale = "sale_management_icon"
+        case distributor = "distributor_icon"
+        case importReceipt = "importReceipt_icon"
         case report = "report_icon"
     }
     private enum TitleAlert: String {
@@ -66,7 +72,7 @@ class MenuTableViewController: UITableViewController {
         cell.backgroundColor = .lightGray
         cell.selectionStyle = .none
         if !isAdmin {
-            if cell.labelViewCell.text == MenuName.product.rawValue || cell.labelViewCell.text == MenuName.employee.rawValue {
+            if cell.labelViewCell.text == MenuName.product.rawValue || cell.labelViewCell.text == MenuName.employee.rawValue || cell.labelViewCell.text == MenuName.distributor.rawValue || cell.labelViewCell.text == MenuName.importReceipt.rawValue {
                 cell.labelViewCell.textColor = myColor
                 cell.imageViewCell.alpha = alphaForCell
                 return cell
@@ -109,6 +115,10 @@ class MenuTableViewController: UITableViewController {
             tableView.deselectRow(at: indexPath, animated: true)
         case MenuName.report.rawValue:
             let vc = ReportViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
+        case MenuName.distributor.rawValue:
+            let vc = DistributorViewController()
             navigationController?.pushViewController(vc, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
         default:
