@@ -31,7 +31,7 @@
                                 </connections>
                             </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" image="add_icon" id="IcT-dI-4as">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="addButtonTapped:" destination="-1" id="DyS-rG-tQK"/>
                                 </connections>
@@ -52,7 +52,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="kJS-Qd-hjV"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="30"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -61,7 +61,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmQ-0B-toJ">
                             <rect key="frame" x="0.0" y="0.0" width="183" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                             <state key="normal" title="Cancel">
                                 <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -71,7 +71,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HE5-BT-uhh">
                             <rect key="frame" x="191" y="0.0" width="183" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                             <state key="normal" title="Pay"/>
                             <connections>
                                 <action selector="paymentTapped:" destination="-1" eventType="touchUpInside" id="uRS-e6-nDe"/>

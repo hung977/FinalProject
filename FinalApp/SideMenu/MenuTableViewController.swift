@@ -121,6 +121,10 @@ class MenuTableViewController: UITableViewController {
             let vc = DistributorViewController()
             navigationController?.pushViewController(vc, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
+        case MenuName.importReceipt.rawValue:
+            let vc = ImportReceiptViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         default:
             print("not match!")
         }

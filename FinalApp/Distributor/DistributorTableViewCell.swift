@@ -8,7 +8,7 @@
 
 import UIKit
 protocol MyDistributorCellDelegate: AnyObject {
-    func editButtonTapped(cell: DistributorTableViewCell)
+    func editButtonTapped(cell: DistributorTableViewCell, button: UIButton)
 }
 class DistributorTableViewCell: UITableViewCell {
     
@@ -27,7 +27,7 @@ class DistributorTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func editBtnTapped(_ sender: UIButton) {
-        delegate?.editButtonTapped(cell: self)
+        delegate?.editButtonTapped(cell: self, button: sender)
     }
     
 }

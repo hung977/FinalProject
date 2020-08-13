@@ -142,6 +142,49 @@
                 }
             }
         }
+        func AFRequestEditDistributor(for id: String, route: Router, param: [String:Any], withblock:@escaping (_ response: AFDataResponse<Data?>?, _ data:Data?, _ error: Error?)->Void) {
+            let bearerToken = "Bearer \(LoginViewController.token)"
+            let baseURL = "\(route.URLwithPath)/\(id)"
+            let headers: HTTPHeaders
+            headers = ["Content-type": "multipart/form-data",
+                       "Content-Disposition" : "form-data",
+                       "Authorization" : bearerToken]
+            AF.upload(multipartFormData: { (multipart) in
+                for (key, value) in param {
+                    multipart.append((value as! String).data(using: .utf8)!, withName: key)
+                }
+            }, to: baseURL, usingThreshold: UInt64.init(),
+               method: route.method,
+               headers: headers).response { (response) in
+                switch (response.result) {
+                case .success(let data):
+                    withblock(response, data, nil)
+                case .failure(let error):
+                    withblock(response, nil, error)
+                }
+            }
+        }
+        func AFRequestAddDistributor(route: Router, param: [String:Any], withblock:@escaping (_ response: AFDataResponse<Data?>?, _ data:Data?, _ error: Error?)->Void) {
+            let bearerToken = "Bearer \(LoginViewController.token)"
+            let headers: HTTPHeaders
+            headers = ["Content-type": "multipart/form-data",
+                       "Content-Disposition" : "form-data",
+                       "Authorization" : bearerToken]
+            AF.upload(multipartFormData: { (multipart) in
+                for (key, value) in param {
+                    multipart.append((value as! String).data(using: .utf8)!, withName: key)
+                }
+            }, to: route.URLwithPath, usingThreshold: UInt64.init(),
+               method: route.method,
+               headers: headers).response { (response) in
+                switch (response.result) {
+                case .success(let data):
+                    withblock(response, data, nil)
+                case .failure(let error):
+                    withblock(response, nil, error)
+                }
+            }
+        }
         
         public class func callsendImageAPIEditProduct(for id: String, param:[String: Any],arrImage:[UIImage],imageKey:String, withblock:@escaping (_ response: AFDataResponse<Data?>?, _ data:Data?, _ error: Error?)->Void){
             

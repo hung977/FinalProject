@@ -19,7 +19,7 @@ class EmployeeManagementViewController: UIViewController {
     private var totalProducts = 0
     private var pageIndex = 1
     private var pageSize = 20
-    private var menuWidth: CGFloat = 300
+    private var menuWidth: CGFloat = 250
     private var PageIndexParams = "pageIndex"
     private var PageSizeParams = "pageSize"
     private var PageSearchStringParams = "searchString"

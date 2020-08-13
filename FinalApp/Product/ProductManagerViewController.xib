@@ -24,15 +24,15 @@
                     <rect key="frame" x="-7" y="44" width="411" height="44"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <items>
-                        <navigationItem title="Product Management" id="crO-Ax-kQM">
-                            <barButtonItem key="leftBarButtonItem" title="Item" image="hamburger" id="vfH-AR-fz3">
+                        <navigationItem title="Product Management" largeTitleDisplayMode="always" id="crO-Ax-kQM">
+                            <barButtonItem key="leftBarButtonItem" image="hamburger" id="vfH-AR-fz3">
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="didTappedMenu:" destination="-1" id="6NM-Oj-zes"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" image="add_icon" id="IBk-M1-sjz">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="addProductTapped:" destination="-1" id="Onp-hm-xfv"/>
                                 </connections>

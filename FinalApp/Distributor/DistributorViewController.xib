@@ -30,6 +30,7 @@
                                 </connections>
                             </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" image="add_icon" id="8pg-6x-kSf">
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="addBtnTapped:" destination="-1" id="vEE-Ra-4hw"/>
                                 </connections>

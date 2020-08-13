@@ -43,68 +43,68 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="529"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Full name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXh-XJ-b9M">
-                                    <rect key="frame" x="10" y="0.0" width="384" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <rect key="frame" x="10" y="0.0" width="384" height="20"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="753" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HUH-A9-uIR">
-                                    <rect key="frame" x="10" y="21" width="384" height="34"/>
+                                    <rect key="frame" x="10" y="20" width="384" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="759" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5R-Kb-ZrL">
-                                    <rect key="frame" x="10" y="75" width="384" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <rect key="frame" x="10" y="74" width="384" height="20"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="753" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I2l-SI-giq">
-                                    <rect key="frame" x="10" y="96" width="384" height="34"/>
+                                    <rect key="frame" x="10" y="94" width="384" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="757" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ip9-bH-nCl">
-                                    <rect key="frame" x="10" y="150" width="384" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <rect key="frame" x="10" y="148" width="384" height="20"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ByO-2b-ylR">
-                                    <rect key="frame" x="10" y="171" width="384" height="34"/>
+                                    <rect key="frame" x="10" y="168" width="384" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFs-16-8YH">
-                                    <rect key="frame" x="10" y="225" width="384" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <rect key="frame" x="10" y="222" width="384" height="20"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="756" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etl-Cg-0At">
-                                    <rect key="frame" x="10" y="300" width="384" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <rect key="frame" x="10" y="296" width="384" height="20"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="758" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o94-ge-3QY">
-                                    <rect key="frame" x="10" y="246" width="384" height="34"/>
+                                    <rect key="frame" x="10" y="242" width="384" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="752" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DKt-Ws-Kgx">
-                                    <rect key="frame" x="10" y="321" width="384" height="34"/>
+                                    <rect key="frame" x="10" y="316" width="384" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KkM-fG-u3p">
-                                    <rect key="frame" x="10" y="375" width="384" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <rect key="frame" x="10" y="370" width="384" height="20"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uNf-lG-oQb">
-                                    <rect key="frame" x="10" y="396" width="384" height="34"/>
+                                    <rect key="frame" x="10" y="390" width="384" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 </textField>
@@ -120,8 +120,8 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Admin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3H-5p-cfX">
-                                    <rect key="frame" x="10" y="450" width="52.5" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <rect key="frame" x="10" y="450" width="47.5" height="21"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -130,7 +130,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </switch>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCh-27-ORL">
-                                    <rect key="frame" x="368" y="328" width="20" height="20"/>
+                                    <rect key="frame" x="368" y="323" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="Sjk-Ng-Bp3"/>
                                         <constraint firstAttribute="width" constant="20" id="i5Q-Qh-Foh"/>
@@ -141,7 +141,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmB-r6-d49">
-                                    <rect key="frame" x="368" y="403" width="20" height="20"/>
+                                    <rect key="frame" x="368" y="397" width="20" height="26"/>
                                     <state key="normal" image="hidepass"/>
                                     <connections>
                                         <action selector="confirmPassHideorShow:" destination="-1" eventType="touchUpInside" id="fS5-Um-qNT"/>

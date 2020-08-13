@@ -41,7 +41,7 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
         navigationController?.isNavigationBarHidden = true
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
-        menu?.menuWidth = 300
+        menu?.menuWidth = 250
         SideMenuManager.default.leftMenuNavigationController = menu
         NotificationCenter.default.addObserver(self, selector: #selector(didUpdateNumberCart(notification:)), name: Notification.Name("didUpdateNumberCart"), object: nil)
         

@@ -30,7 +30,7 @@ class ReportViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         menu?.leftSide = true
-        menu?.menuWidth = 300
+        menu?.menuWidth = 250
         SideMenuManager.default.leftMenuNavigationController = menu
         axisFormatDelegate = self
     }

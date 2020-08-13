@@ -10,13 +10,13 @@ import UIKit
 import SideMenu
 
 class DistributorViewController: UIViewController, MyDistributorCellDelegate {
-    
+
     var menu: SideMenuNavigationController?
     var distributors: [Distributor] = []
     var currentDistributor: Distributor?
     //MARK: - Contants
     private var totalDistributor = 0
-    private var menuWidth: CGFloat = 300
+    private var menuWidth: CGFloat = 250
     private var PageIndexParams = "pageIndex"
     private var PageSizeParams = "pageSize"
     private var PageSearchStringParams = "searchString"
@@ -47,29 +47,91 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
         present(menu!, animated: true)
     }
     @IBAction func addBtnTapped(_ sender: UIBarButtonItem) {
-    }
-    func editButtonTapped(cell: DistributorTableViewCell) {
-        let indexPath = self.tableView.indexPath(for: cell)
-        currentDistributor = distributors[indexPath!.row]
-        let alert = UIAlertController(title: currentDistributor?.name, message: nil, preferredStyle: .actionSheet)
-        if let popoverController = alert.popoverPresentationController {
-            popoverController.sourceView = cell
-            popoverController.sourceRect = cell.bounds
+        var name = UITextField()
+        var address = UITextField()
+        let alert = UIAlertController(title: "Add new distributor", message: "", preferredStyle: .alert)
+        alert.addTextField { (uiTextField) in
+            uiTextField.placeholder = "Enter distributor name"
+            uiTextField.layer.cornerRadius = 10
+            name = uiTextField
         }
-        let edit = UIAlertAction(title: "Edit", style: .default) { (_) in
-            self.alertEditDistributor(for: self.currentDistributor!)
+        alert.addTextField { (uiTextField) in
+            uiTextField.placeholder = "Enter distributor address"
+            uiTextField.layer.cornerRadius = 10
+            address = uiTextField
         }
-        let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
-            //
+        let action = UIAlertAction(title: "Add", style: .default) { (_) in
+            if let nameStr = name.text, let addressStr = address.text {
+                let route = Router.addDistributor
+                let param = [
+                    "Name" : nameStr,
+                    "Address" : addressStr
+                ]
+                RequestService.shared.AFRequestAddDistributor(route: route, param: param) { [weak self] (response, data, error) in
+                                        guard let self = self else {return}
+                    let statusCode = response?.response?.statusCode
+                    if statusCode == 200 || statusCode == 204 {
+                        self.alertResponseAPISuccess(tit: "", mess: "Success")
+                    } else if statusCode == 401 {
+                        self.alertResponseAPIError(tit: "Error", mess: "Unauthorized")
+                    } else if statusCode == 403 {
+                        self.alertResponseAPIError(tit: "Error", mess: "Forbidden")
+                    } else {
+                        if let safeData = data {
+                            self.alertResponseAPIError(tit: "Error", mess: "\(String(data: safeData, encoding: .utf8) ?? "Something went wrong!")")
+                            
+                        }
+                    }
+
+                }
+            }
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(edit)
-        alert.addAction(delete)
+        alert.addAction(action)
         alert.addAction(cancel)
         present(alert, animated: true)
+        
+    }
+    func editButtonTapped(cell: DistributorTableViewCell, button: UIButton) {
+        if let indexPath = self.tableView.indexPath(for: cell)
+        {
+            currentDistributor = distributors[indexPath.row]
+            let alert = UIAlertController(title: currentDistributor?.name, message: nil, preferredStyle: .actionSheet)
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = button
+                popoverController.sourceRect = button.bounds
+            }
+            let edit = UIAlertAction(title: "Edit", style: .default) { (_) in
+                self.alertEditDistributor(for: self.currentDistributor!)
+            }
+            let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
+                self.alertDeleteDistributor(for: self.currentDistributor!)
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(edit)
+            alert.addAction(delete)
+            alert.addAction(cancel)
+            present(alert, animated: true)
+        }
     }
     
     //MARK: - Supporting Func
+    func alertDeleteDistributor(for distributor: Distributor) {
+        let alert = UIAlertController(title: distributor.name, message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Delete", style: .default) { (_) in
+            let route = Router.deleteDistributor
+            RequestService.shared.request(router: route, id: distributor.id) { [weak self] (response, error) in
+                guard let self = self else {return}
+                self.distributors = []
+                self.loadDistributor(withPage: 1, withSize: 20, withString: "")
+                
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(action)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
     func alertEditDistributor(for distributor: Distributor) {
         var name = UITextField()
         var address = UITextField()
@@ -90,15 +152,14 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
             if let nameStr = name.text, let addressStr = address.text {
                 let route = Router.editDistributor
                 let param = [
-                    "Name" : nameStr,
-                    "Address" : addressStr
+                    "Name" : "\(nameStr)",
+                    "Address" : "\(addressStr)"
                 ]
-                RequestService.shared.AFRequestChangePassWord(router: route, id: distributor.id, params: param) { [weak self] (data, response, error) in
+                RequestService.shared.AFRequestEditDistributor(for: distributor.id, route: route, param: param) { [weak self] (response, data, error) in
                     guard let self = self else {return}
-                    
                     let statusCode = response?.response?.statusCode
                     if statusCode == 200 || statusCode == 204 {
-                        self.alertResponseAPISuccess(tit: "Success", mess: "Edited for \(distributor.name).")
+                        self.alertResponseAPISuccess(tit: "Success", mess: "Edited for \(distributor.id).")
                     } else if statusCode == 401 {
                         self.alertResponseAPIError(tit: "Error", mess: "Unauthorized")
                     } else if statusCode == 403 {
@@ -130,6 +191,7 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
         let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
             guard let self = self else {return}
+            self.distributors = []
             self.loadDistributor(withPage: self.pageIndex, withSize: self.pageSize, withString: "")
             self.tableView.reloadData()
         }
@@ -171,16 +233,23 @@ extension DistributorViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         currentDistributor = distributors[indexPath.row]
+        let alert = UIAlertController(title: currentDistributor?.name, message: nil, preferredStyle: .actionSheet)
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = tableView.cellForRow(at: indexPath)
+            popoverController.sourceRect = tableView.cellForRow(at: indexPath)!.bounds
+        }
+        let edit = UIAlertAction(title: "Edit", style: .default) { (_) in
+            self.alertEditDistributor(for: self.currentDistributor!)
+        }
+        let delete = UIAlertAction(title: "Delete", style: .default) { (_) in
+            self.alertDeleteDistributor(for: self.currentDistributor!)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(edit)
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        present(alert, animated: true)
         
-        //        let vc = CreateEditProductViewController()
-        //        vc.tit = titleEdit
-        //        vc.productName = currentProduct?.name
-        //        vc.productAmout = currentProduct?.amount
-        //        vc.productPrice = currentProduct?.price
-        //        vc.productId = currentProduct?.id
-        //        let newImageURL = currentProduct!.image
-        //        vc.productImageName = newImageURL
-        //        self.navigationController?.pushViewController(vc, animated: true)
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == distributors.count - 1 && distributors.count < totalDistributor {

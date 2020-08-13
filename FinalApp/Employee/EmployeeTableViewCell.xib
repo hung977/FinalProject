@@ -29,7 +29,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="HHz-Jn-K3s"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="17"/>
                         <color key="textColor" red="0.4559201598" green="0.45598942040000001" blue="0.45590496060000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -38,7 +38,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Ohm-Rq-RdK"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -47,7 +47,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="8KL-rF-twz"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -62,25 +62,15 @@
                             <action selector="editButtonTapped:" destination="-1" eventType="touchUpInside" id="JP7-nD-06Y"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5On-A8-5mA">
-                        <rect key="frame" x="0.0" y="114" width="385" height="2"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="2" id="o34-5G-G6x"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="W5w-82-9lL" secondAttribute="trailing" constant="20" id="2UW-wO-svU"/>
                     <constraint firstItem="xbo-sg-Shr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="2uV-g0-lOW"/>
                     <constraint firstAttribute="bottom" secondItem="xbo-sg-Shr" secondAttribute="bottom" constant="8" id="4Nh-Bs-l7V"/>
-                    <constraint firstAttribute="bottom" secondItem="5On-A8-5mA" secondAttribute="bottom" id="4vU-NC-KfS"/>
-                    <constraint firstItem="5On-A8-5mA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7zW-YF-yu0"/>
                     <constraint firstItem="xbo-sg-Shr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="8ND-Pb-BTe"/>
                     <constraint firstItem="fXD-Ls-jIn" firstAttribute="leading" secondItem="xbo-sg-Shr" secondAttribute="trailing" constant="8" id="9uN-dZ-Dtx"/>
                     <constraint firstAttribute="trailing" secondItem="zOG-RX-TL6" secondAttribute="trailing" id="A40-jq-0gw"/>
                     <constraint firstAttribute="trailing" secondItem="fXD-Ls-jIn" secondAttribute="trailing" constant="20" id="EB0-eO-zqn"/>
-                    <constraint firstAttribute="trailing" secondItem="5On-A8-5mA" secondAttribute="trailing" id="GHt-jQ-mlb"/>
                     <constraint firstItem="fXD-Ls-jIn" firstAttribute="top" secondItem="W5w-82-9lL" secondAttribute="bottom" constant="5" id="LUa-Si-cLv"/>
                     <constraint firstItem="fPX-Gc-Cx2" firstAttribute="top" secondItem="fXD-Ls-jIn" secondAttribute="bottom" constant="5" id="RbC-8D-ztQ"/>
                     <constraint firstItem="W5w-82-9lL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Say-Az-cwH"/>

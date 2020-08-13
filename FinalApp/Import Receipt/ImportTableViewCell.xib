@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="157" id="KGk-i7-Jjw" customClass="ImportTableViewCell" customModule="FinalApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="270" height="157"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="243" height="157"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="distributor_icon" translatesAutoresizingMaskIntoConstraints="NO" id="eZ7-0L-tLZ">
+                        <rect key="frame" x="5" y="5" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="fhF-sy-MLO"/>
+                            <constraint firstAttribute="height" constant="25" id="qrd-fS-5wx"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distributor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ski-LM-iac">
+                        <rect key="frame" x="40" y="7.5" width="183" height="20"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="employee_management_icon" translatesAutoresizingMaskIntoConstraints="NO" id="0rX-oZ-l41">
+                        <rect key="frame" x="5" y="35" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="J8o-Hb-odI"/>
+                            <constraint firstAttribute="height" constant="25" id="w9I-LO-6uR"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHn-uB-ZSf">
+                        <rect key="frame" x="40" y="37.5" width="183" height="20"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pricee" translatesAutoresizingMaskIntoConstraints="NO" id="Wl8-Ly-9uT">
+                        <rect key="frame" x="5" y="65" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="AaL-B0-bLT"/>
+                            <constraint firstAttribute="height" constant="25" id="bX7-qv-qgO"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eg7-CE-iEe">
+                        <rect key="frame" x="40" y="67.5" width="175" height="20"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="importReceipt_icon" translatesAutoresizingMaskIntoConstraints="NO" id="JMl-R2-j8r">
+                        <rect key="frame" x="5" y="95" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="els-g6-1zX"/>
+                            <constraint firstAttribute="height" constant="25" id="y98-iC-zYs"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="importReceiptDetails" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k7-ZA-bTC">
+                        <rect key="frame" x="40" y="97.5" width="175" height="20"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="date" translatesAutoresizingMaskIntoConstraints="NO" id="nZ5-xB-xDh">
+                        <rect key="frame" x="5" y="125" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Ova-FP-3ZA"/>
+                            <constraint firstAttribute="width" constant="25" id="nRW-bk-Gjm"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uO6-Cb-8sB">
+                        <rect key="frame" x="40" y="127.5" width="175" height="20"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="gHn-uB-ZSf" secondAttribute="trailing" constant="20" id="0Sl-Gf-iw8"/>
+                    <constraint firstItem="0rX-oZ-l41" firstAttribute="top" secondItem="eZ7-0L-tLZ" secondAttribute="bottom" constant="5" id="5dj-rx-YXy"/>
+                    <constraint firstItem="0rX-oZ-l41" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="7d0-65-Fx0"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="2k7-ZA-bTC" secondAttribute="trailing" constant="20" id="8Ce-by-qpF"/>
+                    <constraint firstItem="gHn-uB-ZSf" firstAttribute="leading" secondItem="0rX-oZ-l41" secondAttribute="trailing" constant="10" id="99v-uI-JXb"/>
+                    <constraint firstItem="JMl-R2-j8r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="A49-GI-aoY"/>
+                    <constraint firstItem="eZ7-0L-tLZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="BmI-Qr-gx5"/>
+                    <constraint firstItem="2k7-ZA-bTC" firstAttribute="centerY" secondItem="JMl-R2-j8r" secondAttribute="centerY" id="DgT-um-9nd"/>
+                    <constraint firstItem="nZ5-xB-xDh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="Eqg-VN-0Rp"/>
+                    <constraint firstItem="ski-LM-iac" firstAttribute="centerY" secondItem="eZ7-0L-tLZ" secondAttribute="centerY" id="G1c-o0-pXS"/>
+                    <constraint firstAttribute="trailing" secondItem="ski-LM-iac" secondAttribute="trailing" constant="20" id="G8I-TB-72l"/>
+                    <constraint firstItem="uO6-Cb-8sB" firstAttribute="centerY" secondItem="nZ5-xB-xDh" secondAttribute="centerY" id="KTA-OK-4pD"/>
+                    <constraint firstItem="2k7-ZA-bTC" firstAttribute="leading" secondItem="JMl-R2-j8r" secondAttribute="trailing" constant="10" id="NQH-gM-WSK"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="uO6-Cb-8sB" secondAttribute="trailing" constant="20" id="PLP-4p-6d6"/>
+                    <constraint firstItem="eg7-CE-iEe" firstAttribute="leading" secondItem="Wl8-Ly-9uT" secondAttribute="trailing" constant="10" id="QtL-eb-Nqx"/>
+                    <constraint firstAttribute="bottom" secondItem="nZ5-xB-xDh" secondAttribute="bottom" constant="20" id="Rq0-WO-2Cy"/>
+                    <constraint firstItem="eZ7-0L-tLZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="TFn-0t-ndZ"/>
+                    <constraint firstItem="Wl8-Ly-9uT" firstAttribute="top" secondItem="0rX-oZ-l41" secondAttribute="bottom" constant="5" id="Yis-hY-mhN"/>
+                    <constraint firstItem="eg7-CE-iEe" firstAttribute="centerY" secondItem="Wl8-Ly-9uT" secondAttribute="centerY" id="YnW-7y-Lmo"/>
+                    <constraint firstItem="uO6-Cb-8sB" firstAttribute="leading" secondItem="nZ5-xB-xDh" secondAttribute="trailing" constant="10" id="fjN-Zr-fdt"/>
+                    <constraint firstItem="Wl8-Ly-9uT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="had-AB-Lpl"/>
+                    <constraint firstItem="gHn-uB-ZSf" firstAttribute="centerY" secondItem="0rX-oZ-l41" secondAttribute="centerY" id="jeo-W6-40W"/>
+                    <constraint firstItem="nZ5-xB-xDh" firstAttribute="top" secondItem="JMl-R2-j8r" secondAttribute="bottom" constant="5" id="psP-Ea-GqE"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="eg7-CE-iEe" secondAttribute="trailing" constant="20" id="rwe-Fj-gaf"/>
+                    <constraint firstItem="ski-LM-iac" firstAttribute="leading" secondItem="eZ7-0L-tLZ" secondAttribute="trailing" constant="10" id="tLg-U8-mfT"/>
+                    <constraint firstItem="JMl-R2-j8r" firstAttribute="top" secondItem="Wl8-Ly-9uT" secondAttribute="bottom" constant="5" id="wJK-fo-FpG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="date" destination="uO6-Cb-8sB" id="g5Z-4H-zaO"/>
+                <outlet property="distributor" destination="ski-LM-iac" id="vU6-qB-3Rz"/>
+                <outlet property="importReceipts" destination="2k7-ZA-bTC" id="1Mr-LE-FOZ"/>
+                <outlet property="price" destination="eg7-CE-iEe" id="e1z-QP-izz"/>
+                <outlet property="user" destination="gHn-uB-ZSf" id="EKo-eG-5iO"/>
+            </connections>
+            <point key="canvasLocation" x="-43.478260869565219" y="89.397321428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="date" width="128" height="128"/>
+        <image name="distributor_icon" width="128" height="128"/>
+        <image name="employee_management_icon" width="128" height="128"/>
+        <image name="importReceipt_icon" width="128" height="128"/>
+        <image name="pricee" width="128" height="128"/>
+    </resources>
+</document>

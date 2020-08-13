@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReceiptDetailViewController" customModule="FinalApp" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="Jxp-6G-5Kc" id="Kuu-Xe-TT7"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jxp-6G-5Kc">
+                    <rect key="frame" x="0.0" y="79" width="414" height="783"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikE-yS-rWv">
+                    <rect key="frame" x="0.0" y="35" width="414" height="44"/>
+                    <items>
+                        <navigationItem title="Import Receipt Detail" id="jSe-JE-i30">
+                            <barButtonItem key="leftBarButtonItem" title="Back" id="qNa-v3-846">
+                                <connections>
+                                    <action selector="backBtnTapped:" destination="-1" id="DyJ-M6-Ifr"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="ikE-yS-rWv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="8X4-YD-PNW"/>
+                <constraint firstItem="Jxp-6G-5Kc" firstAttribute="top" secondItem="ikE-yS-rWv" secondAttribute="bottom" id="W8x-46-Jze"/>
+                <constraint firstItem="Jxp-6G-5Kc" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Zfq-jQ-74K"/>
+                <constraint firstItem="Jxp-6G-5Kc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="etd-rg-2av"/>
+                <constraint firstItem="ikE-yS-rWv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="35" id="hcf-5n-JdA"/>
+                <constraint firstItem="Jxp-6G-5Kc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mn0-wF-zzt"/>
+                <constraint firstItem="ikE-yS-rWv" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="rnk-Iy-Li2"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
+        </view>
+    </objects>
+</document>

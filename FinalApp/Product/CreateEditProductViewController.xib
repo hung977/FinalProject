@@ -52,7 +52,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="eYp-gm-J83"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -69,7 +69,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="Ozv-OD-ozw"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -78,7 +78,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="Rno-41-jkN"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -96,7 +96,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="fkh-G5-xxa"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="17"/>
                                     <state key="normal" title="Save"/>
                                     <connections>
                                         <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="hsR-bO-8X1"/>
