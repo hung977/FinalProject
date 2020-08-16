@@ -176,58 +176,58 @@ class CreateEmployeeViewController: UIViewController, UIImagePickerControllerDel
             passwordParam : pass,
             roleParam : isAdmin
         ]
-        if isValidEmailAddress(emailAddressString: email) {
-            if checkNumber(str: phone) {
-                if checkPassMatch(pass, confirmPass) {
-                    RequestService.callsendImageAPICreateEmployee(param: param, arrImage: [currentImage!], imageKey: imageKey) { [weak self] (bool, data, error) in
-                        guard let self = self else {return}
-                        if let safeData = data {
-                            do {
-                                let json = try JSONDecoder.init().decode(CreateEmployee.self, from: safeData)
-                                if json.id == nil {
-                                    for (key, value) in self.dirError {
-                                        if (json.code == key) {
-                                            self.alertResponse(tit: Title.error.rawValue, mess: value)
-                                            break
-                                        }
-                                    }
-                                } else {
-                                    self.alertCompletion(mess: "employee id: \(json.id!)")
-                                }
-                                if json.code == nil {
-                                    var mess = self.defaultStr
-                                    if let name = json.Name {
-                                        mess += self.appendStr(array: name)
-                                    }
-                                    if let email = json.Email {
-                                        mess += self.appendStr(array: email)
-                                    }
-                                    if let pass = json.Password {
-                                        mess += self.appendStr(array: pass)
-                                    }
-                                    if let phone = json.PhoneNumber {
-                                        mess += self.appendStr(array: phone)
-                                    }
-                                    if let username = json.UserName {
-                                        mess += self.appendStr(array: username)
-                                    }
-                                    self.alertResponse(tit: Title.error.rawValue, mess: mess)
-                                }
-                            } catch {
-                                self.alertResponse(tit: Title.error.rawValue, mess: MessageAlert.severFailture.rawValue)
+        if !isValidEmailAddress(emailAddressString: email) {
+            alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldEmail.rawValue)
+            return
+        }
+        if !checkNumber(str: phone) {
+            alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldPhone.rawValue)
+            return
+        }
+        if !checkPassMatch(pass, confirmPass) {
+            alertResponse(tit: Title.error.rawValue, mess: MessageAlert.passwordNotMatch.rawValue)
+            return
+        }
+        RequestService.callsendImageAPICreateEmployee(param: param, arrImage: [currentImage!], imageKey: imageKey) { [weak self] (bool, data, error) in
+            guard let self = self else {return}
+            if let safeData = data {
+                do {
+                    let json = try JSONDecoder.init().decode(CreateEmployee.self, from: safeData)
+                    if json.id == nil {
+                        for (key, value) in self.dirError {
+                            if (json.code == key) {
+                                self.alertResponse(tit: Title.error.rawValue, mess: value)
+                                break
                             }
-                        } else {
-                            self.alertResponse(tit: Title.error.rawValue, mess: MessageAlert.severFailture.rawValue)
                         }
+                    } else {
+                        self.alertCompletion(mess: "employee id: \(json.id!)")
                     }
-                } else {
-                    alertResponse(tit: Title.error.rawValue, mess: MessageAlert.passwordNotMatch.rawValue)
+                    if json.code == nil {
+                        var mess = self.defaultStr
+                        if let name = json.Name {
+                            mess += self.appendStr(array: name)
+                        }
+                        if let email = json.Email {
+                            mess += self.appendStr(array: email)
+                        }
+                        if let pass = json.Password {
+                            mess += self.appendStr(array: pass)
+                        }
+                        if let phone = json.PhoneNumber {
+                            mess += self.appendStr(array: phone)
+                        }
+                        if let username = json.UserName {
+                            mess += self.appendStr(array: username)
+                        }
+                        self.alertResponse(tit: Title.error.rawValue, mess: mess)
+                    }
+                } catch {
+                    self.alertResponse(tit: Title.error.rawValue, mess: MessageAlert.severFailture.rawValue)
                 }
             } else {
-                alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldPhone.rawValue)
+                self.alertResponse(tit: Title.error.rawValue, mess: MessageAlert.severFailture.rawValue)
             }
-        } else {
-            alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldEmail.rawValue)
         }
         
     }

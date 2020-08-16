@@ -10,6 +10,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateImportViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
                 <outlet property="createbtn" destination="P4y-LG-u1p" id="odo-Dd-SiI"/>
+                <outlet property="distributorLabel" destination="dSV-9B-1Ly" id="Yfw-hD-712"/>
+                <outlet property="tableView" destination="2yi-0A-lvW" id="gyN-rm-MpM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
