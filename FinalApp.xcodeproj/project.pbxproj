@@ -30,6 +30,8 @@
 		BA38ECA724C9667E00C4414F /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38ECA624C9667E00C4414F /* LoginResponse.swift */; };
 		BA3D95D624C5531A00D4BFEA /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3D95D424C5531A00D4BFEA /* ReportViewController.swift */; };
 		BA3D95D724C5531A00D4BFEA /* ReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA3D95D524C5531A00D4BFEA /* ReportViewController.xib */; };
+		BA3F5F9424EA2F21006BA15D /* CreateImportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F5F9224EA2F21006BA15D /* CreateImportTableViewCell.swift */; };
+		BA3F5F9524EA2F21006BA15D /* CreateImportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA3F5F9324EA2F21006BA15D /* CreateImportTableViewCell.xib */; };
 		BA4EE62224C559C40014F878 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EE62024C559C40014F878 /* ProductTableViewCell.swift */; };
 		BA4EE62324C559C40014F878 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4EE62124C559C40014F878 /* ProductTableViewCell.xib */; };
 		BA4EE62624C56A470014F878 /* CreateEditProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EE62424C56A470014F878 /* CreateEditProductViewController.swift */; };
@@ -104,6 +106,8 @@
 		BA38ECA624C9667E00C4414F /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		BA3D95D424C5531A00D4BFEA /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		BA3D95D524C5531A00D4BFEA /* ReportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportViewController.xib; sourceTree = "<group>"; };
+		BA3F5F9224EA2F21006BA15D /* CreateImportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateImportTableViewCell.swift; sourceTree = "<group>"; };
+		BA3F5F9324EA2F21006BA15D /* CreateImportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateImportTableViewCell.xib; sourceTree = "<group>"; };
 		BA4EE62024C559C40014F878 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		BA4EE62124C559C40014F878 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		BA4EE62424C56A470014F878 /* CreateEditProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditProductViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 				BAEE65E324E536690069DBA6 /* ReceiptDetailViewController.xib */,
 				BAEE65E624E554BA0069DBA6 /* CreateImportViewController.swift */,
 				BAEE65E724E554BA0069DBA6 /* CreateImportViewController.xib */,
+				BA3F5F9224EA2F21006BA15D /* CreateImportTableViewCell.swift */,
+				BA3F5F9324EA2F21006BA15D /* CreateImportTableViewCell.xib */,
 			);
 			path = "Import Receipt";
 			sourceTree = "<group>";
@@ -462,6 +468,7 @@
 				BA2FAA0724C52E6300BC23DF /* MenuTableViewCell.xib in Resources */,
 				BA4EE62324C559C40014F878 /* ProductTableViewCell.xib in Resources */,
 				BA83FB3724C5A9130054B203 /* BadgeViewController.xib in Resources */,
+				BA3F5F9524EA2F21006BA15D /* CreateImportTableViewCell.xib in Resources */,
 				BA2FA9F024C529F900BC23DF /* Main.storyboard in Resources */,
 				BAA6B80E24C5987000F2241F /* SaleCollectionViewCell.xib in Resources */,
 				BAEE65DB24E520830069DBA6 /* ImportTableViewCell.xib in Resources */,
@@ -562,6 +569,7 @@
 				BA6A152D24C551C500F0CF9D /* SaleManagerViewController.swift in Sources */,
 				BA3D95D624C5531A00D4BFEA /* ReportViewController.swift in Sources */,
 				BAEDF04F24D17F5000056669 /* PostReceiptResponse.swift in Sources */,
+				BA3F5F9424EA2F21006BA15D /* CreateImportTableViewCell.swift in Sources */,
 				BAEE65E424E536690069DBA6 /* ReceiptDetailViewController.swift in Sources */,
 				BA4EE62A24C57B190014F878 /* EmployeeTableViewCell.swift in Sources */,
 				BA2FAA0624C52E6300BC23DF /* MenuTableViewCell.swift in Sources */,
