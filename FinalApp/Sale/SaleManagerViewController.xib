@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SaleManagerViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="activity" destination="ucs-un-cpz" id="cIW-IJ-Lfy"/>
                 <outlet property="barItem" destination="1j5-w7-xgZ" id="iUp-Fb-Xee"/>
                 <outlet property="collectionView" destination="diK-jf-OEw" id="tXW-dA-bLm"/>
                 <outlet property="searchBar" destination="gRR-ea-wOT" id="Dgl-VS-TtJ"/>
@@ -47,12 +48,21 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ucs-un-cpz">
+                    <rect key="frame" x="182" y="144" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="9h1-md-W6k"/>
+                        <constraint firstAttribute="width" constant="50" id="IMS-eI-W2n"/>
+                    </constraints>
+                    <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="iAU-Ze-QmJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="7Ts-xo-beU"/>
                 <constraint firstItem="diK-jf-OEw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Aa0-54-3be"/>
                 <constraint firstItem="diK-jf-OEw" firstAttribute="top" secondItem="gRR-ea-wOT" secondAttribute="bottom" id="Vxf-Ml-R9c"/>
+                <constraint firstItem="ucs-un-cpz" firstAttribute="top" secondItem="gRR-ea-wOT" secondAttribute="bottom" id="aVj-dg-xoS"/>
                 <constraint firstItem="iAU-Ze-QmJ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="dh3-K7-6Ss"/>
                 <constraint firstItem="gRR-ea-wOT" firstAttribute="top" secondItem="iAU-Ze-QmJ" secondAttribute="bottom" id="dvY-40-cEi"/>
                 <constraint firstItem="iAU-Ze-QmJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eFX-wB-4wE"/>
@@ -61,6 +71,7 @@
                 <constraint firstItem="gRR-ea-wOT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pdS-E0-tR8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="diK-jf-OEw" secondAttribute="bottom" id="qlY-Yi-qV0"/>
                 <constraint firstItem="gRR-ea-wOT" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="tTJ-a4-ODA"/>
+                <constraint firstItem="ucs-un-cpz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uIh-eT-dD8"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>

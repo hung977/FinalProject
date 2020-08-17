@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ProductTableViewCell: UITableViewCell {
 
@@ -18,6 +19,11 @@ class ProductTableViewCell: UITableViewCell {
     static let name = "ProductTableViewCell"
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        productImage.image = UIImage(named: "image_default")
         
     }
 

@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditEmployeeViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="activity" destination="qMN-iN-i9D" id="kOy-2v-31A"/>
                 <outlet property="emailTextfield" destination="0Vq-On-bD5" id="Zzr-vA-xgD"/>
                 <outlet property="employeeImg" destination="QSL-gK-vfi" id="1yc-qq-rNM"/>
                 <outlet property="fullNameTextfield" destination="5Ob-OW-mMJ" id="LBx-dd-OoJ"/>
@@ -103,12 +104,20 @@
                                         <action selector="isAdminSwitchChanged:" destination="-1" eventType="valueChanged" id="ije-fz-fY8"/>
                                     </connections>
                                 </switch>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qMN-iN-i9D">
+                                    <rect key="frame" x="197" y="264.5" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="8wY-fi-mdb"/>
+                                        <constraint firstAttribute="height" constant="20" id="HWC-7I-bc8"/>
+                                    </constraints>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="GEa-k2-LIU" secondAttribute="trailing" constant="20" id="3N0-4u-qw1"/>
                                 <constraint firstItem="6x5-v5-Wkd" firstAttribute="top" secondItem="0Vq-On-bD5" secondAttribute="bottom" constant="20" id="9jv-FW-Yko"/>
                                 <constraint firstItem="IYN-KZ-LLd" firstAttribute="leading" secondItem="5VK-4h-opT" secondAttribute="leading" constant="10" id="ByL-DQ-k3R"/>
+                                <constraint firstItem="qMN-iN-i9D" firstAttribute="centerX" secondItem="5VK-4h-opT" secondAttribute="centerX" id="Eri-kh-FzE"/>
                                 <constraint firstItem="5Ob-OW-mMJ" firstAttribute="top" secondItem="GEa-k2-LIU" secondAttribute="bottom" id="Hlj-N4-hXf"/>
                                 <constraint firstItem="0Vq-On-bD5" firstAttribute="leading" secondItem="5VK-4h-opT" secondAttribute="leading" constant="10" id="IB1-Gh-tRd"/>
                                 <constraint firstAttribute="trailing" secondItem="kfd-CR-1Zh" secondAttribute="trailing" constant="20" id="IFx-HV-ckF"/>
@@ -120,6 +129,7 @@
                                 <constraint firstItem="GEa-k2-LIU" firstAttribute="leading" secondItem="5VK-4h-opT" secondAttribute="leading" constant="10" id="XlO-XI-xIo"/>
                                 <constraint firstItem="6x5-v5-Wkd" firstAttribute="leading" secondItem="5VK-4h-opT" secondAttribute="leading" constant="10" id="Zvm-xU-aVm"/>
                                 <constraint firstAttribute="trailing" secondItem="5Ob-OW-mMJ" secondAttribute="trailing" constant="20" id="aa0-3n-pBG"/>
+                                <constraint firstItem="qMN-iN-i9D" firstAttribute="centerY" secondItem="vna-v4-iR2" secondAttribute="centerY" id="g9u-1o-xXb"/>
                                 <constraint firstAttribute="trailing" secondItem="jcT-Sr-erv" secondAttribute="trailing" constant="20" id="hyQ-6g-twd"/>
                                 <constraint firstItem="jcT-Sr-erv" firstAttribute="top" secondItem="5Ob-OW-mMJ" secondAttribute="bottom" constant="20" id="ik4-iM-jTZ"/>
                                 <constraint firstItem="gO4-xH-SeH" firstAttribute="centerY" secondItem="IYN-KZ-LLd" secondAttribute="centerY" id="jju-nP-1ZS"/>

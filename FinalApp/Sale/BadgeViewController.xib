@@ -24,8 +24,7 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                     <items>
                         <navigationItem title="Product Management" id="VUb-Xr-MZR">
-                            <barButtonItem key="leftBarButtonItem" title="Item" image="hamburger" id="l74-w8-nFJ">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <barButtonItem key="leftBarButtonItem" title="Back" id="l74-w8-nFJ">
                                 <connections>
                                     <action selector="didTappedMenu:" destination="-1" id="tJh-xT-flX"/>
                                 </connections>
@@ -110,6 +109,5 @@
     </objects>
     <resources>
         <image name="add_icon" width="32" height="32"/>
-        <image name="hamburger" width="48" height="48"/>
     </resources>
 </document>

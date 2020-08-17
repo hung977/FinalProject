@@ -23,8 +23,11 @@ class BadgeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         amoutTextField.delegate = self
-        //amoutTextField.keyboardType = UIKeyboardType.decimalPad
-        // Initialization code
+        amoutTextField.keyboardType = UIKeyboardType.decimalPad
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageViewItem.image = UIImage(named: "image_default")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

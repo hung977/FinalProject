@@ -84,6 +84,8 @@ class ReportViewController: UIViewController {
     }
     
     func setData() {
+        productName = []
+        productAmount = []
         for item in productsReport {
             productName.append(item.product.name)
             productAmount.append(Double(item.revenue))

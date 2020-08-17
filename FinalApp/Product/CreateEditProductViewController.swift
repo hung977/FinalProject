@@ -22,7 +22,7 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
     
     //MARK: - Contants
     private let saveButtonRadiusValue: CGFloat = 10
-    private let imageNameDefault = "product_example"
+    private let imageNameDefault = "image_default"
     private let titleAdd = "Add new product"
     private let nameParam = "Name"
     private let priceParam = "Price"
@@ -53,6 +53,7 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
     
     // MARK: - IBOutlet
     @IBOutlet weak var productImage: UIImageView!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     @IBOutlet weak var productNameTextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var productAmountTextfield: UITextField!
@@ -121,6 +122,9 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
         navigationController?.popViewController(animated: true)
     }
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+        saveButton.isEnabled = false
+        saveButton.alpha = 0.3
+        activity.startAnimating()
         if tit == titleAdd {
             let currentName = productNameTextfield.text!
             let currentAmout = String(productAmountTextfield.text!)
@@ -128,6 +132,9 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
             if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
                 let params: [String:Any] = [nameParam: currentName, priceParam: currentPrice, amountParam: currentAmout]
                 RequestService.callsendImageAPI(param: params, arrImage: [currentImage!], imageKey: imageParam) { (response, data, error) in
+                    self.activity.stopAnimating()
+                    self.saveButton.isEnabled = true
+                    self.saveButton.alpha = 1
                     if let err = error {
                         self.alertAPI(tit: Title.error.rawValue, mess: "\(err.localizedDescription)")
                     } else {
@@ -159,6 +166,9 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
                 if !isSelectedImage {
                     message += missImage
                 }
+                saveButton.isEnabled = true
+                saveButton.alpha = 1
+                activity.stopAnimating()
                 let alert = UIAlertController(title: Title.missingField.rawValue, message: "\(message) is required.", preferredStyle: .alert)
                 let action = UIAlertAction(title: Title.ok.rawValue, style: .default, handler: nil)
                 alert.addAction(action)
@@ -171,6 +181,9 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
             if (notNil(name: currentName, amount: currentAmout, price: currentPrice, isImage: isSelectedImage)) {
                 let params: [String:Any] = [nameParam: currentName, priceParam: currentPrice, amountParam: currentAmout]
                 RequestService.callsendImageAPIEditProduct(for: productId!, param: params, arrImage: [currentImage!], imageKey: imageParam) { (response, data, error) in
+                    self.activity.stopAnimating()
+                    self.saveButton.isEnabled = true
+                    self.saveButton.alpha = 1
                     if let err = error {
                         self.alertAPI(tit: Title.error.rawValue, mess: "\(err.localizedDescription)")
                     } else {
@@ -187,6 +200,27 @@ class CreateEditProductViewController: UIViewController, UIImagePickerController
                     }
                 }
                 
+            } else {
+                var message = ""
+                if currentName == "" {
+                    message += missName
+                }
+                if currentAmout == "" {
+                    message += missAmount
+                }
+                if currentPrice == "" {
+                    message += missPrice
+                }
+                if !isSelectedImage {
+                    message += missImage
+                }
+                saveButton.isEnabled = true
+                saveButton.alpha = 1
+                activity.stopAnimating()
+                let alert = UIAlertController(title: Title.missingField.rawValue, message: "\(message) is required.", preferredStyle: .alert)
+                let action = UIAlertAction(title: Title.ok.rawValue, style: .default, handler: nil)
+                alert.addAction(action)
+                present(alert, animated:true)
             }
         }
     }

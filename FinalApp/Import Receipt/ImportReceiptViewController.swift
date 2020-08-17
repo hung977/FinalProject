@@ -21,6 +21,7 @@ class ImportReceiptViewController: UIViewController, UIPickerViewDelegate, UIPic
     //MARK: - IBOutlet
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     @IBOutlet weak var userSwitch: UISwitch!
     @IBOutlet weak var dateSwitch: UISwitch!
     @IBOutlet weak var searchBtn: UIButton!
@@ -57,14 +58,10 @@ class ImportReceiptViewController: UIViewController, UIPickerViewDelegate, UIPic
             dateLabel.text = ""
         }
     }
-    @IBAction func addBtnTapped(_ sender: UIBarButtonItem) {
-        let vc = CreateImportViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-        
-    }
+
     //MARK: - Supporting func
     func loadImportReceipt(searchString: String, pageIndex: Int, pageSize: Int, date: String) {
+        activity.startAnimating()
         var day = ""
         var month = ""
         var year = ""
@@ -96,6 +93,7 @@ class ImportReceiptViewController: UIViewController, UIPickerViewDelegate, UIPic
             } catch(let error) {
                 self.alertResponseErr(title: "Error", message: error.localizedDescription)
             }
+            self.activity.stopAnimating()
         }
     }
     func alertResponseErr(title: String, message: String) {

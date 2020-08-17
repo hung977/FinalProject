@@ -24,7 +24,8 @@
                     <rect key="frame" x="0.0" y="35" width="375" height="44"/>
                     <items>
                         <navigationItem title="Create ImportReceipt" id="LDK-V0-9Ep">
-                            <barButtonItem key="leftBarButtonItem" title="Back" id="GzZ-Ot-u2H">
+                            <barButtonItem key="leftBarButtonItem" image="hamburger" id="GzZ-Ot-u2H">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="backBtnTapped:" destination="-1" id="Z8T-4z-nFK"/>
                                 </connections>
@@ -117,4 +118,7 @@
             <point key="canvasLocation" x="-872" y="142.98029556650246"/>
         </label>
     </objects>
+    <resources>
+        <image name="hamburger" width="48" height="48"/>
+    </resources>
 </document>

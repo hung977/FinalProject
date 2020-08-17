@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DistributorViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="activity" destination="yvz-IA-xVc" id="dTP-LL-Ey5"/>
                 <outlet property="searchBar" destination="ZaZ-ij-5lT" id="S8Z-cH-PD0"/>
                 <outlet property="tableView" destination="WK3-am-MHU" id="lnr-5U-co3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -46,6 +47,14 @@
                     <rect key="frame" x="0.0" y="80" width="414" height="56"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yvz-IA-xVc">
+                    <rect key="frame" x="182" y="136" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="f2U-W6-2k4"/>
+                        <constraint firstAttribute="width" constant="50" id="xbl-XG-f2t"/>
+                    </constraints>
+                    <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
@@ -53,11 +62,13 @@
                 <constraint firstItem="ep8-aO-zh8" firstAttribute="trailing" secondItem="WK3-am-MHU" secondAttribute="trailing" id="4iq-5n-n5b"/>
                 <constraint firstItem="ep8-aO-zh8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="36" id="BOT-Du-zoE"/>
                 <constraint firstItem="WK3-am-MHU" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="HDx-ja-VaP"/>
+                <constraint firstItem="yvz-IA-xVc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ULb-3k-UyT"/>
                 <constraint firstItem="WK3-am-MHU" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="ZGg-7K-tjR"/>
                 <constraint firstItem="ZaZ-ij-5lT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Zxg-d4-IEG"/>
                 <constraint firstItem="WK3-am-MHU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cj0-Yc-aMj"/>
                 <constraint firstItem="ZaZ-ij-5lT" firstAttribute="top" secondItem="ep8-aO-zh8" secondAttribute="bottom" id="h7T-ax-c5l"/>
                 <constraint firstItem="WK3-am-MHU" firstAttribute="top" secondItem="ZaZ-ij-5lT" secondAttribute="bottom" id="out-A7-C8o"/>
+                <constraint firstItem="yvz-IA-xVc" firstAttribute="top" secondItem="ZaZ-ij-5lT" secondAttribute="bottom" id="rbP-0w-qb1"/>
                 <constraint firstItem="ep8-aO-zh8" firstAttribute="leading" secondItem="WK3-am-MHU" secondAttribute="leading" id="rwf-Gu-K8E"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

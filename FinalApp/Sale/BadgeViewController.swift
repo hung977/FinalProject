@@ -30,7 +30,7 @@ class BadgeViewController: UIViewController, MyBadgeCellDelegate {
     var menu: SideMenuNavigationController?
     var products: [ListProduct] = []
     var totalPrice = 0.0
-    let dataFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("products.plist")
+    let dataFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("listproducts.plist")
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -117,6 +117,8 @@ class BadgeViewController: UIViewController, MyBadgeCellDelegate {
                 self.products = []
                 self.updateUI()
                 self.tableView.reloadData()
+                NotificationCenter.default.post(name: Notification.Name("didUpdateNumberCart"), object: self.totalItem())
+                self.navigationController?.popViewController(animated: true)
             } catch {
                 print(error)
             }
@@ -135,14 +137,17 @@ class BadgeViewController: UIViewController, MyBadgeCellDelegate {
     
     //MARK: - IBAction
     @IBAction func didTappedMenu(_ sender: UIBarButtonItem) {
-        present(menu!, animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        NotificationCenter.default.post(name: Notification.Name("didUpdateNumberCart"), object: totalItem())
         navigationController?.popViewController(animated: true)
     }
     @IBAction func cancelPaymentTapped(_ sender: UIButton) {
-        alertCancel()
+        if products.count > 0 {
+            alertCancel()
+        }
     }
     func alertCancel() {
         let alert = UIAlertController(title: nil, message: "Are you sure?", preferredStyle: .alert)

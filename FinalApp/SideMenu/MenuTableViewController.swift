@@ -15,8 +15,10 @@ class MenuTableViewController: UITableViewController {
         ItemMenu(lable: MenuName.employee.rawValue, image: MenuImage.employee.rawValue),
         ItemMenu(lable: MenuName.distributor.rawValue, image: MenuImage.distributor.rawValue),
         ItemMenu(lable: MenuName.importReceipt.rawValue, image: MenuImage.importReceipt.rawValue),
+        ItemMenu(lable: MenuName.createReceipt.rawValue, image: MenuImage.createReceipt.rawValue),
         ItemMenu(lable: MenuName.sale.rawValue, image: MenuImage.sale.rawValue),
-        ItemMenu(lable: MenuName.report.rawValue, image: MenuImage.report.rawValue)
+        ItemMenu(lable: MenuName.report.rawValue, image: MenuImage.report.rawValue),
+        ItemMenu(lable: MenuName.logout.rawValue, image: MenuImage.logout.rawValue)
     ]
     var isAdmin = LoginViewController.isAdmin
     
@@ -27,7 +29,9 @@ class MenuTableViewController: UITableViewController {
         case sale = "Sale"
         case distributor = "Distributor"
         case importReceipt = "Import Receipt"
+        case createReceipt = "Create Import Receipt"
         case report = "Report"
+        case logout = "Log out"
     }
     private enum MenuImage: String {
         case product = "product_management_icon"
@@ -35,14 +39,16 @@ class MenuTableViewController: UITableViewController {
         case sale = "sale_management_icon"
         case distributor = "distributor_icon"
         case importReceipt = "importReceipt_icon"
+        case createReceipt = "importReceipt_icon-1"
         case report = "report_icon"
+        case logout = "logout_icon"
     }
     private enum TitleAlert: String {
         case ok = "OK"
         
     }
     private enum MessageAlert: String {
-        case accessDenied = "Access denied!"
+        case accessDenied = "ACCESS DENIED"
     }
     private let myColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3)
     private let alphaForCell: CGFloat = 0.3
@@ -72,7 +78,7 @@ class MenuTableViewController: UITableViewController {
         cell.backgroundColor = .lightGray
         cell.selectionStyle = .none
         if !isAdmin {
-            if cell.labelViewCell.text == MenuName.product.rawValue || cell.labelViewCell.text == MenuName.employee.rawValue || cell.labelViewCell.text == MenuName.distributor.rawValue || cell.labelViewCell.text == MenuName.importReceipt.rawValue {
+            if cell.labelViewCell.text == MenuName.product.rawValue || cell.labelViewCell.text == MenuName.employee.rawValue || cell.labelViewCell.text == MenuName.distributor.rawValue || cell.labelViewCell.text == MenuName.report.rawValue || cell.labelViewCell.text == MenuName.importReceipt.rawValue || cell.labelViewCell.text == MenuName.createReceipt.rawValue {
                 cell.labelViewCell.textColor = myColor
                 cell.imageViewCell.alpha = alphaForCell
                 return cell
@@ -82,7 +88,7 @@ class MenuTableViewController: UITableViewController {
     }
     func alertNotPermission() {
         let alert = UIAlertController(title: nil, message: MessageAlert.accessDenied.rawValue, preferredStyle: .alert)
-        let action = UIAlertAction(title: TitleAlert.ok.rawValue, style: .default) { (_) in
+        let action = UIAlertAction(title: TitleAlert.ok.rawValue, style: .destructive) { (_) in
             //do something
         }
         alert.addAction(action)
@@ -114,17 +120,51 @@ class MenuTableViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
         case MenuName.report.rawValue:
-            let vc = ReportViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            tableView.deselectRow(at: indexPath, animated: true)
+            if isAdmin {
+                let vc = ReportViewController()
+                navigationController?.pushViewController(vc, animated: true)
+                tableView.deselectRow(at: indexPath, animated: true)
+            } else {
+                alertNotPermission()
+            }
+            
         case MenuName.distributor.rawValue:
-            let vc = DistributorViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            tableView.deselectRow(at: indexPath, animated: true)
+            if isAdmin {
+                let vc = DistributorViewController()
+                navigationController?.pushViewController(vc, animated: true)
+                tableView.deselectRow(at: indexPath, animated: true)
+            } else {
+                alertNotPermission()
+            }
+            
         case MenuName.importReceipt.rawValue:
-            let vc = ImportReceiptViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            tableView.deselectRow(at: indexPath, animated: true)
+            if isAdmin {
+                let vc = ImportReceiptViewController()
+                navigationController?.pushViewController(vc, animated: true)
+                tableView.deselectRow(at: indexPath, animated: true)
+            } else {
+                alertNotPermission()
+            }
+        case MenuName.createReceipt.rawValue:
+            if isAdmin {
+                let vc = CreateImportViewController()
+                navigationController?.pushViewController(vc, animated: true)
+                tableView.deselectRow(at: indexPath, animated: true)
+            } else {
+                alertNotPermission()
+            }
+        case MenuName.logout.rawValue:
+            let alert = UIAlertController(title: "Log out", message: "Are you sure?", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default) { (_) in
+                LoginViewController.token = ""
+                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                //self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            present(alert, animated: true)
+            
         default:
             print("not match!")
         }

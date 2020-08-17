@@ -17,11 +17,11 @@ class LoginViewController: UIViewController {
     //MARK: - Contants
     //TextField animation
     private let timeWithDurationForTF = 1.0
-    private let timeDelayForTF = 0.0
+    private let timeDelayForTF = 1.0
     private let constantForTF: CGFloat = 20
     //Logo & Button animation
-    private let timeWithDurationForLogo = 0.5
-    private let timeDelayForLogo = 1.0
+    private let timeWithDurationForLogo = 0.1
+    private let timeDelayForLogo = 0.0
     private let logoScaleValue: CGFloat = 1.5
     private let buttonScaleValue: CGFloat = 0.9
     //API
@@ -47,6 +47,7 @@ class LoginViewController: UIViewController {
     
     //MARK: - IBoutlet
     @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var leadingViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -74,21 +75,10 @@ class LoginViewController: UIViewController {
         passwdLeading.constant -= view.bounds.width
         passTFLeading.constant += view.bounds.width
         loginLeading.constant -= view.bounds.width
+        leadingViewConstraint.constant += view.bounds.width
     }
     override func viewDidAppear(_ animated: Bool) {
-        UIView.animate(withDuration: timeWithDurationForTF,
-                       delay: timeDelayForTF,
-                       options: [],
-                       animations: { [weak self] in
-                        guard let self = self else {return}
-                        self.leadingContraintImg.constant = self.constantForTF
-                        self.usernameLeading.constant = self.constantForTF
-                        self.userTFLeading.constant = self.constantForTF
-                        self.passwdLeading.constant = self.constantForTF
-                        self.passTFLeading.constant = self.constantForTF
-                        self.loginLeading.constant = self.constantForTF
-                        self.view.layoutIfNeeded()
-          }, completion: nil)
+        
         UIView.animate(withDuration: timeWithDurationForLogo, delay: timeDelayForLogo, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.imageview.transform = CGAffineTransform.identity.scaledBy(x: self.logoScaleValue, y: self.logoScaleValue)
          }) { [weak self] (finished) in
@@ -97,6 +87,21 @@ class LoginViewController: UIViewController {
               self.imageview.transform = CGAffineTransform.identity
            })
         }
+        
+        UIView.animate(withDuration: timeWithDurationForTF,
+                     delay: timeDelayForTF,
+                     options: [],
+                     animations: { [weak self] in
+                      guard let self = self else {return}
+                      self.leadingContraintImg.constant = self.constantForTF
+                      self.usernameLeading.constant = self.constantForTF
+                      self.userTFLeading.constant = self.constantForTF
+                      self.passwdLeading.constant = self.constantForTF
+                      self.passTFLeading.constant = self.constantForTF
+                      self.loginLeading.constant = self.constantForTF
+                      self.leadingViewConstraint.constant = self.constantForTF
+                      self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     //MARK: - IBAction
     @IBAction func loginButtonTapped(_ sender: UIButton) {
@@ -125,6 +130,8 @@ class LoginViewController: UIViewController {
                         LoginViewController.token = json.accessToken
                         if json.profile.role == self.adminRole {
                             LoginViewController.isAdmin = true
+                        } else {
+                            LoginViewController.isAdmin = false
                         }
                         self.performSegue(withIdentifier: self.loginToHome, sender: sender)
                     }

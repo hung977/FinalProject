@@ -21,20 +21,11 @@
                                 <color key="textColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wait a second..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXh-ft-18C">
-                                <rect key="frame" x="20" y="438.5" width="374" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="QdR-Uc-Xv0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3xd-l6-uCk"/>
-                            <constraint firstItem="kXh-ft-18C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="D2n-GM-5Ov"/>
-                            <constraint firstItem="kXh-ft-18C" firstAttribute="top" secondItem="QdR-Uc-Xv0" secondAttribute="bottom" id="LLF-HJ-IZB"/>
                             <constraint firstItem="QdR-Uc-Xv0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SrB-Yb-23E"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kXh-ft-18C" secondAttribute="trailing" constant="20" id="eqp-QC-SnP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QdR-Uc-Xv0" secondAttribute="trailing" constant="20" id="vgR-bE-lDL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -158,6 +149,7 @@
                         <outlet property="activity" destination="FPY-ar-MzD" id="F3V-J6-l4j"/>
                         <outlet property="imageview" destination="wAP-hi-B7Y" id="1aO-3P-ns6"/>
                         <outlet property="leadingContraintImg" destination="sEY-5A-qBp" id="meZ-8L-EWi"/>
+                        <outlet property="leadingViewConstraint" destination="VQw-ty-2fV" id="cAE-QQ-a0c"/>
                         <outlet property="loginBtn" destination="llT-ma-n8h" id="qoc-9u-KTz"/>
                         <outlet property="loginLeading" destination="QYe-09-mcH" id="cYw-i5-tMW"/>
                         <outlet property="passTFLeading" destination="xJG-iV-Ca7" id="ds5-09-m4v"/>

@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmployeeManagementViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="activity" destination="bgh-br-FUm" id="2gb-Kb-5ys"/>
                 <outlet property="searchBar" destination="ahs-qG-hGy" id="ta9-oW-bif"/>
                 <outlet property="tableView" destination="5a5-nz-rAX" id="K1T-WW-8ME"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -46,6 +47,14 @@
                     <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </tableView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bgh-br-FUm">
+                    <rect key="frame" x="182" y="144" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="qyR-1M-a3O"/>
+                        <constraint firstAttribute="width" constant="50" id="uu9-Kc-9vX"/>
+                    </constraints>
+                    <color key="color" red="0.3582989573" green="0.35835498570000002" blue="0.35828667879999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
@@ -55,9 +64,11 @@
                 <constraint firstItem="5a5-nz-rAX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="KTr-fJ-61a"/>
                 <constraint firstItem="ahs-qG-hGy" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="KWd-a4-51e"/>
                 <constraint firstItem="ahs-qG-hGy" firstAttribute="top" secondItem="f4z-WI-eYW" secondAttribute="bottom" id="VQD-0O-845"/>
+                <constraint firstItem="bgh-br-FUm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ZJz-za-IA5"/>
                 <constraint firstItem="5a5-nz-rAX" firstAttribute="top" secondItem="ahs-qG-hGy" secondAttribute="bottom" id="dzh-xJ-Cly"/>
                 <constraint firstItem="ahs-qG-hGy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="g2G-Ff-kXs"/>
                 <constraint firstItem="5a5-nz-rAX" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="g3j-vd-pH6"/>
+                <constraint firstItem="bgh-br-FUm" firstAttribute="top" secondItem="ahs-qG-hGy" secondAttribute="bottom" id="h1Y-YV-bLm"/>
                 <constraint firstItem="5a5-nz-rAX" firstAttribute="top" secondItem="ahs-qG-hGy" secondAttribute="bottom" id="lQs-1H-IEm"/>
                 <constraint firstItem="f4z-WI-eYW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lgc-WV-H7B"/>
                 <constraint firstItem="f4z-WI-eYW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="vVp-PQ-jLn"/>

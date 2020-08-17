@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductManagerViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="activity" destination="8Bd-jL-8bV" id="I3G-3W-ljb"/>
                 <outlet property="menuButton" destination="vfH-AR-fz3" id="KnU-Qb-whe"/>
                 <outlet property="searchBar" destination="4V5-hy-Bjk" id="Ka0-Yo-0Gw"/>
                 <outlet property="tableView" destination="YyE-b1-YIH" id="6lS-nQ-DZk"/>
@@ -57,14 +58,24 @@
                         <outlet property="delegate" destination="-1" id="IAr-Xi-55I"/>
                     </connections>
                 </tableView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="8Bd-jL-8bV">
+                    <rect key="frame" x="182" y="144" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Ff0-cA-hP4"/>
+                        <constraint firstAttribute="width" constant="50" id="wQm-ub-fOZ"/>
+                    </constraints>
+                    <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.96598762270000005" green="0.96612614389999996" blue="0.96595734359999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="YyE-b1-YIH" firstAttribute="top" secondItem="4V5-hy-Bjk" secondAttribute="bottom" id="18f-7d-LIa"/>
                 <constraint firstItem="4V5-hy-Bjk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2bU-k8-YfJ"/>
+                <constraint firstItem="8Bd-jL-8bV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Mjc-wo-UlH"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3zS-FT-mbP" secondAttribute="trailing" constant="10" id="RvB-sd-REG"/>
                 <constraint firstItem="4V5-hy-Bjk" firstAttribute="top" secondItem="3zS-FT-mbP" secondAttribute="bottom" id="UCM-hM-IIu"/>
                 <constraint firstItem="3zS-FT-mbP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="b9x-ok-er0"/>
+                <constraint firstItem="8Bd-jL-8bV" firstAttribute="top" secondItem="4V5-hy-Bjk" secondAttribute="bottom" id="bg4-jE-AYB"/>
                 <constraint firstItem="3zS-FT-mbP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-7" id="cQX-tn-elb"/>
                 <constraint firstItem="4V5-hy-Bjk" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="luC-ES-CSH"/>
                 <constraint firstItem="YyE-b1-YIH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mAo-Wp-q3t"/>

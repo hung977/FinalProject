@@ -20,6 +20,10 @@ class EmployeeTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        employeeImage.image = UIImage(named: "employee_example")
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

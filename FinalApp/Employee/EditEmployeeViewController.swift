@@ -57,6 +57,7 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var fullNameTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     @IBOutlet weak var isAdminSwitch: UISwitch!
     @IBOutlet weak var phoneTextfield: UITextField!
     
@@ -192,6 +193,9 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
         
     }
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+        activity.startAnimating()
+        saveBtn.isSelected = false
+        saveBtn.alpha = 0.5
         let name = fullNameTextfield.text!
         let email = emailTextfield.text!
         let phone = phoneTextfield.text!
@@ -208,6 +212,9 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
             if checkNumber(str: phone) {
                 RequestService.callsendImageAPIEditEmployee(for: id!, param: param, arrImage: [currentImage!], imageKey: imageKey) { [weak self] (response , error) in
                     guard let self = self else {return}
+                    self.activity.stopAnimating()
+                    self.saveBtn.isSelected = true
+                    self.saveBtn.alpha = 1
                     if let respon = response {
                         if let statusCode = respon.response?.statusCode {
                             if statusCode == 204 || statusCode == 200 {
@@ -226,10 +233,16 @@ class EditEmployeeViewController: UIViewController, UIImagePickerControllerDeleg
                 }
                 
             } else {
+                activity.stopAnimating()
+                saveBtn.isSelected = true
+                saveBtn.alpha = 1
                 alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldPhone.rawValue)
             }
             
         } else {
+            activity.stopAnimating()
+            saveBtn.isSelected = true
+            saveBtn.alpha = 1
             alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldEmail.rawValue)
         }
     }

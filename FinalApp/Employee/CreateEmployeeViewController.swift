@@ -81,6 +81,7 @@ class CreateEmployeeViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var confirmTextfield: UITextField!
     @IBOutlet weak var isAdminSwitch: UISwitch!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var passwordHideorShowBtn: UIButton!
     @IBOutlet weak var confirmPassHideorShowBtn: UIButton!
@@ -156,6 +157,9 @@ class CreateEmployeeViewController: UIViewController, UIImagePickerControllerDel
     
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+        activity.startAnimating()
+        saveBtn.isSelected = false
+        saveBtn.alpha = 0.5
         let name = fullNameTextfield.text!
         let email = emailTextfield.text!
         let phone = phoneTextfield.text!
@@ -178,18 +182,31 @@ class CreateEmployeeViewController: UIViewController, UIImagePickerControllerDel
         ]
         if !isValidEmailAddress(emailAddressString: email) {
             alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldEmail.rawValue)
+            activity.stopAnimating()
+            saveBtn.isSelected = true
+            saveBtn.alpha = 1
             return
         }
         if !checkNumber(str: phone) {
             alertResponse(tit: Title.error.rawValue, mess: MessageAlert.invaldPhone.rawValue)
+            activity.stopAnimating()
+            saveBtn.isSelected = true
+            saveBtn.alpha = 1
             return
         }
         if !checkPassMatch(pass, confirmPass) {
             alertResponse(tit: Title.error.rawValue, mess: MessageAlert.passwordNotMatch.rawValue)
+            activity.stopAnimating()
+            saveBtn.isSelected = true
+            saveBtn.alpha = 1
             return
         }
         RequestService.callsendImageAPICreateEmployee(param: param, arrImage: [currentImage!], imageKey: imageKey) { [weak self] (bool, data, error) in
+            
             guard let self = self else {return}
+            self.activity.stopAnimating()
+            self.saveBtn.isSelected = true
+            self.saveBtn.alpha = 1
             if let safeData = data {
                 do {
                     let json = try JSONDecoder.init().decode(CreateEmployee.self, from: safeData)

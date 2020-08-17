@@ -37,6 +37,7 @@ class ProductManagerViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -55,7 +56,7 @@ class ProductManagerViewController: UIViewController {
     }
     
     @objc func loadProduct(withPage: Int, withSize: Int, withString: String) {
-        
+        activity.startAnimating()
         let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
         let routerGetProduct = Router.getProducts
         RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: ProductResponse.self) { [weak self] (bool, data, error) in
@@ -68,6 +69,7 @@ class ProductManagerViewController: UIViewController {
             } catch {
                 print("error to convert \(error.localizedDescription)")
             }
+            self.activity.stopAnimating()
         }
         
     }
@@ -149,17 +151,17 @@ extension ProductManagerViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProductTableViewCell
-        let newImageURL = products[indexPath.row].image
-        DispatchQueue.global().async {
-            if let data = try? Data(contentsOf: URL(string: newImageURL)!) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        cell.productImage.image = image
-                        
-                    }
-                }
-            }
-        }
+        
+            let newImageURL = self.products[indexPath.row].image
+             DispatchQueue.global().async {
+                 if let data = try? Data(contentsOf: URL(string: newImageURL)!) {
+                     if let image = UIImage(data: data) {
+                         DispatchQueue.main.async {
+                             cell.productImage.image = image
+                         }
+                     }
+                 }
+             }
         
         cell.amoutLabel.text = "Amount: \(products[indexPath.row].amount)"
         cell.productName.text = products[indexPath.row].name

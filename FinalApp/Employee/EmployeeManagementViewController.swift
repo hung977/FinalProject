@@ -56,6 +56,7 @@ class EmployeeManagementViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     
     //MARK: - Life cycle
     override func viewDidLoad() {
@@ -199,7 +200,7 @@ class EmployeeManagementViewController: UIViewController {
     }
     
     func loadEmployee(withPage: Int, withSize: Int, withString: String) {
-        DispatchQueue.main.async {
+        activity.startAnimating()
             let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
             let routerGetProduct = Router.getEmployee
             RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: EmployeeResponse.self) {
@@ -215,8 +216,9 @@ class EmployeeManagementViewController: UIViewController {
                 } catch {
                     print("error to convert \(error.localizedDescription)")
                 }
+                self.activity.stopAnimating()
             }
-        }
+        
     }
     func alertResponseAPIError(tit: String, mess: String) {
         let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)

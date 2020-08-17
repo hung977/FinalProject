@@ -7,13 +7,27 @@
 //
 
 import UIKit
+import SideMenu
 
 class CreateImportViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, MyImportCellDelegate {
     var products: [Product] = []
+    var menu: SideMenuNavigationController?
     var listProducts: [Product] = []
     var picker: UIPickerView?
+    var currentDistributor: Distributor?
     var distributors: [Distributor] = []
     var isLoadingDistributor = true
+    var dirError: [Int:String] = [
+        2000:"PRODUCT_NAME_IS_TAKEN",
+        2001:"PRODUCT_NOT_FOUND",
+        2002:"ANOTHER_PRODUCT_HAS_SAME_PRICE",
+        3000:"DISTRIBUTOR_NAME_IS_TAKEN",
+        3001:"DISTRIBUTOR_NOT_FOUND",
+        3002:"DISTRIBUTOR_ID_IS_REQUIRED",
+        5000:"IMPORT_RECEIPT_DETAILS_IS_REQUIRED",
+        5001:"THE_ACTUAL_TOTAL_PRICE_DIFFERS_THE_IMPORT_RECEIPT_ONE",
+        6000:"TOTAL_PRICE_IS_REQUIRED"
+    ]
     //MARK: - Contants
     private var menuWidth: CGFloat = 250
     private var PageIndexParams = "pageIndex"
@@ -30,6 +44,10 @@ class CreateImportViewController: UIViewController, UIPickerViewDelegate, UIPick
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
+        menu?.leftSide = true
+        menu?.menuWidth = 250
+        SideMenuManager.default.leftMenuNavigationController = menu
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "CreateImportTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
@@ -40,11 +58,7 @@ class CreateImportViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     //MARK: - IBAction
     @IBAction func backBtnTapped(_ sender: UIBarButtonItem) {
-        if listProducts.count > 0 {
-            showAlertCancel(title: "", message: "Are you sure?")
-        } else {
-            dismiss(animated: true, completion: nil)
-        }
+        present(menu!, animated: true)
         
     }
     @IBAction func chooseDistributorTapped(_ sender: UIButton) {
@@ -59,14 +73,98 @@ class CreateImportViewController: UIViewController, UIPickerViewDelegate, UIPick
         if listProducts.count > 0 {
             showAlertCancel(title: "", message: "Are you sure?")
         } else {
-            dismiss(animated: true, completion: nil)
+            //
         }
         
     }
     @IBAction func createBtnTapped(_ sender: UIButton) {
+        if !checkNil() {
+            return
+        }
+        var dirc: [String:Any] = [:]
+        var array: [Dictionary<String, Any>] = []
+        for i in listProducts {
+            dirc["productId"] = "\(i.id)"
+            dirc["productAmount"] = i.amount
+            dirc["productPrice"] = i.price
+            array.append(dirc)
+            
+        }
+        var totalPrice = 0.0
+        for index in listProducts {
+            totalPrice += index.price * Double(index.amount)
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = Date()
+        let currentDate = dateFormatter.string(from: date)
+        let param: [String:Any] = [
+            "dateTime": "\(currentDate)",
+            "totalPrice": totalPrice,
+            "distributorId": currentDistributor?.id ?? "",
+            "importReceiptDetails": array
+        ]
+        let route = Router.createImportReceipt
+        RequestService.shared.AFRequestPostReceipt(router: route, params: param) { [weak self] (data, response, error) in
+            guard let self = self else {return}
+            if let respon = response {
+                if respon.response?.statusCode == 200 {
+                    self.alertResponse(tit: "Success", mess: "")
+                } else if respon.response?.statusCode == 400 {
+                    if let data = data {
+                        do {
+                            let json = try JSONDecoder.init().decode(PostReceiptResponse.self, from: data)
+                            for (key, value) in self.dirError {
+                                if key == json.code {
+                                    self.alertResponseErr(tit: "Error", mess: value)
+                                }
+                            }
+                            
+                        } catch {
+                            self.alertResponseErr(tit: "Oops!", mess: "Something went wrong :<")
+                        }
+                    } else {
+                        self.alertResponseErr(tit: "Oops!", mess: "Something went wrong :<")
+                    }
+                } else {
+                    self.alertResponseErr(tit: "Oops!", mess: "Something went wrong :<")
+                }
+            }
+        }
     }
     
     //MARK: - Supporting Function
+    func checkNil() -> Bool {
+        if distributorLabel.text == "" || listProducts.count == 0 {
+            alertt()
+            return false
+        } else {
+            return true
+        }
+    }
+    func alertt() {
+        let alert = UIAlertController(title: "Error", message: "Distributor or Product can't be null", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+    func alertResponse(tit: String, mess: String) {
+        let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
+        let actio = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
+            guard let self = self else {return}
+            self.listProducts = []
+            self.distributorLabel.text = ""
+            self.tableView.reloadData()
+        }
+        alert.addAction(actio)
+        present(alert, animated: true)
+    }
+    func alertResponseErr(tit: String, mess: String) {
+        let alert = UIAlertController(title: tit, message: mess, preferredStyle: .alert)
+        let actio = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(actio)
+        present(alert, animated: true)
+    }
     func loadProduct(withPage: Int, withSize: Int, withString: String) {
         
         let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
@@ -131,8 +229,8 @@ class CreateImportViewController: UIViewController, UIPickerViewDelegate, UIPick
         alertView.view.addSubview(picker!)
         let action = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
             guard let self = self else {return}
-            let currentDistributor = self.distributors[(self.picker?.selectedRow(inComponent: 0))!]
-            self.distributorLabel.text = currentDistributor.name
+            self.currentDistributor = self.distributors[(self.picker?.selectedRow(inComponent: 0))!]
+            self.distributorLabel.text = self.currentDistributor?.name
         }
         alertView.addAction(action)
         present(alertView, animated: true)
@@ -143,7 +241,8 @@ class CreateImportViewController: UIViewController, UIPickerViewDelegate, UIPick
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default) { [weak self] (_) in
             guard let self = self else {return}
-            self.dismiss(animated: true, completion: nil)
+            self.listProducts = []
+            self.tableView.reloadData()
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(action)
@@ -203,6 +302,7 @@ class CreateImportViewController: UIViewController, UIPickerViewDelegate, UIPick
             let price = Double(text) ?? 1
             if price != 0 {
                 cell.priceTextField.text = "\(price)"
+                listProducts[indexPath!.row].price = price
             } else {
                 listProducts.remove(at: indexPath!.row)
             }
@@ -223,8 +323,10 @@ extension CreateImportViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CreateImportTableViewCell
         cell.productName.text = listProducts[indexPath.row].name
+        cell.amountTextField.text = "\(listProducts[indexPath.row].amount)"
         cell.priceTextField.text = "\(listProducts[indexPath.row].price)"
         cell.delegate = self
+        cell.selectionStyle = .none
         let queue = DispatchQueue(label: "queue")
         queue.async {
             if let imgURL = URL(string: self.listProducts[indexPath.row].image) {

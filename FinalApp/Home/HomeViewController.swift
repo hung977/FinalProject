@@ -11,8 +11,14 @@ import UIKit
 class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let vc = ProductManagerViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if LoginViewController.isAdmin {
+            let vc = ProductManagerViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = SaleManagerViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
 
 }

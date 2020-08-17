@@ -26,6 +26,7 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
     //MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     
     //MARK: - Life cycel
     override func viewDidLoad() {
@@ -61,6 +62,7 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
             address = uiTextField
         }
         let action = UIAlertAction(title: "Add", style: .default) { (_) in
+            self.activity.startAnimating()
             if let nameStr = name.text, let addressStr = address.text {
                 let route = Router.addDistributor
                 let param = [
@@ -82,6 +84,7 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
                             
                         }
                     }
+                    self.activity.stopAnimating()
 
                 }
             }
@@ -149,6 +152,7 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
             address = uiTextField
         }
         let action = UIAlertAction(title: "Change", style: .default) { (_) in
+            self.activity.startAnimating()
             if let nameStr = name.text, let addressStr = address.text {
                 let route = Router.editDistributor
                 let param = [
@@ -170,7 +174,9 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
                             
                         }
                     }
+                    self.activity.stopAnimating()
                 }
+                
                 
             } else {
                 self.alertResponseAPIError(tit: "Error", mess: "Missing Field")
@@ -199,6 +205,7 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
         present(alert, animated: true)
     }
     func loadDistributor(withPage: Int, withSize: Int, withString: String) {
+        activity.startAnimating()
         let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
         let route = Router.getDistributor
         RequestService.shared.AFRequestProduct(router: route, params: param, objectType: DistributorResponse.self) { [weak self] (bool, data, error) in
@@ -211,6 +218,7 @@ class DistributorViewController: UIViewController, MyDistributorCellDelegate {
             } catch {
                 print("error to convert \(error.localizedDescription)")
             }
+            self.activity.stopAnimating()
         }
     }
     

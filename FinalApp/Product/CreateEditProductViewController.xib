@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateEditProductViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="activity" destination="fGa-UU-Gse" id="45f-UE-e8g"/>
                 <outlet property="productAmountTextfield" destination="ylb-XQ-lgh" id="eRe-9S-DM5"/>
                 <outlet property="productImage" destination="j3w-5G-4p5" id="rqQ-TO-QNK"/>
                 <outlet property="productNameTextfield" destination="t5z-ig-EVA" id="twL-L0-n33"/>
@@ -35,14 +36,14 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product_example" translatesAutoresizingMaskIntoConstraints="NO" id="j3w-5G-4p5">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default" translatesAutoresizingMaskIntoConstraints="NO" id="j3w-5G-4p5">
                     <rect key="frame" x="20" y="118" width="374" height="300"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="300" id="lCj-tX-saa"/>
                     </constraints>
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="llO-cS-U7D">
-                    <rect key="frame" x="0.0" y="391" width="414" height="505"/>
+                    <rect key="frame" x="0.0" y="418" width="414" height="478"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tge-mN-Cg3">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="478"/>
@@ -110,6 +111,9 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="fGa-UU-Gse">
+                                    <rect key="frame" x="197" y="300" width="20" height="20"/>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
@@ -123,8 +127,10 @@
                                 <constraint firstItem="6ea-gf-igq" firstAttribute="leading" secondItem="tge-mN-Cg3" secondAttribute="leading" constant="10" id="HT5-sJ-Qkw"/>
                                 <constraint firstItem="hYr-ZP-fTX" firstAttribute="top" secondItem="ylb-XQ-lgh" secondAttribute="bottom" constant="20" id="POt-Zm-pLb"/>
                                 <constraint firstItem="ylb-XQ-lgh" firstAttribute="top" secondItem="6ea-gf-igq" secondAttribute="bottom" id="RKF-NI-Qhw"/>
+                                <constraint firstItem="fGa-UU-Gse" firstAttribute="centerX" secondItem="tge-mN-Cg3" secondAttribute="centerX" id="RtG-qM-FkA"/>
                                 <constraint firstItem="wAG-3a-bI3" firstAttribute="top" secondItem="tge-mN-Cg3" secondAttribute="top" id="SfD-c6-yXQ"/>
                                 <constraint firstAttribute="trailing" secondItem="6ea-gf-igq" secondAttribute="trailing" constant="20" id="Tj8-ih-fcM"/>
+                                <constraint firstItem="fGa-UU-Gse" firstAttribute="centerY" secondItem="JR3-qJ-SBu" secondAttribute="centerY" id="Ul9-UF-eMO"/>
                                 <constraint firstItem="JR3-qJ-SBu" firstAttribute="top" secondItem="SrC-IR-Hbj" secondAttribute="bottom" constant="40" id="XVH-af-V9d"/>
                                 <constraint firstAttribute="trailing" secondItem="SrC-IR-Hbj" secondAttribute="trailing" constant="20" id="YCG-4h-pEx"/>
                                 <constraint firstItem="JR3-qJ-SBu" firstAttribute="leading" secondItem="tge-mN-Cg3" secondAttribute="leading" constant="10" id="cWG-1B-aen"/>
@@ -146,7 +152,7 @@
                     </constraints>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fx6-k9-cLX">
-                    <rect key="frame" x="20" y="145" width="374" height="246"/>
+                    <rect key="frame" x="20" y="118" width="374" height="300"/>
                     <connections>
                         <action selector="selectImageTapped:" destination="-1" eventType="touchUpInside" id="RlH-Yi-4VG"/>
                     </connections>
@@ -159,8 +165,8 @@
                 <constraint firstItem="tge-mN-Cg3" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="K6Y-Lt-nf4"/>
                 <constraint firstItem="Jbn-Pt-gGQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="34" id="KEY-Z2-V6i"/>
                 <constraint firstItem="fx6-k9-cLX" firstAttribute="trailing" secondItem="j3w-5G-4p5" secondAttribute="trailing" id="KgB-XU-pug"/>
-                <constraint firstItem="fx6-k9-cLX" firstAttribute="top" secondItem="Jbn-Pt-gGQ" secondAttribute="bottom" constant="67" id="NuX-WH-Q9M"/>
                 <constraint firstItem="llO-cS-U7D" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="SRj-tV-jsm"/>
+                <constraint firstItem="llO-cS-U7D" firstAttribute="top" secondItem="j3w-5G-4p5" secondAttribute="bottom" id="c04-WP-tUo"/>
                 <constraint firstItem="j3w-5G-4p5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="cyb-4l-BQw"/>
                 <constraint firstItem="Jbn-Pt-gGQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="edV-6E-QkG"/>
                 <constraint firstItem="fx6-k9-cLX" firstAttribute="centerY" secondItem="j3w-5G-4p5" secondAttribute="centerY" id="i7w-yF-eZ7"/>
@@ -169,12 +175,13 @@
                 <constraint firstItem="llO-cS-U7D" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ww1-uZ-iNF"/>
                 <constraint firstItem="Jbn-Pt-gGQ" firstAttribute="centerX" secondItem="j3w-5G-4p5" secondAttribute="centerX" id="xVr-OU-a1j"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="j3w-5G-4p5" secondAttribute="trailing" constant="20" id="zia-X3-1oW"/>
+                <constraint firstItem="fx6-k9-cLX" firstAttribute="top" secondItem="Jbn-Pt-gGQ" secondAttribute="bottom" constant="40" id="ztV-ef-Qud"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
         </view>
     </objects>
     <resources>
-        <image name="product_example" width="200" height="200"/>
+        <image name="image_default" width="200" height="200"/>
     </resources>
 </document>

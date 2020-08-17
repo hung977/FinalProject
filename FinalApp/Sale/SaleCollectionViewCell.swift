@@ -27,6 +27,10 @@ class SaleCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = UIImage(named: "image_default")
+    }
     @IBAction func addButtonTapped(_ sender: UIButton) {
         delegate?.addButtonTapped(cell: self)
     }

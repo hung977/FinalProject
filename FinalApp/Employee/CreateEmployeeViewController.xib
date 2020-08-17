@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateEmployeeViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="activity" destination="k5k-pt-Hjg" id="bzx-c2-jRR"/>
                 <outlet property="confirmPassHideorShowBtn" destination="hmB-r6-d49" id="IG1-8x-HTC"/>
                 <outlet property="confirmTextfield" destination="uNf-lG-oQb" id="xoK-WN-zdJ"/>
                 <outlet property="emailTextfield" destination="I2l-SI-giq" id="RYa-1T-ABm"/>
@@ -147,6 +148,13 @@
                                         <action selector="confirmPassHideorShow:" destination="-1" eventType="touchUpInside" id="fS5-Um-qNT"/>
                                     </connections>
                                 </button>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="k5k-pt-Hjg">
+                                    <rect key="frame" x="197" y="496" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="30P-I3-VgJ"/>
+                                        <constraint firstAttribute="width" constant="20" id="iFg-MT-OHi"/>
+                                    </constraints>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -159,10 +167,12 @@
                                 <constraint firstItem="o4M-zq-PZ8" firstAttribute="centerY" secondItem="B3H-5p-cfX" secondAttribute="centerY" id="AAO-S6-CDc"/>
                                 <constraint firstAttribute="trailing" secondItem="KkM-fG-u3p" secondAttribute="trailing" constant="20" id="ACP-HZ-hsU"/>
                                 <constraint firstItem="hmB-r6-d49" firstAttribute="top" secondItem="KkM-fG-u3p" secondAttribute="bottom" constant="7" id="Eb1-ux-phl"/>
+                                <constraint firstItem="k5k-pt-Hjg" firstAttribute="centerY" secondItem="xFh-aT-XMH" secondAttribute="centerY" id="Fur-Qg-9wQ"/>
                                 <constraint firstItem="xFh-aT-XMH" firstAttribute="top" secondItem="uNf-lG-oQb" secondAttribute="bottom" constant="61" id="Gid-Hr-dl7"/>
                                 <constraint firstItem="tCh-27-ORL" firstAttribute="centerY" secondItem="DKt-Ws-Kgx" secondAttribute="centerY" id="HUZ-bx-VV9"/>
                                 <constraint firstItem="xFh-aT-XMH" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="8" id="JMh-0M-i1c"/>
                                 <constraint firstAttribute="trailing" secondItem="o94-ge-3QY" secondAttribute="trailing" constant="20" id="LYI-59-Fps"/>
+                                <constraint firstItem="k5k-pt-Hjg" firstAttribute="centerX" secondItem="lpP-0U-Wt8" secondAttribute="centerX" id="MB4-gQ-221"/>
                                 <constraint firstItem="DKt-Ws-Kgx" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="10" id="MPn-yV-5yN"/>
                                 <constraint firstItem="OFs-16-8YH" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="10" id="Nwi-IS-JKo"/>
                                 <constraint firstItem="uNf-lG-oQb" firstAttribute="leading" secondItem="lpP-0U-Wt8" secondAttribute="leading" constant="10" id="O3h-oG-kJX"/>

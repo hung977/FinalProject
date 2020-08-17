@@ -13,7 +13,7 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
     var products: [Product] = []
     var listproduct: [ListProduct] = []
     var menu: SideMenuNavigationController?
-    let dataFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("products.plist")
+    let dataFile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("listproducts.plist")
     //MARK: - Contants
     private var totalProducts = 0
     private var pageIndex = 1
@@ -25,6 +25,7 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
     
     //MARK: - IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     @IBOutlet weak var barItem: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -48,7 +49,9 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
         // Do any additional setup after loading the view.
     }
     // MARK: - Supporting function
+    
     @objc func didUpdateNumberCart(notification: Notification) {
+        loadListProduct()
         if let number = notification.object as? Int {
             createBarItem(withNumber: number)
         }
@@ -60,7 +63,6 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
     }
     func calculateNumberProduct() -> Int {
         var totalItem = 0
-        loadListProduct()
         for item in listproduct {
             totalItem += item.amount
         }
@@ -82,9 +84,7 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
         rightButton.setBackgroundImage(UIImage(named: "Webp.net-resizeimage-6"), for: .normal)
         rightButton.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
         rightButton.addSubview(label)
-        // Bar button item
         let rightBarButtomItem = UIBarButtonItem(customView: rightButton)
-        
         barItem.rightBarButtonItem = rightBarButtomItem
     }
     func loadListProduct() {
@@ -92,6 +92,7 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
             let decoder = PropertyListDecoder()
             do {
                 listproduct = try decoder.decode([ListProduct].self, from: data)
+                createBarItem(withNumber: calculateNumberProduct())
             } catch {
                 print("Error decoding listProducts, \(error)")
             }
@@ -107,7 +108,7 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
         }
     }
     func loadProduct(withPage: Int, withSize: Int, withString: String) {
-        DispatchQueue.main.async {
+        activity.startAnimating()
             let param = [self.PageIndexParams: "\(String(withPage))", self.PageSizeParams: "\(String(withSize))", self.PageSearchStringParams: withString]
             let routerGetProduct = Router.getProducts
             RequestService.shared.AFRequestProduct(router: routerGetProduct, params: param, objectType: ProductResponse.self) { [weak self] (bool, data, error) in
@@ -122,8 +123,9 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
                 } catch {
                     print("error to convert \(error.localizedDescription)")
                 }
+                self.activity.stopAnimating()
             }
-        }
+        
     }
     
     // IBAction
@@ -134,6 +136,13 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
         let indexPath = self.collectionView.indexPath(for: cell)
         let product = products[indexPath!.row]
         if product.amount != 0 {
+            UIView.transition(with: cell.imageView, duration: 0.2, options: .curveEaseInOut, animations: {
+                cell.imageView.transform = CGAffineTransform.identity.scaledBy(x: 0.8, y: 0.8)
+            }) { (_) in
+                UIView.transition(with: cell.imageView, duration: 0.2, options: .curveEaseInOut, animations: {
+                    cell.imageView.transform = CGAffineTransform.identity
+                }, completion: nil)
+            }
             let item = ListProduct(name: product.name, price: product.price, amount: 1, image: product.image, id: product.id)
             if listproduct.count == 0 {
                 listproduct.append(item)
@@ -151,8 +160,8 @@ class SaleManagerViewController: UIViewController, MyCellDelegate {
                 }
             }
             saveListProduct()
-            createBarItem(withNumber: calculateNumberProduct())
-            alertAppendProduct(message: "Success")
+            loadListProduct()
+            
         } else {
             alertAppendProduct(message: "Error: Out of Stock")
         }

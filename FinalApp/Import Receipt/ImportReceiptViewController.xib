@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImportReceiptViewController" customModule="FinalApp" customModuleProvider="target">
             <connections>
+                <outlet property="activity" destination="hzW-H6-8gr" id="dc8-sE-OWZ"/>
                 <outlet property="dateLabel" destination="6JE-Rt-7lB" id="y3L-Eq-Fl3"/>
                 <outlet property="dateSwitch" destination="ZrF-6R-hd2" id="nzE-4f-VUV"/>
                 <outlet property="searchBtn" destination="a87-hw-MKH" id="qXm-jK-nm2"/>
@@ -31,12 +32,6 @@
                                 <color key="tintColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="menuBtnTapped:" destination="-1" id="aZf-gi-Q4a"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" image="add_icon" id="aLQ-fh-sEh">
-                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="addBtnTapped:" destination="-1" id="00D-Yj-aXz"/>
                                 </connections>
                             </barButtonItem>
                         </navigationItem>
@@ -90,10 +85,19 @@
                     <rect key="frame" x="0.0" y="203" width="414" height="659"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </tableView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hzW-H6-8gr">
+                    <rect key="frame" x="182" y="203" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="3VU-tR-2u1"/>
+                        <constraint firstAttribute="width" constant="50" id="tmF-AX-5kd"/>
+                    </constraints>
+                    <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.92821305990000003" green="0.92504036430000003" blue="0.935705483" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="UD6-JG-S0b" firstAttribute="centerY" secondItem="Sfl-Kt-PnA" secondAttribute="centerY" id="1Mc-fE-2Bi"/>
+                <constraint firstItem="hzW-H6-8gr" firstAttribute="top" secondItem="a87-hw-MKH" secondAttribute="bottom" constant="10" id="1lQ-iQ-c7k"/>
                 <constraint firstItem="Sfl-Kt-PnA" firstAttribute="top" secondItem="yPY-O6-SJV" secondAttribute="bottom" constant="10" id="1xM-5H-P6B"/>
                 <constraint firstItem="m1i-Vv-0cM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="5Dh-TP-vwS"/>
                 <constraint firstItem="Sfl-Kt-PnA" firstAttribute="leading" secondItem="m1i-Vv-0cM" secondAttribute="trailing" constant="10" id="5Sx-Zi-Q9u"/>
@@ -114,6 +118,7 @@
                 <constraint firstItem="6JE-Rt-7lB" firstAttribute="leading" secondItem="ZrF-6R-hd2" secondAttribute="trailing" constant="20" id="jeZ-5P-kYL"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6JE-Rt-7lB" secondAttribute="trailing" constant="20" id="kyg-dD-fL1"/>
                 <constraint firstItem="6JE-Rt-7lB" firstAttribute="top" secondItem="UD6-JG-S0b" secondAttribute="bottom" constant="15" id="pZU-Db-n7Y"/>
+                <constraint firstItem="hzW-H6-8gr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qPx-dT-usV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q6M-ek-yhu" secondAttribute="trailing" id="r11-jG-RgL"/>
                 <constraint firstItem="q6M-ek-yhu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sI6-au-3eE"/>
                 <constraint firstItem="ZrF-6R-hd2" firstAttribute="leading" secondItem="1Hx-7D-aGf" secondAttribute="trailing" constant="10" id="utv-Ui-hkx"/>
@@ -126,7 +131,6 @@
         </view>
     </objects>
     <resources>
-        <image name="add_icon" width="32" height="32"/>
         <image name="hamburger" width="48" height="48"/>
     </resources>
 </document>
