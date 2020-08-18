@@ -256,9 +256,18 @@ extension BadgeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         if let text = searchBar.text {
-            products = products.filter({$0.name.lowercased().contains(text.lowercased())})
-            tableView.reloadData()
+            if text.count == 0 {
+                loadListProduct()
+                tableView.reloadData()
+            } else {
+                products = products.filter({$0.name.lowercased().contains(text.lowercased())})
+                tableView.reloadData()
+            }
         }
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        loadListProduct()
+        tableView.reloadData()
     }
 }
 
